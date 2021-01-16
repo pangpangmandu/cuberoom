@@ -1,8 +1,6 @@
-# multi-client-ws
+# Cuberoom
 
-generated using Luminus version "3.91"
-
-FIXME
+Vit art museums in digital world.
 
 ## Prerequisites
 
@@ -16,6 +14,10 @@ To start a web server for the application, run:
 
     lein run 
 
-## License
+## Developing
 
-Copyright © 2021 FIXME
+Run cider repl. `(start)` will run the webserver.
+`(start-fw)` will run Figwheel server.
+
+Typing `(cljs)` will give you a repl for clojurescript.
+To return the clojure repl, write `:cljs/quit` in the repl.
