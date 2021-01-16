@@ -1,4 +1,4 @@
-(ns multi-client-ws.layout
+(ns cuberoom.layout
   (:require
    [clojure.java.io]
    [selmer.parser :as parser]

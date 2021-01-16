@@ -1,11 +1,11 @@
-(ns multi-client-ws.env
+(ns cuberoom.env
   (:require [clojure.tools.logging :as log]))
 
 (def defaults
   {:init
    (fn []
-     (log/info "\n-=[multi-client-ws started successfully]=-"))
+     (log/info "\n-=[cuberoom started successfully]=-"))
    :stop
    (fn []
-     (log/info "\n-=[multi-client-ws has shut down successfully]=-"))
+     (log/info "\n-=[cuberoom has shut down successfully]=-"))
    :middleware identity})

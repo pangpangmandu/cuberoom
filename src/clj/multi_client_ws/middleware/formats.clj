@@ -1,4 +1,4 @@
-(ns multi-client-ws.middleware.formats
+(ns cuberoom.middleware.formats
   (:require
    [luminus-transit.time :as time]
    [muuntaja.core :as m]))

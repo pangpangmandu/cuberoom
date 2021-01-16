@@ -1,4 +1,4 @@
-(ns multi-client-ws.nrepl
+(ns cuberoom.nrepl
   (:require
    [nrepl.server :as nrepl]
    [clojure.tools.logging :as log]))

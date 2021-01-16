@@ -1,4 +1,4 @@
-(ns multi-client-ws.figwheel
+(ns cuberoom.figwheel
   (:require [figwheel-sidecar.repl-api :as ra]))
 
 (defn start-fw []

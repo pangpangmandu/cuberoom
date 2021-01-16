@@ -1,6 +1,6 @@
-(ns^:figwheel-no-load multi-client-ws.app
+(ns^:figwheel-no-load cuberoom.app
   (:require
-    [multi-client-ws.core :as core]
+    [cuberoom.core :as core]
     [cljs.spec.alpha :as s]
     [expound.alpha :as expound]
     [devtools.core :as devtools]))

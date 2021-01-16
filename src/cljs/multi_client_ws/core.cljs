@@ -1,7 +1,7 @@
-(ns multi-client-ws.core
+(ns cuberoom.core
   (:require [oops.core :refer [oapply]]
             [mount.core :refer [defstate] :as mount])
-  (:require-macros [multi-client-ws.macros :refer [jsf]]))
+  (:require-macros [cuberoom.macros :refer [jsf]]))
 
 (defn js-console [& args]
   (oapply js/console "log" (clj->js args)))
@@ -54,7 +54,7 @@
   (let [content (js/document.getElementById "app")]
     (while (.hasChildNodes content)
       (.removeChild content (.-lastChild content)))
-    (.appendChild content (js/document.createTextNode "Welcome to multi-client-ws"))
+    (.appendChild content (js/document.createTextNode "Welcome to cuberoom"))
     (mount/in-cljc-mode)
     (mount/start)
     (js-console "Flagwheel loaded core.js")

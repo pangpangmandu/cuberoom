@@ -1,12 +1,12 @@
-(ns multi-client-ws.handler
+(ns cuberoom.handler
   (:require
-   [multi-client-ws.middleware :as middleware]
-   [multi-client-ws.layout :refer [error-page]]
-   [multi-client-ws.routes.home :refer [home-routes]]
+   [cuberoom.middleware :as middleware]
+   [cuberoom.layout :refer [error-page]]
+   [cuberoom.routes.home :refer [home-routes]]
    [reitit.ring :as ring]
    [ring.middleware.content-type :refer [wrap-content-type]]
    [ring.middleware.webjars :refer [wrap-webjars]]
-   [multi-client-ws.env :refer [defaults]]
+   [cuberoom.env :refer [defaults]]
    [mount.core :as mount]))
 
 (mount/defstate init-app

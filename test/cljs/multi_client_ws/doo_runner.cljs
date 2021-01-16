@@ -1,6 +1,6 @@
-(ns multi-client-ws.doo-runner
+(ns cuberoom.doo-runner
   (:require [doo.runner :refer-macros [doo-tests]]
-            [multi-client-ws.core-test]))
+            [cuberoom.core-test]))
 
-(doo-tests 'multi-client-ws.core-test)
+(doo-tests 'cuberoom.core-test)
 

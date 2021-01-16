@@ -1,12 +1,12 @@
-(ns multi-client-ws.middleware
+(ns cuberoom.middleware
   (:require
-   [multi-client-ws.env :refer [defaults]]
+   [cuberoom.env :refer [defaults]]
    [clojure.tools.logging :as log]
-   [multi-client-ws.layout :refer [error-page]]
+   [cuberoom.layout :refer [error-page]]
    [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
-   [multi-client-ws.middleware.formats :as formats]
+   [cuberoom.middleware.formats :as formats]
    [muuntaja.middleware :refer [wrap-format wrap-params]]
-   [multi-client-ws.config :refer [env]]
+   [cuberoom.config :refer [env]]
    [ring.middleware.flash :refer [wrap-flash]]
    [immutant.web.middleware :refer [wrap-session]]
    [ring.middleware.defaults :refer [site-defaults wrap-defaults]]))

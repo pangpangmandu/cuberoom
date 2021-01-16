@@ -1,9 +1,9 @@
-(ns multi-client-ws.core
+(ns cuberoom.core
   (:require
-   [multi-client-ws.handler :as handler]
-   [multi-client-ws.nrepl :as nrepl]
+   [cuberoom.handler :as handler]
+   [cuberoom.nrepl :as nrepl]
    [luminus.http-server :as http]
-   [multi-client-ws.config :refer [env]]
+   [cuberoom.config :refer [env]]
    [clojure.tools.cli :refer [parse-opts]]
    [clojure.tools.logging :as log]
    [mount.core :as mount])

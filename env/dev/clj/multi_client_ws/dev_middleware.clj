@@ -1,4 +1,4 @@
-(ns multi-client-ws.dev-middleware
+(ns cuberoom.dev-middleware
   (:require
    [ring.middleware.reload :refer [wrap-reload]]
    [selmer.middleware :refer [wrap-error-page]]
@@ -8,4 +8,4 @@
   (-> handler
       wrap-reload
       wrap-error-page
-      (wrap-exceptions {:app-namespaces ['multi-client-ws]})))
+      (wrap-exceptions {:app-namespaces ['cuberoom]})))

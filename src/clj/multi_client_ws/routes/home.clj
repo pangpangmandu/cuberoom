@@ -1,8 +1,8 @@
-(ns multi-client-ws.routes.home
+(ns cuberoom.routes.home
   (:require
-   [multi-client-ws.layout :as layout]
+   [cuberoom.layout :as layout]
    [clojure.java.io :as io]
-   [multi-client-ws.middleware :as middleware]
+   [cuberoom.middleware :as middleware]
    [ring.util.response]
    [ring.util.http-response :as response]))
 

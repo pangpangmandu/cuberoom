@@ -1,4 +1,4 @@
-(defproject multi-client-ws "0.1.0-SNAPSHOT"
+(defproject cuberoom "0.1.0-SNAPSHOT"
 
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
@@ -37,7 +37,7 @@
   :test-paths ["test/clj"]
   :resource-paths ["resources" "target/cljsbuild"]
   :target-path "target/%s/"
-  :main ^:skip-aot multi-client-ws.core
+  :main ^:skip-aot cuberoom.core
 
   :plugins [[lein-cljsbuild "1.1.7"]
             [lein-immutant "2.1.0"]
@@ -68,7 +68,7 @@
                             {:externs-validation :off :non-standard-jsdoc :off}}}}}
 
              :aot :all
-             :uberjar-name "multi-client-ws.jar"
+             :uberjar-name "cuberoom.jar"
              :source-paths ["env/prod/clj"]
              :resource-paths ["env/prod/resources"]}
 
@@ -91,9 +91,9 @@
                   :cljsbuild {:builds
                               {:app
                                {:source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
-                                :figwheel {:on-jsload "multi-client-ws.core/mount-components"}
+                                :figwheel {:on-jsload "cuberoom.core/mount-components"}
                                 :compiler
-                                {:main "multi-client-ws.app"
+                                {:main "cuberoom.app"
                                  :asset-path "/js/out"
                                  :output-to "target/cljsbuild/public/js/app.js"
                                  :output-dir "target/cljsbuild/public/js/out"
@@ -116,7 +116,7 @@
                     {:source-paths ["src/cljc" "src/cljs" "test/cljs"]
                      :compiler
                      {:output-to "target/test.js"
-                      :main "multi-client-ws.doo-runner"
+                      :main "cuberoom.doo-runner"
                       :optimizations :whitespace
                       :pretty-print true}}}}}
 

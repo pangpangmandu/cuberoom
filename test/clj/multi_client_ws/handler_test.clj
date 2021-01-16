@@ -1,9 +1,9 @@
-(ns multi-client-ws.handler-test
+(ns cuberoom.handler-test
   (:require
    [clojure.test :refer :all]
    [ring.mock.request :refer :all]
-   [multi-client-ws.handler :refer :all]
-   [multi-client-ws.middleware.formats :as formats]
+   [cuberoom.handler :refer :all]
+   [cuberoom.middleware.formats :as formats]
    [muuntaja.core :as m]
    [mount.core :as mount]))
 
@@ -13,8 +13,8 @@
 (use-fixtures
   :once
   (fn [f]
-    (mount/start #'multi-client-ws.config/env
-                 #'multi-client-ws.handler/app-routes)
+    (mount/start #'cuberoom.config/env
+                 #'cuberoom.handler/app-routes)
     (f)))
 
 (deftest test-app

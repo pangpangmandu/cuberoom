@@ -1,4 +1,4 @@
-(ns multi-client-ws.macros
+(ns cuberoom.macros
   (:require [oops.core :refer [oget]]
             [clojure.test :refer [deftest is]]
             [clojure.string :as str]))

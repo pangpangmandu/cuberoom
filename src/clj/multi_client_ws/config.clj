@@ -1,4 +1,4 @@
-(ns multi-client-ws.config
+(ns cuberoom.config
   (:require
    [cprop.core :refer [load-config]]
    [cprop.source :as source]

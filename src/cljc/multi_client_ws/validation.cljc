@@ -1,2 +1,2 @@
-(ns multi-client-ws.validation
+(ns cuberoom.validation
   (:require [struct.core :as st]))
