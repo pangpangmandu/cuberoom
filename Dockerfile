@@ -1,7 +1,7 @@
 FROM openjdk:8-alpine
 
-COPY target/uberjar/multi-client-ws.jar /multi-client-ws/app.jar
+COPY target/uberjar/cuberoom.jar /cuberoom/app.jar
 
 EXPOSE 3000
 
-CMD ["java", "-jar", "/multi-client-ws/app.jar"]
+CMD ["java", "-jar", "/cuberoom/app.jar"]
