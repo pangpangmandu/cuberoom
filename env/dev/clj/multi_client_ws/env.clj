@@ -1,8 +1,8 @@
 (ns multi-client-ws.env
   (:require
-    [selmer.parser :as parser]
-    [clojure.tools.logging :as log]
-    [multi-client-ws.dev-middleware :refer [wrap-dev]]))
+   [selmer.parser :as parser]
+   [clojure.tools.logging :as log]
+   [multi-client-ws.dev-middleware :refer [wrap-dev]]))
 
 (def defaults
   {:init

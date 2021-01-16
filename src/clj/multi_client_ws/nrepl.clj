@@ -1,7 +1,7 @@
 (ns multi-client-ws.nrepl
   (:require
-    [nrepl.server :as nrepl]
-    [clojure.tools.logging :as log]))
+   [nrepl.server :as nrepl]
+   [clojure.tools.logging :as log]))
 
 (defn start
   "Start a network repl for debugging on specified port followed by

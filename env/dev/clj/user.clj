@@ -2,12 +2,12 @@
   "Userspace functions you can run by default in your local REPL."
   (:require
    [multi-client-ws.config :refer [env]]
-    [clojure.pprint]
-    [clojure.spec.alpha :as s]
-    [expound.alpha :as expound]
-    [mount.core :as mount]
-    [multi-client-ws.figwheel :refer [start-fw stop-fw cljs]]
-    [multi-client-ws.core :refer [start-app]]))
+   [clojure.pprint]
+   [clojure.spec.alpha :as s]
+   [expound.alpha :as expound]
+   [mount.core :as mount]
+   [multi-client-ws.figwheel :refer [start-fw stop-fw cljs]]
+   [multi-client-ws.core :refer [start-app]]))
 
 (alter-var-root #'s/*explain-out* (constantly expound/printer))
 
