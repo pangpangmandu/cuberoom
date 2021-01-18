@@ -121,4 +121,5 @@
                       :pretty-print true}}}}}
 
    :profiles/dev {}
-   :profiles/test {}})
+   :profiles/test {}}
+  :cljfmt {:indents {this-as [[:inner 0]]}})
