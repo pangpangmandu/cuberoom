@@ -1,12 +1,12 @@
 (ns cuberoom.core
   (:require [cuberoom.js :refer [js-console]]
-            [mount.core :refer [defstate] :as mount]
-            [cuberoom.phaser.example.core :as example]))
+            [cuberoom.scene :as scene]
+            [mount.core :refer [defstate] :as mount]))
 
 (defstate game
   :start (do
            (println "Creates a game object.")
-           (js/Phaser.Game. example/phaser-config))
+           (js/Phaser.Game. scene/phaser-config))
   :stop (do
           (println "Remove game object")
           (.destroy @game true false)))
