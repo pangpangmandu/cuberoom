@@ -1,10 +1,7 @@
 (ns cuberoom.core
-  (:require [oops.core :refer [oapply]]
+  (:require [cuberoom.js :refer [js-console]]
             [mount.core :refer [defstate] :as mount]
             [cuberoom.phaser.example.core :as example]))
-
-(defn js-console [& args]
-  (oapply js/console "log" (clj->js args)))
 
 (defstate game
   :start (do

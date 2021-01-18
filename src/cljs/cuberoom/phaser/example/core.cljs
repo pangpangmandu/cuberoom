@@ -1,9 +1,6 @@
 (ns cuberoom.phaser.example.core
-  (:require [oops.core :refer [oapply]])
+  (:require [cuberoom.js :refer [js-console]])
   (:require-macros [cuberoom.macros :refer [jsf]]))
-
-(defn- js-console [& args]
-  (oapply js/console "log" (clj->js args)))
 
 (defn- preload []
   (js-console "Called preload")
