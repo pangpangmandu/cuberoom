@@ -22,3 +22,7 @@ profiles.clj
 
 # clj-kondo
 .clj-kondo/.cache
+
+# Google drive
+gdrive/
+/gdrive
