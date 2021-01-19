@@ -4,13 +4,15 @@
             [cuberoom.resource :as resource]
             [cuberoom.phaser :as phaser]
             [cuberoom.play-scene :as play-scene]
-            [cuberoom.db :as db])
+            [cuberoom.db :as db]
+            [cuberoom.scene.player :as player])
   (:require-macros [cuberoom.macros :refer [jsf]]))
 
 (defn- preload []
   (js-console "Called preload")
   (this-as self
     (background/initialize)
+    (player/initialize)
     (jsf self :load.setBaseURL "/img/")
     (binding [phaser/*scene* self]
       (phaser/run-commands (resource/load-all)))))
