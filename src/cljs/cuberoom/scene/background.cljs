@@ -6,11 +6,11 @@
   ""
   []
   (resource/register ::resource
-                   {:type :image
-                    :name ::image
-                    :file "미술관-내부.png"})
+                     {:type :image
+                      :name ::image
+                      :file "미술관-내부.png"})
   (play-scene/register ::object
-                   {:type :image
-                    :x 400
-                    :y 300
-                    :image ::image}))
+                       {:type :image
+                        :x 400
+                        :y 300
+                        :image ::image}))

@@ -8,8 +8,8 @@
 
 (defn- get-db []
   (if (some? @*db-override*)
-      *db-override*
-      real-db))
+    *db-override*
+    real-db))
 
 (defn get-real-db
   "For debug purpose"
