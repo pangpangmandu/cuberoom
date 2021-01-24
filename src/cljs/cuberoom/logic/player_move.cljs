@@ -1,4 +1,6 @@
 (ns cuberoom.logic.player-move
+  "Use `update'` to move player.
+  It read input and change player's position"
   (:require [cuberoom.scene.player :as player]))
 
 (defn- parse-horizontal [pressed-keys]
