@@ -5,8 +5,12 @@
             [cuberoom.phaser :as phaser]
             [cuberoom.play-scene :as play-scene]
             [cuberoom.db :as db]
-            [cuberoom.scene.player :as player])
+            [cuberoom.scene.player :as player]
+            [cuberoom.input :as input]
+            [cuberoom.input.log :as input-log])
   (:require-macros [cuberoom.macros :refer [jsf]]))
+
+(def input-objects "input objects from phaser" ())
 
 (defn- preload []
   (js-console "Called preload")
@@ -15,20 +19,23 @@
     (player/initialize)
     (jsf self :load.setBaseURL "/img/")
     (binding [phaser/*scene* self]
-      (phaser/run-commands (resource/load-all)))))
+      (phaser/run-commands (resource/load-all))))
+  (js-console "preload finished"))
 
 (defn- create []
   (js-console "Called create")
   (this-as self
-    (js-console "real db" (js->clj @(db/get-real-db)))
-    (println "real db" @(db/get-real-db))
-    (js-console "overrided db" (js->clj @db/*db-override*))
+    (js-console "inside this as self")
     (binding [phaser/*scene* self]
+      (set! input-objects (input/initialize self))
       (js-console "in create-binding")
-      (phaser/run-commands (play-scene/create-all-objects)))))
+      (phaser/run-commands (play-scene/create-all-objects))))
+  (js-console "Create finished"))
 
 (defn- update' []
-  (js-console "hi update"))
+  ;; run player move
+  (let [input-this-frame (input/read-input input-objects)]
+    (input-log/log-if-changed input-this-frame)
 
 (def phaser-config
   #js {:type js/Phaser.AUTO
