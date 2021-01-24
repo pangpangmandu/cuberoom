@@ -27,6 +27,9 @@
       (js-console "in create-binding")
       (phaser/run-commands (play-scene/create-all-objects)))))
 
+(defn- update' []
+  (js-console "hi update"))
+
 (def phaser-config
   #js {:type js/Phaser.AUTO
        :width 800
@@ -34,4 +37,5 @@
        :physics #js {:default "arcade"
                      :arcade #js {:gravity #js {:y 200}}}
        :scene #js {:preload preload
-                   :create create}})
+                   :create create
+                   :update update'}})
