@@ -5,8 +5,10 @@
             [cuberoom.phaser :as phaser]
             [cuberoom.play-scene :as play-scene]
             [cuberoom.db :as db]
+            [cuberoom.db.log :as db-log]
             [cuberoom.scene.player :as player]
             [cuberoom.input :as input]
+            [cuberoom.logic.player-move :as player-move]
             [cuberoom.input.log :as input-log])
   (:require-macros [cuberoom.macros :refer [jsf]]))
 
@@ -34,9 +36,27 @@
 
 (defn- update' []
   ;; run player move
-  (let [input-this-frame (input/read-input input-objects)]
+  (let [input-this-frame (input/read-input input-objects)
+        commands (atom [])]
     (input-log/log-if-changed input-this-frame)
-
+    ;; TODO: player-move/update does not return new db
+    ;; It returns new db and commands.
+    (db/with-db
+      (fn [db]
+        (let [{new-db :db new-commands :commands} (player-move/update' db input-this-frame)]
+          ;; FIXME: Let's not use the atom
+          (swap! commands #(concat % new-commands))
+          new-db)))
+;;    (phaser/run-commands @commands)
+    (db/with-db (fn [db]
+                  (db-log/log-if-changed
+                   [:cuberoom.scene.player/object]
+                   db)
+                  db))))
+(comment
+  (conj [] 1 3)
+  (concat [] [1 3] [1 4])
+  (+  1 2))
 (def phaser-config
   #js {:type js/Phaser.AUTO
        :width 800

@@ -36,3 +36,5 @@
        db
        (assoc db key value)))))
 
+(defn with-db [update-fn]
+  (swap! (get-db) update-fn))
