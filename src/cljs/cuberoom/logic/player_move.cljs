@@ -43,10 +43,12 @@
 
 (defn- vec->commands [movements]
   (let [[x y] (move->vec movements)]
-    {:type :move-rel
-     :target :cuberoom.scene.player/object
-     :x x
-     :y y}))
+    (if (= 0 x y)
+      []
+      [{:type :move-rel
+        :target :cuberoom.scene.player/object
+        :x x
+        :y y}])))
 
 (defn update' [db input]
   (let [movements (input->movements input)
