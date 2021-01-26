@@ -18,6 +18,7 @@
     (for [key keys
           :let [object (db/get-db-value key)]]
       {:type :create-object
+       :name key
        :image (:image object)
        :x (:x object)
        :y (:y object)})))

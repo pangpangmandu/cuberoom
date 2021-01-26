@@ -47,7 +47,9 @@
           ;; FIXME: Let's not use the atom
           (swap! commands #(concat % new-commands))
           new-db)))
-;;    (phaser/run-commands @commands)
+    (this-as self
+      (binding [phaser/*scene* self]
+        (phaser/run-commands @commands)))
     (db/with-db (fn [db]
                   (db-log/log-if-changed
                    [:cuberoom.scene.player/object]
