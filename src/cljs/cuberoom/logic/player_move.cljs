@@ -32,12 +32,12 @@
                         2 (js/Math.sqrt move-speed))
         distance (* frame-delta distance-unit)
         x-unit (cond
-                 (contains? movements :+x) 1
-                 (contains? movements :-x) -1
+                 (some #{:+x} movements) 1
+                 (some #{:-x} movements) -1
                  :else 0)
         y-unit (cond
-                 (contains? movements :+y) 1
-                 (contains? movements :-y) -1
+                 (some #{:+y} movements) 1
+                 (some #{:-y} movements) -1
                  :else 0)]
     [(* distance x-unit) (* distance y-unit)]))
 
