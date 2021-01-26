@@ -1,5 +1,6 @@
 (ns cuberoom.phaser
-  (:require [cuberoom.js :refer [js-console]])
+  (:require [cuberoom.js :refer [js-console]]
+            [cuberoom.util.timing :as timing])
   (:require-macros [cuberoom.macros :refer [jsf]]))
 
 (def ^:dynamic *scene* nil)
@@ -13,20 +14,19 @@
   {:pre (some? *scene*)}
   (jsf *scene* :add.image x y image))
 
+(def ^:private print-less (timing/make-once-per-sec))
+
 (defn run-command
   [cmd]
-  (js-console "run-command called")
   (let [name (:type cmd)]
     (case name
       :load (load cmd)
       :create-object (create-object cmd)
-      (do
-        (println "Unknown phase command " cmd)
-        (js-console "Unknown phase command " cmd)))))
+      (print-less #(do
+                     (println "Unknown phase command " cmd))))))
 
 (defn run-commands
   [cmds]
-  (js-console "run-commands" cmds)
   (doseq [cmd cmds]
     (run-command cmd)))
 
