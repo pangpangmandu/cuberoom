@@ -11,8 +11,8 @@
 
 (defn- parse-vertical [pressed-keys]
   (cond
-    (contains? pressed-keys :w) :+y
-    (contains? pressed-keys :s) :-y
+    (contains? pressed-keys :w) :-y
+    (contains? pressed-keys :s) :+y
     :else nil))
 
 (defn- input->movements [input]
