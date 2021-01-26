@@ -55,10 +55,7 @@
                    [:cuberoom.scene.player/object]
                    db)
                   db))))
-(comment
-  (conj [] 1 3)
-  (concat [] [1 3] [1 4])
-  (+  1 2))
+
 (def phaser-config
   #js {:type js/Phaser.AUTO
        :width 800
