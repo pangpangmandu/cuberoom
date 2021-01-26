@@ -41,8 +41,8 @@
                  :else 0)]
     [(* distance x-unit) (* distance y-unit)]))
 
-(defn- vec->commands [movements]
-  (let [[x y] (move->vec movements)]
+(defn- vec->commands [move-vec]
+  (let [[x y] move-vec]
     (if (= 0 x y)
       []
       [{:type :move-rel
