@@ -6,13 +6,17 @@
 (defn- parse-horizontal [pressed-keys]
   (cond
     (contains? pressed-keys :a) :-x
+    (contains? pressed-keys :left) :-x
     (contains? pressed-keys :d) :+x
+    (contains? pressed-keys :right) :+x
     :else nil))
 
 (defn- parse-vertical [pressed-keys]
   (cond
     (contains? pressed-keys :w) :-y
+    (contains? pressed-keys :up) :-y
     (contains? pressed-keys :s) :+y
+    (contains? pressed-keys :down) :+y
     :else nil))
 
 (defn- input->movements [input]

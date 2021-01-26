@@ -21,7 +21,11 @@
   {:w (add-key scene "w")
    :a (add-key scene "a")
    :s (add-key scene "s")
-   :d (add-key scene "d")})
+   :d (add-key scene "d")
+   :up (add-key scene js/Phaser.Input.Keyboard.KeyCodes.UP)
+   :down (add-key scene js/Phaser.Input.Keyboard.KeyCodes.DOWN)
+   :left (add-key scene js/Phaser.Input.Keyboard.KeyCodes.LEFT)
+   :right (add-key scene js/Phaser.Input.Keyboard.KeyCodes.RIGHT)})
 
 (defn- pressed-keys-from-phaser
   [phaser-input-objects]
