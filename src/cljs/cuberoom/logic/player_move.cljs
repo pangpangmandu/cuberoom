@@ -33,7 +33,7 @@
         distance-unit (case len
                         0 0
                         1 move-speed
-                        2 (js/Math.sqrt move-speed))
+                        2 (/ move-speed (js/Math.sqrt 2)))
         distance (* frame-delta distance-unit)
         x-unit (cond
                  (some #{:+x} movements) 1
