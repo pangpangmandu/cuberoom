@@ -1,7 +1,8 @@
 (ns cuberoom.core
   (:require [cuberoom.js :refer [js-console]]
             [cuberoom.scene :as scene]
-            [mount.core :refer [defstate] :as mount]))
+            [mount.core :refer [defstate] :as mount]
+            [cuberoom.network :as network]))
 
 (defstate game
   :start (do
@@ -21,5 +22,12 @@
     (js-console "Flagwheel loaded core.js")
     (js-console @game)))
 
+(defonce messages (atom []))
+
+(defn update-messages! [{:keys [message]}]
+  (swap! messages #(vec (take 10 (conj % message)))))
+
 (defn init! []
+  ;; todo
+  (network/make-websocket! (str "ws://" (.-host js/location) "/ws") update-messages!)
   (mount-components))
