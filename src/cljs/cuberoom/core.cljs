@@ -29,5 +29,5 @@
 
 (defn init! []
   ;; todo
-  (network/make-websocket! (str "ws://" (.-host js/location) "/ws") update-messages!)
+;;  (network/make-websocket! (str "ws://" (.-host js/location) "/ws") update-messages!)
   (mount-components))
