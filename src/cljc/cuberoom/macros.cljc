@@ -36,4 +36,3 @@
     (if (empty? chain)
       `(~dotmethod ~obj ~@args)
       `(~dotmethod (oget ~obj ~chain) ~@args))))
-
