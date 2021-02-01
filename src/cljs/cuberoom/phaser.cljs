@@ -42,3 +42,5 @@
   (doseq [cmd cmds]
     (run-command cmd)))
 
+(defn get-object [key]
+  (get-in global [:object key]))

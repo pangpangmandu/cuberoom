@@ -9,7 +9,8 @@
             [cuberoom.scene.player :as player]
             [cuberoom.input :as input]
             [cuberoom.logic.player-move :as player-move]
-            [cuberoom.input.log :as input-log])
+            [cuberoom.input.log :as input-log]
+            [cuberoom.logic.camera-follow-player :as camera-follow-player])
   (:require-macros [cuberoom.macros :refer [jsf]]))
 
 (def input-objects "input objects from phaser" ())
@@ -31,7 +32,8 @@
     (binding [phaser/*scene* self]
       (set! input-objects (input/initialize self))
       (js-console "in create-binding")
-      (phaser/run-commands (play-scene/create-all-objects))))
+      (phaser/run-commands (play-scene/create-all-objects))
+      (camera-follow-player/follow)))
   (js-console "Create finished"))
 
 (defn- update' []
@@ -60,6 +62,11 @@
   #js {:type js/Phaser.AUTO
        :width 800
        :height 600
+       :scale #js
+       {:mode js/Phaser.Scale.FIT
+        :parent "phaser-parent"
+        :autoCenter js/Phaser.Scale.CENTER_BOTH}
+
        :physics #js {:default "arcade"
                      :arcade #js {:gravity #js {:y 200}}}
        :scene #js {:preload preload
