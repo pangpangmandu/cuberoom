@@ -25,7 +25,23 @@
 
 (defn register
   "Register resource in DB.
-  A value needs these keys :type :name :file"
+  A value needs these keys :type :name :file
+
+  Currently only :image is available for the :type
+
+  FIXME: Let's merge the name and the key
+  :name is used for a key in Phaser.
+
+  :file is a URL for the image.
+
+  ```example
+  (resource/register ::resource
+    {:type :image
+     :name \"some-image\"
+     :file \"./x.png\"
+    })
+  ```
+  "
   [key value]
   (add-resource-key key)
   (db/set-if-empty key value))
