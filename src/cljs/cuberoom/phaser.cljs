@@ -13,6 +13,7 @@
 
 (defn- create-object [{name :name image :image x :x y :y}]
   {:pre (some? *scene*)}
+  (println "create-object " name image)
   (let [image (jsf *scene* :add.image x y image)]
     (set! global
           (assoc-in global [:object name] image))))

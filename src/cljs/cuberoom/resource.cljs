@@ -43,6 +43,7 @@
   ```
   "
   [key value]
+  (println "Regist resource in db " key " : " value)
   (add-resource-key key)
   (db/set-if-empty key value))
 

@@ -5,6 +5,7 @@
 (defn initialize
   ""
   []
+  (println "Background initialize")
   (resource/register ::resource
                      {:type :image
                       :name ::image
