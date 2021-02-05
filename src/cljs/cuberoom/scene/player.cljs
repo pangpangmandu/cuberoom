@@ -39,8 +39,8 @@
   (println "Player initializex")
   (doseq [resource (prepare-image-load)]
     (resource/register resource))
-  (play-scene/register object-key
-                       {:type :image
+  (play-scene/register {:type :image
+                        :name object-key
                         :x 400
                         :y 300
                         :image ::resource-left-1}))
