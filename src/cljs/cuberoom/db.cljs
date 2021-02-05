@@ -2,14 +2,26 @@
 
 (defonce real-db (atom {}))
 
+(comment
+  (println real-db))
+
 (def ^:dynamic *db-override*
   "Overrided db for test"
   (atom nil))
+
+(comment
+  (println *db-override*))
 
 (defn- get-db []
   (if (some? @*db-override*)
     *db-override*
     real-db))
+
+(defn reset-real-db []
+  (set! real-db (atom {})))
+
+(comment
+  (reset-real-db))
 
 (defn get-real-db
   "For debug purpose"
