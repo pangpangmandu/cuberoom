@@ -29,23 +29,23 @@
 
   Currently only :image is available for the :type
 
-  FIXME: Let's merge the name and the key
   :name is used for a key in Phaser.
 
   :file is a URL for the image.
 
   ```example
-  (resource/register ::resource
+  (resource/register
     {:type :image
      :name \"some-image\"
      :file \"./x.png\"
     })
   ```
   "
-  [key value]
-  (println "Regist resource in db " key " : " value)
-  (add-resource-key key)
-  (db/set-if-empty key value))
+  [value]
+  (let [key (:name value)]
+    (println "Regist resource in db " key " : " value)
+    (add-resource-key key)
+    (db/set-if-empty key value)))
 
 (deftest test-register
   (is (= (binding [db/*db-override* (atom {})]
