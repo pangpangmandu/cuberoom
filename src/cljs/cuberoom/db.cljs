@@ -1,9 +1,20 @@
-(ns cuberoom.db)
+(ns cuberoom.db
+  (:require [clojure.string :as str]
+            [cljs.pprint :as ppt]))
 
 (defonce real-db (atom {}))
 
 (comment
-  (println real-db))
+  (println real-db)
+  (println "x")
+  (println (keys @real-db))
+  (ppt/pprint (keys @real-db))
+  (str/includes? "aa" "a")
+  (as-> (keys @real-db) x
+    (map str x)
+    (filter #(str/includes? % "object") x)
+    (println x))
+  (println (filter #(str/includes? % "object") (keys @real-db))))
 
 (def ^:dynamic *db-override*
   "Overrided db for test"
