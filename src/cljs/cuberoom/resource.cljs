@@ -49,5 +49,6 @@
 
 (deftest test-register
   (is (= (binding [db/*db-override* (atom {})]
-           (register :some-key 3))
-         {:cuberoom.resource/keys #{:some-key}, :some-key 3})))
+           (register {:name :some-key :x 3}))
+         {:cuberoom.resource/keys #{:some-key},
+          :some-key {:name :some-key :x 3}})))
