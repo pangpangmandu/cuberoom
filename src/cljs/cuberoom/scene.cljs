@@ -19,7 +19,7 @@
   (js-console "Called preload")
   (this-as self
     (background/initialize)
-    (player/initialize)
+    (player/preload)
     (jsf self :load.setBaseURL "/img/")
     (binding [phaser/*scene* self]
       (phaser/run-commands (resource/load-all))))
@@ -31,8 +31,11 @@
     (js-console "inside this as self")
     (binding [phaser/*scene* self]
       (set! input-objects (input/initialize self))
-      (js-console "in create-binding")
-      (phaser/run-commands (play-scene/create-all-objects))
+      (js-console "in create-binding" self)
+      (phaser/run-commands
+       (concat
+        (play-scene/create-all-objects)
+        (player/create)))
       (camera-follow-player/follow)))
   (js-console "Create finished"))
 

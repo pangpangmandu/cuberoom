@@ -13,7 +13,8 @@
 
   The value must contains these keys: :type, :x, :y, :image, :name.
 
-  Currently only :image is available for the :type value.
+  :type can has :image and :sprite. :image is a static image. :sprite
+  is an image that can be animated.
 
   :x is the x position of the object in the scene.
   Left is 0.
@@ -49,5 +50,6 @@
       {:type :create-object
        :name key
        :image (:image object)
+       :object-type (:type object)
        :x (:x object)
        :y (:y object)})))

@@ -34,16 +34,34 @@
   (for [resource (prepare-image-load)]
     (println ::resource resource)))
 
-(defn initialize
+(defn preload
   []
   (println "Player initializex")
   (doseq [resource (prepare-image-load)]
     (resource/register resource))
-  (play-scene/register {:type :image
+  (play-scene/register {:type :sprite
                         :name object-key
                         :x 400
                         :y 300
                         :image ::resource-left-1}))
+
+(defn create
+  "Returns phaser commands for initialization."
+  []
+  [{:type :create-anim
+    :anim-name :player-walk-left
+    :frames #js [#js {:key
+                      ::resource-left-1}
+                 #js {:key
+                      ::resource-left-2}
+                 #js {:key
+                      ::resource-left-3}
+                 #js {:key
+                      ::resource-left-4}]
+    :repeat -1}
+   {:type :play-anim
+    :anim-name :player-walk-left
+    :character-name ::object}])
 
 (defn get-object-from-db [db]
   (get db ::object))
