@@ -63,19 +63,29 @@
   1. Moved or not
   2. Moved direction"
   [db move-vec]
-  (assoc db ::state
-         {:move-vec move-vec}))
+  (assoc-in db [::state :move-vec] move-vec))
 
 (defn- get-previous-move-vec [db]
   (get-in db [::state :move-vec]))
 
+(defn- save-anim [db anim]
+  (assoc-in db [::state :anim] anim))
+
+(defn- get-previous-anim [db]
+  (get-in db [::state :anim]))
+
 (defn- get-movement-for-anim
   "return :moved :not-moved"
   [move-vec]
-  (let [[x y] move-vec]
-    (cond
-      (= 0 x y) :not-moved
-      :else :moved)))
+  (if (nil? move-vec)
+    :not-moved
+    (do
+      (when (not (vector? move-vec))
+	(println "get-movement-for-anim not vector" move-vec))
+      (let [[x y] move-vec]
+        (cond
+          (= 0 x y) :not-moved
+          :else :moved)))))
 
 (defn- get-direction-for-anim [move-vec]
   (let [[x y] move-vec]
@@ -84,27 +94,49 @@
       (< y 0) :up
       (> x 0) :right
       (< x 0) :left
-      :else :down)))
+      :else nil)))
 
+(defn- calculate-new-anim [anim-direction]
+  (condp = anim-direction
+    :up :player-walk-up
+    :down :player-walk-down
+    :right :player-walk-right
+    :left :player-walk-left
+    (do
+      (println "invalid state in calculate-new-anim" anim-direction)
+      nil)))
+
+;; TODO update the anim name in the db
 (defn- update-anim
   "Check these things.
   1. Moving stopped or moving started
   2. The direction of movement is changed"
   [db move-vec]
+  (when (nil? move-vec)
+    (println "update-anim move-vec is nil" move-vec))
   (let [prev-moved? (get-movement-for-anim (get-previous-move-vec db))
         moved? (get-movement-for-anim move-vec)
-        anim-direction (get-direction-for-anim move-vec)]
+        anim-direction (get-direction-for-anim move-vec)
+        new-anim (calculate-new-anim anim-direction)
+        prev-anim (get-previous-anim db)]
     (cond
       (and (= :moved prev-moved?)
            (= :not-moved moved?))
-      {:db db :commands (player-animator/stop-anim :cuberoom.scene.player/object)};;      :stop-anim
-      (= :moved moved?)
-      {:db db :commands [(player-animator/play-anim
-                          :cuberoom.scene.player/object
-                          :player-walk-right)]}
+      (-> db
+          (save-anim new-anim)
+          ((fn [db] {:db db
+                     :commands
+                     [(player-animator/stop-anim :cuberoom.scene.player/object)]})));;      :stop-anim
+      (and (= :moved moved?)
+           (not= new-anim prev-anim))
+      (-> db
+          (save-anim new-anim)
+          ((fn [db]
+             {:db db :commands [(player-animator/play-anim
+                                 :cuberoom.scene.player/object
+                                 new-anim)]})))
       :else
       {:db db :commands []})))
-
 
 (defn update' [db input]
   (let [movements (input->movements input)
@@ -116,3 +148,4 @@
          (player/move-rel-in-db [move-vec 0] [move-vec 1])
          (update-state move-vec))
      :commands (concat commands anim-commands)}))
+
