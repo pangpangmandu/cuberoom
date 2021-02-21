@@ -21,3 +21,12 @@
 (defn create-anims []
   (for [name character-animation-names]
     (create-anim name)))
+
+(defn play-anim [character-name anim-name]
+  {:type :play-anim
+   :anim-name anim-name
+   :character-name character-name})
+
+(defn stop-anim [character-name]
+  {:type :stop-anim
+   :character-name character-name})

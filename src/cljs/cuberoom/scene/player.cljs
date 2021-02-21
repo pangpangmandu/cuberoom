@@ -48,9 +48,7 @@
   "Returns phaser commands for initialization."
   []
   (concat (player-animator/create-anims)
-          [{:type :play-anim
-            :anim-name :player-walk-left
-            :character-name ::object}]))
+          [(player-animator/play-anim ::object :player-walk-left)]))
 
 (defn get-object-from-db [db]
   (get db ::object))

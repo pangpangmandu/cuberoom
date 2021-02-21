@@ -70,6 +70,11 @@
     (js-console "character" character)
     (jsf character :play (str anim-name))))
 
+(defn- stop-anim
+  [{character-name :character-name}]
+  (let [character (get-in global [:object character-name])]
+    (jsf character :stop)))
+
 (def ^:private print-less (timing/make-once-per-sec))
 
 (defn run-command
@@ -81,6 +86,7 @@
       :move-rel (move-rel cmd)
       :create-anim (create-anim cmd)
       :play-anim (play-anim cmd)
+      :stop-anim (stop-anim cmd)
       (print-less #(do
                      (println "Unknown phase command " cmd))))))
 
