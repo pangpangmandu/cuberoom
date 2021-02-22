@@ -102,9 +102,7 @@
     :down :player-walk-down
     :right :player-walk-right
     :left :player-walk-left
-    (do
-      (println "invalid state in calculate-new-anim" anim-direction)
-      nil)))
+	nil))
 
 ;; TODO update the anim name in the db
 (defn- update-anim
