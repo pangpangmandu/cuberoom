@@ -8,7 +8,7 @@
   (println "Background initialize")
   (resource/register {:type :image
                       :name ::image
-                      :file "미술관-내부.png"})
+                      :file "미술관내부0216.png"})
   (play-scene/register {:type :image
                         :name ::object
                         :x 400
