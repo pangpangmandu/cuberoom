@@ -26,8 +26,7 @@ class CuberoomScene extends Phaser.Scene {
   }
 
   create() {
-    for (var i = 0; i < directions.length; i++) {
-      const direction = directions[i];
+    for (direction of directions) {
       const animConfig = {
         key: `player-${direction}`,
         frames: [...animationFrames(direction)],
