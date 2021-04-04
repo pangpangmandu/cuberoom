@@ -44,6 +44,7 @@ class CuberoomScene extends Phaser.Scene {
       0,
       0
     );
+    this.interactionLayer = interactionLayer;
     interactionLayer.visible = false;
 
     this.map.setCollisionByProperty(
@@ -106,7 +107,7 @@ class CuberoomScene extends Phaser.Scene {
   }
 
   updateAnimation() {
-       if (this.cursors.left.isDown) {
+    if (this.cursors.left.isDown) {
       if (this.prevAnim !== "player-left") {
         this.player.anims.play("player-left", true);
         this.prevAnim = "player-left";
@@ -180,6 +181,25 @@ class CuberoomScene extends Phaser.Scene {
     moveWithSpeed2(this);
 
     this.updateAnimation();
+
+    const pointer = this.input.mousePointer;
+    const tile = this.interactionLayer.getTileAtWorldXY(
+      pointer.worldX,
+      pointer.worldY
+    );
+    if (tile == null) {
+      this.input.setDefaultCursor("auto");
+      return;
+    }
+    if (tile.properties.name === "image1") {
+      this.input.setDefaultCursor("pointer");
+    } else if (tile.properties.name === "image2") {
+      this.input.setDefaultCursor("pointer");
+    } else if (tile.properties.name === "image3") {
+      this.input.setDefaultCursor("pointer");
+    } else if (tile.properties.name === "image4") {
+      this.input.setDefaultCursor("pointer");
+    }
   }
 }
 
