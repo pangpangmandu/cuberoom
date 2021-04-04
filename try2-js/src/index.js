@@ -26,18 +26,7 @@ class CuberoomScene extends Phaser.Scene {
   }
 
   create() {
-    for (direction of directions) {
-      const animConfig = {
-        key: `player-${direction}`,
-        frames: [...animationFrames(direction)],
-        frameRate: 10,
-        repeat: -1,
-      };
-      this.anims.create(animConfig);
-      console.log(animConfig);
-      console.log([...animationFrames(direction)]);
-    }
-
+    createAnimations();
     backgroundStatic(this);
 
     this.map = this.make.tilemap({ key: "map", tileWidth: 16, tileHeight: 16 });
@@ -68,6 +57,20 @@ class CuberoomScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
 
     this.cursors = this.input.keyboard.createCursorKeys();
+  }
+
+  createAnimations() {
+    for (direction of directions) {
+      const animConfig = {
+        key: `player-${direction}`,
+        frames: [...animationFrames(direction)],
+        frameRate: 10,
+        repeat: -1,
+      };
+      this.anims.create(animConfig);
+      console.log(animConfig);
+      console.log([...animationFrames(direction)]);
+    }
   }
 
   update(time, delta) {
