@@ -71,8 +71,14 @@ class CuberoomScene extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
   }
 
-  update() {
-    moveWithSpeed(this);
+  update(time, delta) {
+    // moveWithDelta({
+    //   player: this.player,
+    //   delta,
+    //   cursors: this.cursors,
+    // });
+    //    moveWithSpeed(this);
+    moveWithSpeed2(this);
 
     if (this.cursors.left.isDown) {
       if (this.prevAnim !== "player-left") {
@@ -147,6 +153,55 @@ function moveWithSpeed(scene) {
     scene.player.body.setVelocityY(-200);
   } else if (scene.cursors.down.isDown) {
     scene.player.body.setVelocityY(200);
+  }
+}
+
+function moveWithSpeed2(scene) {
+  let moved = false;
+
+  if (scene.cursors.left.isDown) {
+    if (scene.player.playerMove !== "left") {
+      scene.player.body.setVelocityX(-200);
+      scene.player.prevMove = "left";
+    }
+    moved = true;
+  } else if (scene.cursors.right.isDown) {
+    if (scene.player.playerMove !== "right") {
+      scene.player.body.setVelocityX(200);
+      scene.player.prevMove = "right";
+    }
+    moved = true;
+  }
+  if (scene.cursors.up.isDown) {
+    if (scene.player.playerMove !== "up") {
+      scene.player.body.setVelocityY(-200);
+      scene.player.prevMove = "up";
+    }
+    moved = true;
+  } else if (scene.cursors.down.isDown) {
+    if (scene.player.playerMove !== "down") {
+      scene.player.body.setVelocityY(200);
+      scene.player.prevMove = "down";
+    }
+    moved = true;
+  }
+
+  if (moved === false) {
+    scene.player.body.setVelocity(0);
+  }
+}
+
+function moveWithDelta({ player, delta, cursors }) {
+  const speed = 0.1;
+  if (cursors.left.isDown) {
+    player.x -= speed * delta;
+  } else if (cursors.right.isDown) {
+    player.x += speed * delta;
+  }
+  if (cursors.up.isDown) {
+    player.y -= speed * delta;
+  } else if (cursors.down.isDown) {
+    player.y += speed * delta;
   }
 }
 
