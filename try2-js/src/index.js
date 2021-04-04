@@ -15,6 +15,7 @@ class CuberoomScene extends Phaser.Scene {
   preload() {
     this.load.image("background", "/img/미술관내부0216.png");
     this.load.image("collision-tileset", "/tilemap/simple_tile.png");
+    this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
     this.load.tilemapTiledJSON({
       key: "map",
       url: "/tilemap/tilemap.json",
@@ -35,6 +36,15 @@ class CuberoomScene extends Phaser.Scene {
     const collisionLayer = this.map.createLayer("collision", tileset, 0, 0);
     collisionLayer.visible = false;
     collisionLayer.alpha = 0;
+
+    const interactiveTileset = this.map.addTilesetImage("interactive-tile");
+    const interactionLayer = this.map.createLayer(
+      "interaction",
+      interactiveTileset,
+      0,
+      0
+    );
+    interactionLayer.visible = false;
 
     this.map.setCollisionByProperty(
       {
@@ -57,6 +67,14 @@ class CuberoomScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
 
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.input.keyboard.on("keydown-SPACE", () => {
+      console.log("Space");
+      if (this.cheat === true) {
+        this.cheat = false;
+      } else {
+        this.cheat = true;
+      }
+    });
   }
 
   createAnimations() {
@@ -75,9 +93,11 @@ class CuberoomScene extends Phaser.Scene {
     for (const direction of directions) {
       this.anims.create({
         key: `player-${direction}-stop`,
-        frames: [{
-          key: `player-${direction}-2`
-        }],
+        frames: [
+          {
+            key: `player-${direction}-2`,
+          },
+        ],
         frameRate: 10,
         repeat: -1,
       });
@@ -182,7 +202,11 @@ function moveWithSpeed(scene) {
 
 function moveWithSpeed2(scene) {
   let moved = false;
-  const velocity = 100
+  let velocity = 100;
+
+  if (scene.cheat) {
+    velocity = velocity * 10;
+  }
 
   if (scene.cursors.left.isDown) {
     if (scene.player.playerMove !== "left") {
@@ -222,7 +246,10 @@ function moveWithSpeed2(scene) {
 }
 
 function moveWithDelta({ player, delta, cursors }) {
-  const speed = 0.1;
+  let speed = 0.1;
+  if (this.cheat) {
+    speed = speed * 100;
+  }
   if (cursors.left.isDown) {
     player.x -= speed * delta;
   } else if (cursors.right.isDown) {
