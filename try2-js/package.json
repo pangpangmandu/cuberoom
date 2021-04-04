@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build": "rm -rf public && mkdir public && ./build.sh"
+  }
+}
