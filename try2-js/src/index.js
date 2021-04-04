@@ -39,7 +39,7 @@ class CuberoomScene extends Phaser.Scene {
       console.log([...animationFrames(direction)]);
     }
 
-		backgroundStatic(this);
+    backgroundStatic(this);
 
     this.map = this.make.tilemap({ key: "map", tileWidth: 16, tileHeight: 16 });
     const tileset = this.map.addTilesetImage("collision", "collision-tileset");
@@ -72,18 +72,7 @@ class CuberoomScene extends Phaser.Scene {
   }
 
   update() {
-    this.player.body.setVelocity(0);
-
-    if (this.cursors.left.isDown) {
-      this.player.body.setVelocityX(-200);
-    } else if (this.cursors.right.isDown) {
-      this.player.body.setVelocityX(200);
-    }
-    if (this.cursors.up.isDown) {
-      this.player.body.setVelocityY(-200);
-    } else if (this.cursors.down.isDown) {
-      this.player.body.setVelocityY(200);
-    }
+    moveWithSpeed(this);
 
     if (this.cursors.left.isDown) {
       if (this.prevAnim !== "player-left") {
@@ -145,6 +134,20 @@ function backgroundTile(scene) {
     0,
     0
   );
+}
+
+function moveWithSpeed(scene) {
+  scene.player.body.setVelocity(0);
+  if (scene.cursors.left.isDown) {
+    scene.player.body.setVelocityX(-200);
+  } else if (scene.cursors.right.isDown) {
+    scene.player.body.setVelocityX(200);
+  }
+  if (scene.cursors.up.isDown) {
+    scene.player.body.setVelocityY(-200);
+  } else if (scene.cursors.down.isDown) {
+    scene.player.body.setVelocityY(200);
+  }
 }
 
 var config = {
