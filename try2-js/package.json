@@ -1,5 +1,9 @@
 {
   "scripts": {
-    "build": "rm -rf public && mkdir public && ./build.sh"
+    "build": "rm -rf public && mkdir public && ./build.sh && npm run build-js",
+		"build-js": "esbuild src/index.js --bundle --outfile=./public/index.js"
+  },
+  "dependencies": {
+    "esbuild": "^0.11.5"
   }
 }
