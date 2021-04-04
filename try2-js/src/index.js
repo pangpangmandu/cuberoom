@@ -182,16 +182,17 @@ function moveWithSpeed(scene) {
 
 function moveWithSpeed2(scene) {
   let moved = false;
+  const velocity = 100
 
   if (scene.cursors.left.isDown) {
     if (scene.player.playerMove !== "left") {
-      scene.player.body.setVelocityX(-200);
+      scene.player.body.setVelocityX(-velocity);
       scene.player.prevMove = "left";
     }
     moved = true;
   } else if (scene.cursors.right.isDown) {
     if (scene.player.playerMove !== "right") {
-      scene.player.body.setVelocityX(200);
+      scene.player.body.setVelocityX(velocity);
       scene.player.prevMove = "right";
     }
     moved = true;
@@ -201,13 +202,13 @@ function moveWithSpeed2(scene) {
 
   if (scene.cursors.up.isDown) {
     if (scene.player.playerMove !== "up") {
-      scene.player.body.setVelocityY(-200);
+      scene.player.body.setVelocityY(-velocity);
       scene.player.prevMove = "up";
     }
     moved = true;
   } else if (scene.cursors.down.isDown) {
     if (scene.player.playerMove !== "down") {
-      scene.player.body.setVelocityY(200);
+      scene.player.body.setVelocityY(velocity);
       scene.player.prevMove = "down";
     }
     moved = true;
