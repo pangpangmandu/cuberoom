@@ -26,7 +26,7 @@ class CuberoomScene extends Phaser.Scene {
   }
 
   create() {
-    createAnimations();
+    this.createAnimations();
     backgroundStatic(this);
 
     this.map = this.make.tilemap({ key: "map", tileWidth: 16, tileHeight: 16 });
@@ -60,7 +60,7 @@ class CuberoomScene extends Phaser.Scene {
   }
 
   createAnimations() {
-    for (direction of directions) {
+    for (const direction of directions) {
       const animConfig = {
         key: `player-${direction}`,
         frames: [...animationFrames(direction)],
@@ -70,6 +70,17 @@ class CuberoomScene extends Phaser.Scene {
       this.anims.create(animConfig);
       console.log(animConfig);
       console.log([...animationFrames(direction)]);
+    }
+
+    for (const direction of directions) {
+      this.anims.create({
+        key: `player-${direction}-stop`,
+        frames: [{
+          key: `player-${direction}-2`
+        }],
+        frameRate: 10,
+        repeat: -1,
+      });
     }
   }
 
@@ -103,7 +114,18 @@ class CuberoomScene extends Phaser.Scene {
         this.prevAnim = "player-down";
       }
     } else {
-      this.player.anims.stop();
+      if (this.prevAnim === "player-up") {
+        this.player.anims.play("player-up-stop", true);
+      } else if (this.prevAnim === "player-down") {
+        this.player.anims.play("player-down-stop", true);
+      } else if (this.prevAnim === "player-left") {
+        this.player.anims.play("player-left-stop", true);
+      } else if (this.prevAnim === "player-right") {
+        this.player.anims.play("player-right-stop", true);
+      } else {
+        this.player.anims.stop();
+      }
+
       this.prevAnim = "player-idle";
     }
   }
