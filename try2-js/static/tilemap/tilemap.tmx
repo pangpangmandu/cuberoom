@@ -21,10 +21,26 @@
  </tileset>
  <tileset firstgid="8165" name="interactive-tile" tilewidth="16" tileheight="16" tilecount="4" columns="2">
   <image source="interactive-tile.png" width="32" height="32"/>
-  <tile id="0" type="image1"/>
-  <tile id="1" type="imeage2"/>
-  <tile id="2" type="image3"/>
-  <tile id="3" type="image4"/>
+  <tile id="0" type="image1">
+   <properties>
+    <property name="name" value="image1"/>
+   </properties>
+  </tile>
+  <tile id="1" type="imeage2">
+   <properties>
+    <property name="name" value="image2"/>
+   </properties>
+  </tile>
+  <tile id="2" type="image3">
+   <properties>
+    <property name="name" value="image3"/>
+   </properties>
+  </tile>
+  <tile id="3" type="image4">
+   <properties>
+    <property name="name" value="image4"/>
+   </properties>
+  </tile>
  </tileset>
  <layer id="1" name="background" width="120" height="68">
   <data encoding="csv">

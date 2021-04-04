@@ -55,7 +55,8 @@ class CuberoomScene extends Phaser.Scene {
       collisionLayer
     );
 
-    this.player = this.physics.add.sprite(50, 600, "player-down-2", 1);
+    //    this.player = this.physics.add.sprite(50, 600, "player-down-2", 1);
+    this.player = this.physics.add.sprite(800, 600, "player-down-2", 1);
     this.physics.add.collider(this.player, collisionLayer);
 
     this.cameras.main.setBounds(
@@ -74,6 +75,33 @@ class CuberoomScene extends Phaser.Scene {
       } else {
         this.cheat = true;
       }
+    });
+
+    this.input.on("pointerdown", (pointer) => {
+      //      console.log({ pointer });
+      const tile = interactionLayer.getTileAtWorldXY(
+        pointer.worldX,
+        pointer.worldY
+      );
+      if (tile == null) {
+        return;
+      }
+      // tile.setInteractive({
+      //   useHandCursor: true,
+      // });
+
+      //      console.log({tile});
+      console.log(tile.properties.name);
+      if (tile.properties.name === "image1") {
+        window.open("https://google.com");
+      } else if (tile.properties.name === "image2") {
+        window.open("https://naver.com");
+      } else if (tile.properties.name === "image3") {
+        window.open("https://daum.net");
+      } else if (tile.properties.name === "image4") {
+        window.open("https://www.wikipedia.org/");
+      }
+      //      console.log({ collisionTile: collisionLayer.getTileAtWorldXY(pointer.worldX, pointer.worldY) });
     });
   }
 

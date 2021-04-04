@@ -118,18 +118,42 @@
          "tiles":[
                 {
                  "id":0,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"image1"
+                        }],
                  "type":"image1"
                 }, 
                 {
                  "id":1,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"image2"
+                        }],
                  "type":"imeage2"
                 }, 
                 {
                  "id":2,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"image3"
+                        }],
                  "type":"image3"
                 }, 
                 {
                  "id":3,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"image4"
+                        }],
                  "type":"image4"
                 }],
          "tilewidth":16
