@@ -66,7 +66,7 @@ class CuberoomScene extends Phaser.Scene {
       this.map.widthInPixels,
       this.map.heightInPixels
     );
-    this.cameras.main.startFollow(this.player);
+    this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
 
     this.cursors = this.input.keyboard.createCursorKeys();
   }
@@ -171,7 +171,10 @@ function moveWithSpeed2(scene) {
       scene.player.prevMove = "right";
     }
     moved = true;
+  } else {
+    scene.player.body.setVelocityX(0);
   }
+
   if (scene.cursors.up.isDown) {
     if (scene.player.playerMove !== "up") {
       scene.player.body.setVelocityY(-200);
@@ -184,6 +187,8 @@ function moveWithSpeed2(scene) {
       scene.player.prevMove = "down";
     }
     moved = true;
+  } else {
+    scene.player.body.setVelocityY(0);
   }
 
   if (moved === false) {
@@ -207,9 +212,11 @@ function moveWithDelta({ player, delta, cursors }) {
 
 var config = {
   type: Phaser.AUTO,
+  zoom: 2,
   parent: "phaser-parent",
-  width: 800,
-  height: 600,
+  width: window.innerWidth / 2,
+  height: window.innerHeight / 2,
+
   pixelArt: true,
   physics: {
     default: "arcade",
