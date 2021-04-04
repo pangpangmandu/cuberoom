@@ -45,7 +45,7 @@ class CuberoomScene extends Phaser.Scene {
       collisionLayer
     );
 
-    this.player = this.physics.add.sprite(50, 600, "player-down-1", 1);
+    this.player = this.physics.add.sprite(50, 600, "player-down-2", 1);
     this.physics.add.collider(this.player, collisionLayer);
 
     this.cameras.main.setBounds(
