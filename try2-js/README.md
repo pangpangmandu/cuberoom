@@ -19,3 +19,9 @@ vc dev
 # in other shell
 sfz public
 ```
+
+## Add a domain to deploy
+
+```sh
+vercel alias xxx.vercel.app cuberoom-210404.juhyung.dev
+```
