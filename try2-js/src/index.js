@@ -10,6 +10,8 @@ class CuberoomScene extends Phaser.Scene {
     this.player = null;
     this.cursors = null;
     this.prevAnim = "player-idle";
+    this.prevTile = null;
+    this.interactionLayer = null;
   }
 
   preload() {
@@ -191,6 +193,19 @@ class CuberoomScene extends Phaser.Scene {
     this.updatePlayerAnimation();
 
     this.updateMousePointer();
+
+    // get player tyle
+    // if the the tyle changed
+    // do some event
+    const playerX = this.player.x;
+    const playerY = this.player.y;
+    const curTile = this.interactionLayer.getTileAtWorldXY(playerX, playerY);
+    if (this.prevTile === curTile) {
+    } else {
+      console.log(curTile);
+    }
+//    console.log({ playerX, playerY, curTile });
+    this.prevTile = curTile;
   }
 
   updateMousePointer() {
@@ -199,6 +214,7 @@ class CuberoomScene extends Phaser.Scene {
       pointer.worldX,
       pointer.worldY
     );
+
     if (tile == null) {
       this.input.setDefaultCursor("auto");
       return;
