@@ -109,7 +109,7 @@ class CuberoomScene extends Phaser.Scene {
     });
   }
 
-  updateAnimation() {
+  updatePlayerAnimation() {
     if (this.cursors.left.isDown) {
       if (this.prevAnim !== "player-left") {
         this.player.anims.play("player-left", true);
@@ -183,7 +183,7 @@ class CuberoomScene extends Phaser.Scene {
     //    moveWithSpeed(this);
     moveWithSpeed2(this);
 
-    this.updateAnimation();
+    this.updatePlayerAnimation();
 
     const pointer = this.input.mousePointer;
     const tile = this.interactionLayer.getTileAtWorldXY(
