@@ -185,6 +185,10 @@ class CuberoomScene extends Phaser.Scene {
 
     this.updatePlayerAnimation();
 
+		this.updateMousePointer();
+  }
+
+	updateMousePointer() {
     const pointer = this.input.mousePointer;
     const tile = this.interactionLayer.getTileAtWorldXY(
       pointer.worldX,
@@ -203,7 +207,7 @@ class CuberoomScene extends Phaser.Scene {
     } else if (tile.properties.name === "image4") {
       this.input.setDefaultCursor("pointer");
     }
-  }
+	}
 }
 
 function* allCharacterImageNames() {
