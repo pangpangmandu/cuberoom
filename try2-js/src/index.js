@@ -60,8 +60,13 @@ class CuberoomScene extends Phaser.Scene {
     this.player = this.physics.add.sprite(800, 600, "player-down-2", 1);
     this.physics.add.collider(this.player, collisionLayer);
 
-		const backgroundTileset = this.map.addTilesetImage("background");
-		const overCharacterLayer = this.map.createLayer("overCharacter", backgroundTileset, 0, 0);
+    const backgroundTileset = this.map.addTilesetImage("background");
+    const overCharacterLayer = this.map.createLayer(
+      "overCharacter",
+      backgroundTileset,
+      0,
+      0
+    );
 
     this.cameras.main.setBounds(
       0,
@@ -185,10 +190,10 @@ class CuberoomScene extends Phaser.Scene {
 
     this.updatePlayerAnimation();
 
-		this.updateMousePointer();
+    this.updateMousePointer();
   }
 
-	updateMousePointer() {
+  updateMousePointer() {
     const pointer = this.input.mousePointer;
     const tile = this.interactionLayer.getTileAtWorldXY(
       pointer.worldX,
@@ -207,7 +212,7 @@ class CuberoomScene extends Phaser.Scene {
     } else if (tile.properties.name === "image4") {
       this.input.setDefaultCursor("pointer");
     }
-	}
+  }
 }
 
 function* allCharacterImageNames() {
