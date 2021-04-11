@@ -8,7 +8,15 @@ Run the command below
 vc .
 ```
 
-## Local test
+### Add a domain to deploy
+
+```sh
+vercel alias xxx.vercel.app cuberoom-210404.juhyung.dev
+```
+
+## Developmenmt
+
+### Local test
 
 `vc dev` can't deliver image files. Use sfz public to deliver static image
 files.
@@ -20,8 +28,3 @@ vc dev
 sfz public
 ```
 
-## Add a domain to deploy
-
-```sh
-vercel alias xxx.vercel.app cuberoom-210404.juhyung.dev
-```
