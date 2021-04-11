@@ -21,12 +21,14 @@ class CuberoomScene extends Phaser.Scene {
     this.player = null;
     this.cursors = null;
     this.playerOnMap = null;
+    this.popups = [];
   }
 
   preload() {
     this.load.image("background", "/img/미술관내부0216.png");
     this.load.image("collision-tileset", "/tilemap/simple_tile.png");
     this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
+    this.load.image("popup", "/img/작품링크팝업.png");
     this.load.tilemapTiledJSON({
       key: "map",
       url: "/tilemap/tilemap.json",
@@ -77,7 +79,8 @@ class CuberoomScene extends Phaser.Scene {
     this.playerOnMap = playerOnMapUpdate(
       this.playerOnMap,
       this.player,
-      this.map
+      this.map,
+      this
     );
   }
 }

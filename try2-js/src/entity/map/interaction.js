@@ -25,6 +25,7 @@ export function mapOnPointerDown(map, pointer) {
 
 export function mapUpdateMousePoint(map, scene) {
   const pointer = scene.input.mousePointer;
+  // FIXME: use getAnyLayer
   const tile = map.interactionLayer.getTileAtWorldXY(
     pointer.worldX,
     pointer.worldY

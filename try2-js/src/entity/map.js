@@ -1,5 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
+import { assert } from "../assert";
+
 export function mapCreate(scene) {
   const phaser = scene.make.tilemap({
     key: "map",
@@ -50,4 +52,16 @@ export function mapCreateOverCharacterLayer(map) {
     ...map,
     backgroundTileset,
   };
+}
+
+function getAnyLayer(map) {
+  return map.interactionLayer;
+}
+
+export function mapTileToWorldXY(map, tile) {
+  const layer = getAnyLayer(map);
+  const xy = layer.tileToWorldXY(tile.x, tile.y);
+  assert(xy.x != null, "x not null");
+  assert(xy.y != null, "y not null");
+  return xy;
 }
