@@ -1,4 +1,12 @@
+import { log } from "../log";
+
 const directions = ["down", "up", "left", "right"];
+
+function* animationFrames(direction) {
+  for (let i = 1; i < 5; i += 1) {
+    yield { key: `player-${direction}-${i}` };
+  }
+}
 
 export function playerCreateAnimations(scene) {
   for (const direction of directions) {
@@ -9,8 +17,8 @@ export function playerCreateAnimations(scene) {
       repeat: -1,
     };
     scene.anims.create(animConfig);
-    console.log(animConfig);
-    console.log([...animationFrames(direction)]);
+    log(animConfig);
+    log([...animationFrames(direction)]);
   }
 
   for (const direction of directions) {
@@ -27,12 +35,6 @@ export function playerCreateAnimations(scene) {
   }
 }
 
-function* animationFrames(direction) {
-  for (let i = 1; i < 5; i++) {
-    yield { key: `player-${direction}-${i}` };
-  }
-}
-
 export function playerCreate(scene) {
   return {
     phaser: scene.physics.add.sprite(800, 600, "player-down-2", 1),
@@ -40,30 +42,27 @@ export function playerCreate(scene) {
   };
 }
 
-export function playerUpdate(player, cursors) {
-  updateAnimation(player, cursors);
-}
-
 function updateAnimation(player, cursors) {
+  let newPrevAnim = player.prevAnim;
   if (cursors.left.isDown) {
     if (player.prevAnim !== "player-left") {
       player.phaser.anims.play("player-left", true);
-      player.prevAnim = "player-left";
+      newPrevAnim = "player-left";
     }
   } else if (cursors.right.isDown) {
     if (player.prevAnim !== "player-right") {
       player.phaser.anims.play("player-right", true);
-      player.prevAnim = "player-right";
+      newPrevAnim = "player-right";
     }
   } else if (cursors.up.isDown) {
     if (player.prevAnim !== "player-up") {
       player.phaser.anims.play("player-up", true);
-      player.prevAnim = "player-up";
+      newPrevAnim = "player-up";
     }
   } else if (cursors.down.isDown) {
     if (player.prevAnim !== "player-down") {
       player.phaser.anims.play("player-down", true);
-      player.prevAnim = "player-down";
+      newPrevAnim = "player-down";
     }
   } else {
     if (player.prevAnim === "player-up") {
@@ -78,6 +77,15 @@ function updateAnimation(player, cursors) {
       player.phaser.anims.stop();
     }
 
-    player.prevAnim = "player-idle";
+    newPrevAnim = "player-idle";
   }
+
+  return {
+    ...player,
+    prevAnim: newPrevAnim,
+  };
+}
+
+export function playerUpdate(player, cursors) {
+  updateAnimation(player, cursors);
 }

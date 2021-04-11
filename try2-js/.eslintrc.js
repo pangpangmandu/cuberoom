@@ -11,5 +11,9 @@ module.exports = {
   },
   rules: {
     "prettier/prettier": ["error"],
+		"no-restricted-syntax": 0,
+		"no-unused-vars": ["error", {
+			"argsIgnorePattern": "^_"
+		}],
   },
 };
