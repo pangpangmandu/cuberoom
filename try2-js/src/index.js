@@ -1,9 +1,9 @@
 import Phaser from "phaser";
 import { log } from "./log";
 import { playerCreate, playerUpdate } from "./entity/player";
-
 import { allCharacterImageNames } from "./entity/player/image";
 import { playerCreateAnimations } from "./entity/player/animation";
+import { mapCreate, mapCreateOverCharacterLayer } from "./entity/map";
 
 function backgroundStatic(scene) {
   scene.add.sprite(1920 / 2, 1088 / 2, "background");
@@ -17,7 +17,6 @@ class CuberoomScene extends Phaser.Scene {
     this.cursors = null;
     this.prevAnim = "player-idle";
     this.prevTile = null;
-    this.interactionLayer = null;
   }
 
   preload() {
@@ -38,43 +37,18 @@ class CuberoomScene extends Phaser.Scene {
     playerCreateAnimations(this);
     backgroundStatic(this);
 
-    this.map = this.make.tilemap({ key: "map", tileWidth: 16, tileHeight: 16 });
-    const tileset = this.map.addTilesetImage("collision", "collision-tileset");
-
-    const collisionLayer = this.map.createLayer("collision", tileset, 0, 0);
-    collisionLayer.visible = false;
-    collisionLayer.alpha = 0;
-
-    const interactiveTileset = this.map.addTilesetImage("interactive-tile");
-    const interactionLayer = this.map.createLayer(
-      "interaction",
-      interactiveTileset,
-      0,
-      0
-    );
-    this.interactionLayer = interactionLayer;
-    interactionLayer.visible = false;
-
-    this.map.setCollisionByProperty(
-      {
-        collides: true,
-      },
-      true,
-      true,
-      collisionLayer
-    );
+    this.map = mapCreate(this);
 
     this.player = playerCreate(this);
-    this.physics.add.collider(this.player.phaser, collisionLayer);
+    this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 
-    const backgroundTileset = this.map.addTilesetImage("background");
-    this.map.createLayer("overCharacter", backgroundTileset, 0, 0);
+    this.map = mapCreateOverCharacterLayer(this.map);
 
     this.cameras.main.setBounds(
       0,
       0,
-      this.map.widthInPixels,
-      this.map.heightInPixels
+      this.map.phaser.widthInPixels,
+      this.map.phaser.heightInPixels
     );
     this.cameras.main.startFollow(this.player.phaser, true, 0.1, 0.1);
 
@@ -89,7 +63,7 @@ class CuberoomScene extends Phaser.Scene {
     });
 
     this.input.on("pointerdown", (pointer) => {
-      const tile = interactionLayer.getTileAtWorldXY(
+      const tile = this.map.interactionLayer.getTileAtWorldXY(
         pointer.worldX,
         pointer.worldY
       );
@@ -117,7 +91,10 @@ class CuberoomScene extends Phaser.Scene {
 
     const playerX = this.player.phaser.x;
     const playerY = this.player.phaser.y;
-    const curTile = this.interactionLayer.getTileAtWorldXY(playerX, playerY);
+    const curTile = this.map.interactionLayer.getTileAtWorldXY(
+      playerX,
+      playerY
+    );
     if (this.prevTile !== curTile) {
       log(curTile);
     }
@@ -126,7 +103,7 @@ class CuberoomScene extends Phaser.Scene {
 
   updateMousePointer() {
     const pointer = this.input.mousePointer;
-    const tile = this.interactionLayer.getTileAtWorldXY(
+    const tile = this.map.interactionLayer.getTileAtWorldXY(
       pointer.worldX,
       pointer.worldY
     );
