@@ -15,7 +15,7 @@ export function playerOnMapUpdate(playerOnMap, player, map) {
   const playerY = player.phaser.y;
   const curTile = map.interactionLayer.getTileAtWorldXY(playerX, playerY);
   const curTileName = curTile?.properties?.name;
-  if (playerOnMap.prevTileName != curTileName) {
+  if (playerOnMap.prevTileName !== curTileName) {
     log(curTileName);
   }
   return {

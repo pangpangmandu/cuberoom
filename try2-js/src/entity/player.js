@@ -1,8 +1,14 @@
 import { updateAnimation } from "./player/animation";
+import { playerStartPos } from "./player/const";
 
 export function playerCreate(scene) {
   return {
-    phaser: scene.physics.add.sprite(800, 600, "player-down-2", 1),
+    phaser: scene.physics.add.sprite(
+      playerStartPos.x,
+      playerStartPos.y,
+      "player-down-2",
+      1
+    ),
     prevAnim: null,
     prevMove: null,
   };
