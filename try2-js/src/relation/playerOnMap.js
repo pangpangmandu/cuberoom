@@ -38,6 +38,12 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
   const curTileName = curTile?.properties?.name;
   if (playerOnMap.prevTileName !== curTileName) {
     log(curTileName);
+
+    for (const popup of scene.popups) {
+      popup.phaser.destroy();
+    }
+    scene.popups.splice(0, scene.popups.length);
+
     if (possibleTileNames.includes(curTileName)) {
       // scene을 너무 mutable하게 쓰는 거 같아서 좀 아쉬운걸.
       // 나중에 event를 남기는 걸로 바꿔보자.
@@ -45,13 +51,6 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       const imageName = parseImageName(curTileName);
       const { x, y } = map.objects[imageName];
       scene.popups.push(popupCreate(scene, { x, y }));
-    }
-
-    if (curTileName == null) {
-      for (const popup of scene.popups) {
-        popup.phaser.destroy();
-      }
-      scene.popups.splice(0, scene.popups.length);
     }
   }
 
