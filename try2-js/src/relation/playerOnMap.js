@@ -50,7 +50,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       //      const { x, y } = mapTileToWorldXY(map, curTile);
       const imageName = parseImageName(curTileName);
       const { x, y } = map.objects[imageName];
-      scene.popups.push(popupCreate(scene, { x, y }));
+      scene.popups.push(popupCreate(scene, { x, y, name: imageName }));
     }
   }
 
