@@ -167,7 +167,7 @@ class CuberoomScene extends Phaser.Scene {
     //    moveWithSpeed(this);
     moveWithSpeed2(this);
 
-    playerUpdate(this.player, this.cursors);
+    this.player = playerUpdate(this.player, this.cursors);
 
     this.updateMousePointer();
 
