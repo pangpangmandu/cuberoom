@@ -1,11 +1,12 @@
 import Phaser from "phaser";
 import { log } from "./log";
 import {
-  allCharacterImageNames,
   playerCreateAnimations,
   playerCreate,
   playerUpdate,
 } from "./entity/player";
+
+import { allCharacterImageNames } from "./entity/player/image";
 
 function backgroundStatic(scene) {
   scene.add.sprite(1920 / 2, 1088 / 2, "background");
