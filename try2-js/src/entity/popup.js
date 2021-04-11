@@ -7,6 +7,17 @@ export function popupCreate(scene, { x, y, name }) {
   const phaser = scene.add.sprite(x + 5, y - 10, "popup");
   phaser.setInteractive();
 
+  // FIXME: event 등록 해제해야해
+  phaser.on("pointerover", () => {
+    scene.input.setDefaultCursor("pointer");
+  });
+
+  // FIXME: event 등록 해제해야해
+  phaser.on("pointerout", () => {
+    scene.input.setDefaultCursor("auto");
+  });
+
+  // FIXME: event 등록 해제해야해
   // 중복 제거해야해
   phaser.on("pointerdown", () => {
     if (name === "image1") {
