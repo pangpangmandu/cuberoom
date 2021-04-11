@@ -33,6 +33,13 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       const { x, y } = map.objects.image1;
       scene.popups.push(popupCreate(scene, { x, y }));
     }
+
+    if (curTileName == null) {
+      for (const popup of scene.popups) {
+        popup.phaser.destroy();
+      }
+      scene.popups.splice(0, scene.popups.length);
+    }
   }
 
   return {
