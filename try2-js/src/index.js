@@ -1,23 +1,11 @@
 import Phaser from "phaser";
 import { log } from "./log";
 import {
+  allCharacterImageNames,
   playerCreateAnimations,
   playerCreate,
   playerUpdate,
 } from "./entity/player";
-
-const directions = ["down", "up", "left", "right"];
-
-function* allCharacterImageNames() {
-  for (const direction of directions) {
-    for (let i = 1; i < 5; i += 1) {
-      yield [
-        `player-${direction}-${i}`,
-        `/img/캐릭터01/${direction} (${i}).png`,
-      ];
-    }
-  }
-}
 
 function backgroundStatic(scene) {
   scene.add.sprite(1920 / 2, 1088 / 2, "background");
