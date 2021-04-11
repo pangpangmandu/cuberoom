@@ -116,44 +116,6 @@ class CuberoomScene extends Phaser.Scene {
     });
   }
 
-  updatePlayerAnimation() {
-    if (this.cursors.left.isDown) {
-      if (this.prevAnim !== "player-left") {
-        this.player.phaser.anims.play("player-left", true);
-        this.prevAnim = "player-left";
-      }
-    } else if (this.cursors.right.isDown) {
-      if (this.prevAnim !== "player-right") {
-        this.player.phaser.anims.play("player-right", true);
-        this.prevAnim = "player-right";
-      }
-    } else if (this.cursors.up.isDown) {
-      if (this.prevAnim !== "player-up") {
-        this.player.phaser.anims.play("player-up", true);
-        this.prevAnim = "player-up";
-      }
-    } else if (this.cursors.down.isDown) {
-      if (this.prevAnim !== "player-down") {
-        this.player.phaser.anims.play("player-down", true);
-        this.prevAnim = "player-down";
-      }
-    } else {
-      if (this.prevAnim === "player-up") {
-        this.player.phaser.anims.play("player-up-stop", true);
-      } else if (this.prevAnim === "player-down") {
-        this.player.phaser.anims.play("player-down-stop", true);
-      } else if (this.prevAnim === "player-left") {
-        this.player.phaser.anims.play("player-left-stop", true);
-      } else if (this.prevAnim === "player-right") {
-        this.player.phaser.anims.play("player-right-stop", true);
-      } else {
-        this.player.phaser.anims.stop();
-      }
-
-      this.prevAnim = "player-idle";
-    }
-  }
-
   createAnimations() {
     for (const direction of directions) {
       const animConfig = {
