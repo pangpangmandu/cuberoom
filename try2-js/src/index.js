@@ -9,51 +9,6 @@ function backgroundStatic(scene) {
   scene.add.sprite(1920 / 2, 1088 / 2, "background");
 }
 
-function moveWithSpeed2(scene) {
-  let moved = false;
-  let velocity = 100;
-
-  if (scene.cheat) {
-    velocity *= 10;
-  }
-
-  if (scene.cursors.left.isDown) {
-    if (scene.player.prevMove !== "left") {
-      scene.player.phaser.body.setVelocityX(-velocity);
-      scene.player.prevMove = "left";
-    }
-    moved = true;
-  } else if (scene.cursors.right.isDown) {
-    if (scene.player.prevMove !== "right") {
-      scene.player.phaser.body.setVelocityX(velocity);
-      scene.player.prevMove = "right";
-    }
-    moved = true;
-  } else {
-    scene.player.phaser.body.setVelocityX(0);
-  }
-
-  if (scene.cursors.up.isDown) {
-    if (scene.player.prevMove !== "up") {
-      scene.player.phaser.body.setVelocityY(-velocity);
-      scene.player.prevMove = "up";
-    }
-    moved = true;
-  } else if (scene.cursors.down.isDown) {
-    if (scene.player.prevMove !== "down") {
-      scene.player.phaser.body.setVelocityY(velocity);
-      scene.player.prevMove = "down";
-    }
-    moved = true;
-  } else {
-    scene.player.phaser.body.setVelocityY(0);
-  }
-
-  if (moved === false) {
-    scene.player.phaser.body.setVelocity(0);
-  }
-}
-
 class CuberoomScene extends Phaser.Scene {
   constructor() {
     super();
@@ -159,15 +114,7 @@ class CuberoomScene extends Phaser.Scene {
   }
 
   update(_time, _delta) {
-    // moveWithDelta({
-    //   player: this.player,
-    //   delta,
-    //   cursors: this.cursors,
-    // });
-    //    moveWithSpeed(this);
-    moveWithSpeed2(this);
-
-    this.player = playerUpdate(this.player, this.cursors);
+    this.player = playerUpdate(this.player, this.cursors, this);
 
     this.updateMousePointer();
 
