@@ -28,3 +28,16 @@ vc dev
 sfz public
 ```
 
+### ESLint
+
+Use the command below to run eslint once.
+
+```sh
+npm run eslint
+```
+
+Use the commane below to run eslint whenever you save a js file.
+
+```sh
+npm run eslint-watch
+```
