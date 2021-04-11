@@ -96,9 +96,6 @@ class CuberoomScene extends Phaser.Scene {
       if (tile == null) {
         return;
       }
-      // tile.setInteractive({
-      //   useHandCursor: true,
-      // });
 
       log(tile.properties.name);
       if (tile.properties.name === "image1") {
@@ -118,9 +115,6 @@ class CuberoomScene extends Phaser.Scene {
 
     this.updateMousePointer();
 
-    // get player tyle
-    // if the the tyle changed
-    // do some event
     const playerX = this.player.phaser.x;
     const playerY = this.player.phaser.y;
     const curTile = this.interactionLayer.getTileAtWorldXY(playerX, playerY);
