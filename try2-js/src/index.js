@@ -8,6 +8,7 @@ import {
   mapOnPointerDown,
   mapUpdateMousePoint,
 } from "./entity/map/interaction";
+import { playerOnMapCreate, playerOnMapUpdate } from "./relation/playerOnMap";
 
 function backgroundStatic(scene) {
   scene.add.sprite(1920 / 2, 1088 / 2, "background");
@@ -19,8 +20,7 @@ class CuberoomScene extends Phaser.Scene {
     this.map = null;
     this.player = null;
     this.cursors = null;
-    this.prevAnim = "player-idle";
-    this.prevTile = null;
+    this.playerOnMap = null;
   }
 
   preload() {
@@ -42,8 +42,8 @@ class CuberoomScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this);
-
     this.player = playerCreate(this);
+    this.playerOnMap = playerOnMapCreate();
     this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 
     this.map = mapCreateOverCharacterLayer(this.map);
@@ -73,19 +73,8 @@ class CuberoomScene extends Phaser.Scene {
 
   update(_time, _delta) {
     this.player = playerUpdate(this.player, this.cursors, this);
-
     mapUpdateMousePoint(this.map, this);
-
-    const playerX = this.player.phaser.x;
-    const playerY = this.player.phaser.y;
-    const curTile = this.map.interactionLayer.getTileAtWorldXY(
-      playerX,
-      playerY
-    );
-    if (this.prevTile !== curTile) {
-      log(curTile);
-    }
-    this.prevTile = curTile;
+    playerOnMapUpdate(this.playerOnMap, this.player, this.map);
   }
 }
 
