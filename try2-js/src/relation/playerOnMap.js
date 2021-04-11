@@ -1,5 +1,5 @@
 import { log } from "../log";
-import { mapTileToWorldXY } from "../entity/map";
+import { assert } from "../assert";
 import { popupCreate } from "../entity/popup";
 
 export function playerOnMapCreate() {
@@ -14,7 +14,19 @@ const possibleTileNames = [
   "image1-popup",
   "image2-description",
   "image2-popup",
+  "image3-description",
+  "image3-popup",
+  "image4-description",
+  "image4-popup",
 ];
+
+const imageNames = ["image1", "image2", "image3", "image4"];
+
+function parseImageName(tileName) {
+  const imageName = tileName.substring(0, 6);
+  assert(imageNames.includes(imageName), "image name");
+  return imageName;
+}
 
 /**
  * 플레이어가 위치한 타일에 따라 특정 동작을 함
@@ -30,7 +42,8 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       // scene을 너무 mutable하게 쓰는 거 같아서 좀 아쉬운걸.
       // 나중에 event를 남기는 걸로 바꿔보자.
       //      const { x, y } = mapTileToWorldXY(map, curTile);
-      const { x, y } = map.objects.image1;
+      const imageName = parseImageName(curTileName);
+      const { x, y } = map.objects[imageName];
       scene.popups.push(popupCreate(scene, { x, y }));
     }
 
