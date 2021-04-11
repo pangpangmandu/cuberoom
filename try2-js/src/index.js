@@ -74,7 +74,11 @@ class CuberoomScene extends Phaser.Scene {
   update(_time, _delta) {
     this.player = playerUpdate(this.player, this.cursors, this);
     mapUpdateMousePoint(this.map, this);
-    playerOnMapUpdate(this.playerOnMap, this.player, this.map);
+    this.playerOnMap = playerOnMapUpdate(
+      this.playerOnMap,
+      this.player,
+      this.map
+    );
   }
 }
 
