@@ -1,1 +1,1 @@
-export const hi = "hi esbuild";
+export const hi = 'hi esbuild';
