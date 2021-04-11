@@ -1,3 +1,38 @@
+const directions = ["down", "up", "left", "right"];
+
+export function playerCreateAnimations(scene) {
+  for (const direction of directions) {
+    const animConfig = {
+      key: `player-${direction}`,
+      frames: [...animationFrames(direction)],
+      frameRate: 10,
+      repeat: -1,
+    };
+    scene.anims.create(animConfig);
+    console.log(animConfig);
+    console.log([...animationFrames(direction)]);
+  }
+
+  for (const direction of directions) {
+    scene.anims.create({
+      key: `player-${direction}-stop`,
+      frames: [
+        {
+          key: `player-${direction}-2`,
+        },
+      ],
+      frameRate: 10,
+      repeat: -1,
+    });
+  }
+}
+
+function* animationFrames(direction) {
+  for (let i = 1; i < 5; i++) {
+    yield { key: `player-${direction}-${i}` };
+  }
+}
+
 export function playerCreate(scene) {
   return {
     phaser: scene.physics.add.sprite(800, 600, "player-down-2", 1),

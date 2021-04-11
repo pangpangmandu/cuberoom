@@ -1,6 +1,6 @@
 import { hi } from "./libTest";
 import Phaser from "phaser";
-import { playerCreate, playerUpdate } from "./entity/player";
+import { playerCreateAnimations, playerCreate, playerUpdate } from "./entity/player";
 
 const directions = ["down", "up", "left", "right"];
 
@@ -30,7 +30,7 @@ class CuberoomScene extends Phaser.Scene {
   }
 
   create() {
-    this.createAnimations();
+    playerCreateAnimations(this);
     backgroundStatic(this);
 
     this.map = this.make.tilemap({ key: "map", tileWidth: 16, tileHeight: 16 });
@@ -116,33 +116,6 @@ class CuberoomScene extends Phaser.Scene {
     });
   }
 
-  createAnimations() {
-    for (const direction of directions) {
-      const animConfig = {
-        key: `player-${direction}`,
-        frames: [...animationFrames(direction)],
-        frameRate: 10,
-        repeat: -1,
-      };
-      this.anims.create(animConfig);
-      console.log(animConfig);
-      console.log([...animationFrames(direction)]);
-    }
-
-    for (const direction of directions) {
-      this.anims.create({
-        key: `player-${direction}-stop`,
-        frames: [
-          {
-            key: `player-${direction}-2`,
-          },
-        ],
-        frameRate: 10,
-        repeat: -1,
-      });
-    }
-  }
-
   update(time, delta) {
     // moveWithDelta({
     //   player: this.player,
@@ -201,12 +174,6 @@ function* allCharacterImageNames() {
         `/img/캐릭터01/${direction} (${i}).png`,
       ];
     }
-  }
-}
-
-function* animationFrames(direction) {
-  for (let i = 1; i < 5; i++) {
-    yield { key: `player-${direction}-${i}` };
   }
 }
 
