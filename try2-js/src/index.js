@@ -59,8 +59,8 @@ class CuberoomScene extends Phaser.Scene {
       collisionLayer
     );
 
-		this.player = new Player(this);
-		this.physics.add.collider(this.player.phaser, collisionLayer);
+    this.player = new Player(this);
+    this.physics.add.collider(this.player.phaser, collisionLayer);
 
     const backgroundTileset = this.map.addTilesetImage("background");
     const overCharacterLayer = this.map.createLayer(
@@ -76,7 +76,7 @@ class CuberoomScene extends Phaser.Scene {
       this.map.widthInPixels,
       this.map.heightInPixels
     );
-		this.cameras.main.startFollow(this.player.phaser, true, 0.1, 0.1);
+    this.cameras.main.startFollow(this.player.phaser, true, 0.1, 0.1);
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.input.keyboard.on("keydown-SPACE", () => {
@@ -152,7 +152,7 @@ class CuberoomScene extends Phaser.Scene {
     //    moveWithSpeed(this);
     moveWithSpeed2(this);
 
-    this.updatePlayerAnimation();
+    this.player.update(this.cursors);
 
     this.updateMousePointer();
 
@@ -166,7 +166,7 @@ class CuberoomScene extends Phaser.Scene {
     } else {
       console.log(curTile);
     }
-//    console.log({ playerX, playerY, curTile });
+    //    console.log({ playerX, playerY, curTile });
     this.prevTile = curTile;
   }
 
