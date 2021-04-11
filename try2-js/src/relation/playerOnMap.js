@@ -29,7 +29,8 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
     if (possibleTileNames.includes(curTileName)) {
       // scene을 너무 mutable하게 쓰는 거 같아서 좀 아쉬운걸.
       // 나중에 event를 남기는 걸로 바꿔보자.
-      const { x, y } = mapTileToWorldXY(map, curTile);
+      //      const { x, y } = mapTileToWorldXY(map, curTile);
+      const { x, y } = map.objects.image1;
       scene.popups.push(popupCreate(scene, { x, y }));
     }
   }

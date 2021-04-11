@@ -2,6 +2,19 @@
 
 import { assert } from "../assert";
 
+function extractObjects(phaserObjectLayer) {
+  const results = {};
+  for (const tiledObject of phaserObjectLayer.objects) {
+    const property = tiledObject.properties[0];
+    results[property.value] = {
+      phaser: tiledObject,
+      x: tiledObject.x,
+      y: tiledObject.y,
+    };
+  }
+  return results;
+}
+
 export function mapCreate(scene) {
   const phaser = scene.make.tilemap({
     key: "map",
@@ -32,6 +45,8 @@ export function mapCreate(scene) {
     collisionLayer
   );
 
+  const objectLayer = phaser.objects[0];
+
   return {
     phaser,
     tileset,
@@ -39,6 +54,8 @@ export function mapCreate(scene) {
     interactiveTileset,
     interactionLayer,
     backgroundTileset: null,
+    objectLayer,
+    objects: extractObjects(objectLayer),
   };
 }
 

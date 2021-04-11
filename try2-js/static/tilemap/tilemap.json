@@ -57,9 +57,43 @@
          "id":4,
          "name":"interaction",
          "opacity":0.8,
+         "properties":[
+                {
+                 "name":"cubemapAnchor",
+                 "type":"string",
+                 "value":"image1"
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":120,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":10,
+         "name":"objectLayer",
+         "objects":[
+                {
+                 "height":5.09090909090912,
+                 "id":2,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"cmAnchor",
+                         "type":"string",
+                         "value":"image1"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":5.27272727272725,
+                 "x":901.136363636364,
+                 "y":782.227272727273
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -75,8 +109,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":9,
- "nextobjectid":1,
+ "nextlayerid":11,
+ "nextobjectid":3,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

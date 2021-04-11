@@ -5,6 +5,6 @@ import { log } from "../log";
 export function popupCreate(scene, { x, y }) {
   log(`create pop at x: ${x}, y: ${y}`);
   return {
-    phaser: scene.add.sprite(x, y, "popup"),
+    phaser: scene.add.sprite(x + 5, y - 10, "popup"),
   };
 }
