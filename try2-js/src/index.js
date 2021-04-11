@@ -1,6 +1,6 @@
 import { hi } from "./libTest";
 import Phaser from "phaser";
-import Player from "./entity/player";
+import { playerCreate, playerUpdate } from "./entity/player";
 
 const directions = ["down", "up", "left", "right"];
 
@@ -59,7 +59,7 @@ class CuberoomScene extends Phaser.Scene {
       collisionLayer
     );
 
-    this.player = new Player(this);
+    this.player = playerCreate(this);
     this.physics.add.collider(this.player.phaser, collisionLayer);
 
     const backgroundTileset = this.map.addTilesetImage("background");
@@ -152,7 +152,7 @@ class CuberoomScene extends Phaser.Scene {
     //    moveWithSpeed(this);
     moveWithSpeed2(this);
 
-    this.player.update(this.cursors);
+    playerUpdate(this.player, this.cursors);
 
     this.updateMousePointer();
 
