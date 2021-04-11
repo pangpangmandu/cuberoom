@@ -1,12 +1,7 @@
 import { log } from "../log";
+import { animationFrames } from "./player/image";
 
 const directions = ["down", "up", "left", "right"];
-
-function* animationFrames(direction) {
-  for (let i = 1; i < 5; i += 1) {
-    yield { key: `player-${direction}-${i}` };
-  }
-}
 
 export function playerCreateAnimations(scene) {
   for (const direction of directions) {
