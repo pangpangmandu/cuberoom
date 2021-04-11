@@ -4,6 +4,10 @@ import { playerCreate, playerUpdate } from "./entity/player";
 import { allCharacterImageNames } from "./entity/player/image";
 import { playerCreateAnimations } from "./entity/player/animation";
 import { mapCreate, mapCreateOverCharacterLayer } from "./entity/map";
+import {
+  mapOnPointerDown,
+  mapUpdateMousePoint,
+} from "./entity/map/interaction";
 
 function backgroundStatic(scene) {
   scene.add.sprite(1920 / 2, 1088 / 2, "background");
@@ -62,32 +66,15 @@ class CuberoomScene extends Phaser.Scene {
       }
     });
 
-    this.input.on("pointerdown", (pointer) => {
-      const tile = this.map.interactionLayer.getTileAtWorldXY(
-        pointer.worldX,
-        pointer.worldY
-      );
-      if (tile == null) {
-        return;
-      }
-
-      log(tile.properties.name);
-      if (tile.properties.name === "image1") {
-        window.open("https://google.com");
-      } else if (tile.properties.name === "image2") {
-        window.open("https://naver.com");
-      } else if (tile.properties.name === "image3") {
-        window.open("https://standlaid.github.io/portfolio/OE/M.html");
-      } else if (tile.properties.name === "image4") {
-        window.open("https://standlaid.github.io/portfolio/OE/SS.html");
-      }
-    });
+    this.input.on("pointerdown", (pointer) =>
+      mapOnPointerDown(this.map, pointer)
+    );
   }
 
   update(_time, _delta) {
     this.player = playerUpdate(this.player, this.cursors, this);
 
-    this.updateMousePointer();
+    mapUpdateMousePoint(this.map, this);
 
     const playerX = this.player.phaser.x;
     const playerY = this.player.phaser.y;
@@ -99,28 +86,6 @@ class CuberoomScene extends Phaser.Scene {
       log(curTile);
     }
     this.prevTile = curTile;
-  }
-
-  updateMousePointer() {
-    const pointer = this.input.mousePointer;
-    const tile = this.map.interactionLayer.getTileAtWorldXY(
-      pointer.worldX,
-      pointer.worldY
-    );
-
-    if (tile == null) {
-      this.input.setDefaultCursor("auto");
-      return;
-    }
-    if (tile.properties.name === "image1") {
-      this.input.setDefaultCursor("pointer");
-    } else if (tile.properties.name === "image2") {
-      this.input.setDefaultCursor("pointer");
-    } else if (tile.properties.name === "image3") {
-      this.input.setDefaultCursor("pointer");
-    } else if (tile.properties.name === "image4") {
-      this.input.setDefaultCursor("pointer");
-    }
   }
 }
 
