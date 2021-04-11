@@ -1,5 +1,6 @@
 import { hi } from "./libTest";
 import Phaser from "phaser";
+import Player from "./entity/player";
 
 const directions = ["down", "up", "left", "right"];
 
@@ -58,9 +59,8 @@ class CuberoomScene extends Phaser.Scene {
       collisionLayer
     );
 
-    //    this.player = this.physics.add.sprite(50, 600, "player-down-2", 1);
-    this.player = this.physics.add.sprite(800, 600, "player-down-2", 1);
-    this.physics.add.collider(this.player, collisionLayer);
+		this.player = new Player(this);
+		this.physics.add.collider(this.player.phaser, collisionLayer);
 
     const backgroundTileset = this.map.addTilesetImage("background");
     const overCharacterLayer = this.map.createLayer(
@@ -76,7 +76,7 @@ class CuberoomScene extends Phaser.Scene {
       this.map.widthInPixels,
       this.map.heightInPixels
     );
-    this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
+		this.cameras.main.startFollow(this.player.phaser, true, 0.1, 0.1);
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.input.keyboard.on("keydown-SPACE", () => {
@@ -119,35 +119,35 @@ class CuberoomScene extends Phaser.Scene {
   updatePlayerAnimation() {
     if (this.cursors.left.isDown) {
       if (this.prevAnim !== "player-left") {
-        this.player.anims.play("player-left", true);
+        this.player.phaser.anims.play("player-left", true);
         this.prevAnim = "player-left";
       }
     } else if (this.cursors.right.isDown) {
       if (this.prevAnim !== "player-right") {
-        this.player.anims.play("player-right", true);
+        this.player.phaser.anims.play("player-right", true);
         this.prevAnim = "player-right";
       }
     } else if (this.cursors.up.isDown) {
       if (this.prevAnim !== "player-up") {
-        this.player.anims.play("player-up", true);
+        this.player.phaser.anims.play("player-up", true);
         this.prevAnim = "player-up";
       }
     } else if (this.cursors.down.isDown) {
       if (this.prevAnim !== "player-down") {
-        this.player.anims.play("player-down", true);
+        this.player.phaser.anims.play("player-down", true);
         this.prevAnim = "player-down";
       }
     } else {
       if (this.prevAnim === "player-up") {
-        this.player.anims.play("player-up-stop", true);
+        this.player.phaser.anims.play("player-up-stop", true);
       } else if (this.prevAnim === "player-down") {
-        this.player.anims.play("player-down-stop", true);
+        this.player.phaser.anims.play("player-down-stop", true);
       } else if (this.prevAnim === "player-left") {
-        this.player.anims.play("player-left-stop", true);
+        this.player.phaser.anims.play("player-left-stop", true);
       } else if (this.prevAnim === "player-right") {
-        this.player.anims.play("player-right-stop", true);
+        this.player.phaser.anims.play("player-right-stop", true);
       } else {
-        this.player.anims.stop();
+        this.player.phaser.anims.stop();
       }
 
       this.prevAnim = "player-idle";
@@ -197,8 +197,8 @@ class CuberoomScene extends Phaser.Scene {
     // get player tyle
     // if the the tyle changed
     // do some event
-    const playerX = this.player.x;
-    const playerY = this.player.y;
+    const playerX = this.player.phaser.x;
+    const playerY = this.player.phaser.y;
     const curTile = this.interactionLayer.getTileAtWorldXY(playerX, playerY);
     if (this.prevTile === curTile) {
     } else {
@@ -267,16 +267,16 @@ function backgroundTile(scene) {
 }
 
 function moveWithSpeed(scene) {
-  scene.player.body.setVelocity(0);
+  scene.player.phaser.body.setVelocity(0);
   if (scene.cursors.left.isDown) {
-    scene.player.body.setVelocityX(-200);
+    scene.player.phaser.body.setVelocityX(-200);
   } else if (scene.cursors.right.isDown) {
-    scene.player.body.setVelocityX(200);
+    scene.player.phaser.body.setVelocityX(200);
   }
   if (scene.cursors.up.isDown) {
-    scene.player.body.setVelocityY(-200);
+    scene.player.phaser.body.setVelocityY(-200);
   } else if (scene.cursors.down.isDown) {
-    scene.player.body.setVelocityY(200);
+    scene.player.phaser.body.setVelocityY(200);
   }
 }
 
@@ -289,39 +289,39 @@ function moveWithSpeed2(scene) {
   }
 
   if (scene.cursors.left.isDown) {
-    if (scene.player.playerMove !== "left") {
-      scene.player.body.setVelocityX(-velocity);
+    if (scene.player.prevMove !== "left") {
+      scene.player.phaser.body.setVelocityX(-velocity);
       scene.player.prevMove = "left";
     }
     moved = true;
   } else if (scene.cursors.right.isDown) {
-    if (scene.player.playerMove !== "right") {
-      scene.player.body.setVelocityX(velocity);
+    if (scene.player.prevMove !== "right") {
+      scene.player.phaser.body.setVelocityX(velocity);
       scene.player.prevMove = "right";
     }
     moved = true;
   } else {
-    scene.player.body.setVelocityX(0);
+    scene.player.phaser.body.setVelocityX(0);
   }
 
   if (scene.cursors.up.isDown) {
-    if (scene.player.playerMove !== "up") {
-      scene.player.body.setVelocityY(-velocity);
+    if (scene.player.prevMove !== "up") {
+      scene.player.phaser.body.setVelocityY(-velocity);
       scene.player.prevMove = "up";
     }
     moved = true;
   } else if (scene.cursors.down.isDown) {
-    if (scene.player.playerMove !== "down") {
-      scene.player.body.setVelocityY(velocity);
+    if (scene.player.prevMove !== "down") {
+      scene.player.phaser.body.setVelocityY(velocity);
       scene.player.prevMove = "down";
     }
     moved = true;
   } else {
-    scene.player.body.setVelocityY(0);
+    scene.player.phaser.body.setVelocityY(0);
   }
 
   if (moved === false) {
-    scene.player.body.setVelocity(0);
+    scene.player.phaser.body.setVelocity(0);
   }
 }
 
@@ -331,14 +331,14 @@ function moveWithDelta({ player, delta, cursors }) {
     speed = speed * 100;
   }
   if (cursors.left.isDown) {
-    player.x -= speed * delta;
+    player.phaser.x -= speed * delta;
   } else if (cursors.right.isDown) {
-    player.x += speed * delta;
+    player.phaser.x += speed * delta;
   }
   if (cursors.up.isDown) {
-    player.y -= speed * delta;
+    player.phaser.y -= speed * delta;
   } else if (cursors.down.isDown) {
-    player.y += speed * delta;
+    player.phaser.y += speed * delta;
   }
 }
 
