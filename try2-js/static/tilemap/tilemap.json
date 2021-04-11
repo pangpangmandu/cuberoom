@@ -75,21 +75,48 @@
          "name":"objectLayer",
          "objects":[
                 {
-                 "height":5.09090909090912,
+                 "height":2.36363636363637,
                  "id":2,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"cmAnchor",
-                         "type":"string",
-                         "value":"image1"
-                        }],
+                 "name":"image1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":5.27272727272725,
-                 "x":901.136363636364,
-                 "y":782.227272727273
+                 "width":2,
+                 "x":903.136363636364,
+                 "y":782.409090909091
+                }, 
+                {
+                 "height":2.36364,
+                 "id":3,
+                 "name":"image2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2,
+                 "x":806.454545454545,
+                 "y":878.363634545455
+                }, 
+                {
+                 "height":2.36364,
+                 "id":5,
+                 "name":"image3",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2,
+                 "x":879.181818181818,
+                 "y":878.272725454545
+                }, 
+                {
+                 "height":2.36364,
+                 "id":6,
+                 "name":"image4",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2,
+                 "x":935.181818181818,
+                 "y":879.181816363636
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -110,7 +137,7 @@
          "y":0
         }],
  "nextlayerid":11,
- "nextobjectid":3,
+ "nextobjectid":7,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",

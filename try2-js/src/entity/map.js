@@ -5,8 +5,8 @@ import { assert } from "../assert";
 function extractObjects(phaserObjectLayer) {
   const results = {};
   for (const tiledObject of phaserObjectLayer.objects) {
-    const property = tiledObject.properties[0];
-    results[property.value] = {
+    assert(results[tiledObject.name] == null, "tile object duplication");
+    results[tiledObject.name] = {
       phaser: tiledObject,
       x: tiledObject.x,
       y: tiledObject.y,
