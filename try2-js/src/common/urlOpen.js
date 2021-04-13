@@ -11,10 +11,10 @@ export function openURL(urlName) {
 
   switch (urlName) {
     case "image1":
-      window.open("https://google.com");
+      window.open("https://standlaid.github.io/portfolio/OE/M1988.html");
       break;
     case "image2":
-      window.open("https://naver.com");
+      window.open("https://standlaid.github.io/portfolio/OE/Ms.html");
       break;
     case "image3":
       window.open("https://standlaid.github.io/portfolio/OE/M.html");
