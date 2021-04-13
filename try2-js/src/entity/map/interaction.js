@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
+import { isValidURLName, openURL } from "../../common/urlOpen";
 import { log } from "../../log";
 
 export function mapOnPointerDown(map, pointer) {
@@ -12,14 +13,10 @@ export function mapOnPointerDown(map, pointer) {
   }
 
   log(tile.properties.name);
-  if (tile.properties.name === "image1") {
-    window.open("https://google.com");
-  } else if (tile.properties.name === "image2") {
-    window.open("https://naver.com");
-  } else if (tile.properties.name === "image3") {
-    window.open("https://standlaid.github.io/portfolio/OE/M.html");
-  } else if (tile.properties.name === "image4") {
-    window.open("https://standlaid.github.io/portfolio/OE/SS.html");
+  if (isValidURLName(tile.properties.name)) {
+    openURL(tile.properties.name);
+  } else {
+    log("tile have a invalid url name");
   }
 }
 
