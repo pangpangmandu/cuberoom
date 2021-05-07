@@ -25,10 +25,10 @@ class CuberoomScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("background", "/img/미술관내부0416.png");
+    this.load.image("background", "/img/art-0416.png");
     this.load.image("collision-tileset", "/tilemap/simple_tile.png");
     this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
-    this.load.image("popup", "/img/작품링크팝업.png");
+    this.load.image("popup", "/img/popup.png");
     this.load.tilemapTiledJSON({
       key: "map",
       url: "/tilemap/tilemap.json",
