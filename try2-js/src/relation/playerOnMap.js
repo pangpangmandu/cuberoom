@@ -18,9 +18,24 @@ const possibleTileNames = [
   "image3-popup",
   "image4-description",
   "image4-popup",
+  "image5-description",
+  "image6-description",
+  "image7-description",
+  "image8-description",
+  "image9-description",
 ];
 
-const imageNames = ["image1", "image2", "image3", "image4"];
+const imageNames = [
+  "image1",
+  "image2",
+  "image3",
+  "image4",
+  "image5",
+  "image6",
+  "image7",
+  "image8",
+  "image9",
+];
 
 function parseImageName(tileName) {
   const imageName = tileName.substring(0, 6);

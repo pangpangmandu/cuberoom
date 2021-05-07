@@ -32,13 +32,18 @@ export function mapUpdateMousePoint(map, scene) {
     scene.input.setDefaultCursor("auto");
     return;
   }
-  if (tile.properties.name === "image1") {
-    scene.input.setDefaultCursor("pointer");
-  } else if (tile.properties.name === "image2") {
-    scene.input.setDefaultCursor("pointer");
-  } else if (tile.properties.name === "image3") {
-    scene.input.setDefaultCursor("pointer");
-  } else if (tile.properties.name === "image4") {
+  const availableImageNames = [
+    "image1",
+    "image2",
+    "image3",
+    "image4",
+    "image5",
+    "image6",
+    "image7",
+    "image8",
+    "image9",
+  ];
+  if (availableImageNames.includes(tile.properties.name)) {
     scene.input.setDefaultCursor("pointer");
   }
 }
