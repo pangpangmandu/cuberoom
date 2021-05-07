@@ -14,4 +14,9 @@ const nearImages = {
   y: 16 * 53 + 10,
 };
 
-export const playerStartPos = nearImages;
+const startPoint = {
+  x: 16 * 19 + 12,
+  y: 16 * (68 - 9) - 8,
+};
+
+export const playerStartPos = startPoint;
