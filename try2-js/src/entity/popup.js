@@ -5,27 +5,26 @@ import { openURL } from "../common/urlOpen";
 
 export function popupCreate(scene, { x, y, name }) {
   log(`create pop at x: ${x}, y: ${y}`);
-  const phaser = scene.add.sprite(x + 5, y - 10, "popup");
-  phaser.setInteractive();
+  const popupSprite = scene.add.sprite(x + 5, y - 10, "popup");
+  popupSprite.setInteractive();
 
-  // FIXME: event 등록 해제해야해
-  phaser.on("pointerover", () => {
+  // FIXME: event 등록 해제해야 하는지 확인 필요
+  popupSprite.on("pointerover", () => {
     scene.input.setDefaultCursor("pointer");
   });
 
-  // FIXME: event 등록 해제해야해
-  phaser.on("pointerout", () => {
+  // FIXME: event 등록 해제해야 하는지 확인 필요
+  popupSprite.on("pointerout", () => {
     scene.input.setDefaultCursor("auto");
   });
 
-  // FIXME: event 등록 해제해야해
-  // 중복 제거해야해
-  phaser.on("pointerdown", () => {
+  // FIXME: event 등록 해제해야 하는지 확인 필요
+  popupSprite.on("pointerdown", () => {
     openURL(name);
   });
 
   return {
-    phaser,
+    phaser: popupSprite,
     name,
   };
 }
