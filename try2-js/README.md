@@ -1,5 +1,9 @@
 # Cuberoom vanila js
 
+## 백그라운드 레이어
+
+인수인계시 전달이 잘못된 점이 있네요. tiled의 background 레이어는 현재 사용하지 않고 있습니다. index.js의 `backgroundStatic` 함수에서 백그라운드 이미지를 만들어냅니다.
+
 ## 처음 받아서 시작하기
 
 ```sh
