@@ -1,11 +1,4 @@
-.now
-node_modules
-
-# Environment Variables
-.env
-.env.build
-
-public/
-.vercel/
+/node_modules/
+/public/build/
 
 .DS_Store
