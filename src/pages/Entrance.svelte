@@ -12,7 +12,7 @@
   import { playerOnMapCreate, playerOnMapUpdate } from "../relation/playerOnMap";
 
   function backgroundStatic(scene) {
-    scene.add.sprite(1920 / 2, 1088 / 2, "background");
+    scene.add.sprite(1200 / 2, 800 / 2, "background");
   }
 
   class CuberoomScene extends Phaser.Scene {
@@ -26,13 +26,13 @@
     }
 
     preload() {
-      this.load.image("background", "/img/art-0416.png");
+      this.load.image("background", "/img/배경 01_미술관 밖_01외관.jpg");
       this.load.image("collision-tileset", "/tilemap/simple_tile.png");
       this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
       this.load.image("popup", "/img/popup.png");
       this.load.tilemapTiledJSON({
         key: "map",
-        url: "/tilemap/tilemap.json",
+        url: "/tilemap/entrance.json",
       });
       for (const [key, file] of allCharacterImageNames()) {
         this.load.image(key, file);
@@ -45,7 +45,7 @@
       backgroundStatic(this);
 
       this.map = mapCreate(this);
-      this.player = playerCreate(this);
+      this.player = playerCreate(this, 100, 540);
       this.playerOnMap = playerOnMapCreate();
       this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 
