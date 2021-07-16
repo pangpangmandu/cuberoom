@@ -45,7 +45,7 @@
       backgroundStatic(this);
 
       this.map = mapCreate(this);
-      this.player = playerCreate(this, 70, 480);
+      this.player = playerCreate(this, 80, 490);
       this.playerOnMap = playerOnMapCreate();
       this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 
