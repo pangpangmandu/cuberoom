@@ -15,9 +15,9 @@ function extractObjects(phaserObjectLayer) {
   return results;
 }
 
-export function mapCreate(scene) {
+export function mapCreate(scene, key) {
   const phaser = scene.make.tilemap({
-    key: "map",
+    key,
     tileWidth: 16,
     tileHeight: 16,
   });

@@ -15,7 +15,7 @@
     />
   </div>
   <img class="flag" src="/img/map_click.png" alt="" />
-  <Link to="/entrance" style="position: absolute; top: 500px; left: 740px;">
+  <Link to="/game" style="position: absolute; top: 500px; left: 740px;">
     <img src="/img/map_region.png" alt="클릭" />
   </Link>
 </main>
