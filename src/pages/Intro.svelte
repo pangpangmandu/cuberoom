@@ -1,9 +1,13 @@
+<script>
+  import { Link } from 'svelte-routing';
+</script>
+
 <main>
   <img src="/img/01_시작 배경 01_타이틀로고.png" alt="큐브 스테이지" />
   <div>
-    <a href='character-selection'>
+    <Link to="character-selection">
       <img src="/img/01_시작 배경 01_시작하기 버튼.png" alt="시작하기" />
-    </a>
+    </Link>
   </div>
 </main>
 

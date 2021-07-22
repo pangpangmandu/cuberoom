@@ -1,3 +1,7 @@
+<script>
+  import { Link } from 'svelte-routing';
+</script>
+
 <main>
   <div style="width: 100%; height: 20%;"></div>
   <div style="display: flex; justify-content: center; align-items: flex-start;">
@@ -32,15 +36,15 @@
         <div class="center">의상</div>
         <button class="right"></button>
       </div>
-      <a href='/map' style="position: absolute; bottom: 24px; right: 24px;">
+      <Link to='/map' style="position: absolute; bottom: 24px; right: 24px;">
         <img src="/img/결정 버튼.png" alt="결정" />
-      </a>
+      </Link>
     </div>
     <div style="width: 340px; height: 200px; visibility: hidden;"></div>
   </div>
-  <a href='/' style="position: absolute; bottom: 30px; right: 30px;">
+  <Link to='/' style="position: absolute; bottom: 30px; right: 30px;">
     <img src="/img/메인으로 버튼.png" alt="메인으로" />
-  </a>
+  </Link>
 </main>
 
 <style>

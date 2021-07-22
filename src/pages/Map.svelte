@@ -1,3 +1,7 @@
+<script>
+  import { Link } from 'svelte-routing';
+</script>
+
 <main>
   <div class="guide">
     <img
@@ -11,9 +15,9 @@
     />
   </div>
   <img class="flag" src="/img/클릭지시버튼.png" alt="" />
-  <a href="/entrance">
+  <Link to="/entrance" style="position: absolute; top: 500px; left: 740px;">
     <img src="/img/03_서울행정구 배경_01_강남구 버튼.png" alt="클릭" />
-  </a>
+  </Link>
 </main>
 
 <style>
@@ -35,12 +39,6 @@
   .flag {
     position: absolute;
     top: 400px;
-    left: 740px;
-  }
-
-  a {
-    position: absolute;
-    top: 500px;
     left: 740px;
   }
 </style>
