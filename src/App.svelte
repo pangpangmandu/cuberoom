@@ -1,6 +1,6 @@
 <script>
-	import { Router, Route } from 'svelte-navigator';
-	import IntroPage from './pages/Intro.svelte';
+	import { Router, Route } from 'svelte-routing';
+	import Intro from './pages/Intro.svelte';
 	import CharacterSelection from './pages/CharacterSelection.svelte';
 	import Map from './pages/Map.svelte';
 	import Entrance from './pages/Entrance.svelte';
@@ -9,22 +9,10 @@
 </script>
 
 <Router>
-	<Route path="/">
-		<IntroPage />
-	</Route>
-	<Route path="character-selection">
-		<CharacterSelection />
-	</Route>
-	<Route path="map">
-		<Map />
-	</Route>
-	<Route path="entrance">
-		<Entrance />
-	</Route>
-	<Route path="1f">
-		<FirstFloor />
-	</Route>
-	<Route path="b1">
-		<FirstBasement />
-	</Route>
+	<Route path="/" component="{Intro}" />
+	<Route path="/character-selection" component="{CharacterSelection}" />
+	<Route path="/map" component="{Map}" />
+	<Route path="/entrance" component="{Entrance}" />
+	<Route path="/1f" component="{FirstFloor}" />
+	<Route path="/b1" component="{FirstBasement}" />
 </Router>

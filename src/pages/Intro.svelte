@@ -1,13 +1,9 @@
-<script>
-  import { Link } from 'svelte-navigator';
-</script>
-
 <main>
   <img src="/img/01_시작 배경 01_타이틀로고.png" alt="큐브 스테이지" />
   <div>
-    <Link to='character-selection'>
+    <a href='character-selection'>
       <img src="/img/01_시작 배경 01_시작하기 버튼.png" alt="시작하기" />
-    </Link>
+    </a>
   </div>
 </main>
 
