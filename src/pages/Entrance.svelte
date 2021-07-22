@@ -26,7 +26,7 @@
     }
 
     preload() {
-      this.load.image("background", "/img/배경 01_미술관 밖_01외관.jpg");
+      this.load.image("background", "/img/entrance_background.jpg");
       this.load.image("collision-tileset", "/tilemap/simple_tile.png");
       this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
       this.load.image("popup", "/img/popup.png");

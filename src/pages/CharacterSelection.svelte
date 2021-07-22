@@ -37,20 +37,20 @@
         <button class="right"></button>
       </div>
       <Link to='/map' style="position: absolute; bottom: 24px; right: 24px;">
-        <img src="/img/결정 버튼.png" alt="결정" />
+        <img src="/img/decide.png" alt="결정" />
       </Link>
     </div>
     <div style="width: 340px; height: 200px; visibility: hidden;"></div>
   </div>
   <Link to='/' style="position: absolute; bottom: 30px; right: 30px;">
-    <img src="/img/메인으로 버튼.png" alt="메인으로" />
+    <img src="/img/back_to_main.png" alt="메인으로" />
   </Link>
 </main>
 
 <style>
   main {
     height: 100%;
-    background-image: url('/img/01_시작 배경 01.jpg');
+    background-image: url('/img/intro_background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     /* display: flex;
@@ -134,12 +134,12 @@
   }
 
   .left {
-    background-image: url('/img/화살표버튼01.png');
+    background-image: url('/img/arrow_left.png');
     margin-right: 12px;
   }
 
   .right {
-    background-image: url('/img/화살표버튼02.png');
+    background-image: url('/img/arrow_right.png');
     margin-left: 12px;
   }
 </style>

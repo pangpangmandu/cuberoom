@@ -26,7 +26,7 @@
 		}
 
 		preload() {
-			this.load.image("background", "/img/배경 03_미술관 내부_지하1층_01외관.jpg");
+			this.load.image("background", "/img/b1_background.jpg");
 			this.load.image("collision-tileset", "/tilemap/simple_tile.png");
 			this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
 			this.load.image("popup", "/img/popup.png");
