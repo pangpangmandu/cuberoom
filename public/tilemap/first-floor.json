@@ -4,27 +4,27 @@
  "layers":[
         {
          "id":17,
-         "image":"..\/img\/\ubc30\uacbd 04_\ubbf8\uc220\uad00 \ub0b4\ubd80_1\uce35_01\uc678\uad00.jpg",
+         "image":"..\/img\/1f_background.jpg",
          "name":"Image Layer 1",
          "opacity":1,
          "type":"imagelayer",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
         {
          "id":18,
-         "image":"..\/img\/\ubc30\uacbd 04_\ubbf8\uc220\uad00 \ub0b4\ubd80_1\uce35_02\ub9c8\ud0b9.jpg",
+         "image":"..\/img\/1f_background_marking.jpg",
          "name":"Image Layer 2",
          "opacity":1,
          "type":"imagelayer",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
         {
          "id":19,
-         "image":"..\/img\/\ubc30\uacbd 04_\ubbf8\uc220\uad00 \ub0b4\ubd80_1\uce35_03\ub9c8\ud0b9\ucc38\uc870.jpg",
+         "image":"..\/img\/1f_background_ref.jpg",
          "name":"Image Layer 3",
          "opacity":1,
          "type":"imagelayer",
@@ -39,7 +39,7 @@
          "name":"background",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":50,
          "x":0,
          "y":0
@@ -113,7 +113,7 @@
         {
          "columns":50,
          "firstgid":1,
-         "image":"..\/img\/\ubc30\uacbd 04_\ubbf8\uc220\uad00 \ub0b4\ubd80_1\uce35_01\uc678\uad00.jpg",
+         "image":"..\/img\/1f_background.jpg",
          "imageheight":608,
          "imagewidth":800,
          "margin":0,

@@ -4,7 +4,7 @@
   <export target="first-basement.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="background" tilewidth="16" tileheight="16" tilecount="8160" columns="50">
-  <image source="../img/배경 03_미술관 내부_지하1층_01외관.jpg" width="800" height="928"/>
+  <image source="../img/b1_background.jpg" width="800" height="928"/>
   <tile id="0"/>
   <tile id="1"/>
   <tile id="2"/>
@@ -8302,16 +8302,16 @@
    </properties>
   </tile>
  </tileset>
- <imagelayer id="23" name="Image Layer 1" visible="0">
-  <image source="../img/배경 03_미술관 내부_지하1층_01외관.jpg" width="800" height="928"/>
+ <imagelayer id="23" name="Image Layer 1">
+  <image source="../img/b1_background.jpg" width="800" height="928"/>
  </imagelayer>
- <imagelayer id="24" name="Image Layer 2">
-  <image source="../img/배경 03_미술관 내부_지하1층_02마킹.jpg" width="800" height="928"/>
+ <imagelayer id="24" name="Image Layer 2" visible="0">
+  <image source="../img/b1_background_marking.jpg" width="800" height="928"/>
  </imagelayer>
  <imagelayer id="25" name="Image Layer 3" visible="0">
-  <image source="../img/배경 03_미술관 내부_지하1층_03마킹참조.jpg" width="800" height="928"/>
+  <image source="../img/b1_background_ref.jpg" width="800" height="928"/>
  </imagelayer>
- <layer id="1" name="background" width="50" height="58">
+ <layer id="1" name="background" width="50" height="58" visible="0">
   <data encoding="csv">
 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,
 51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,

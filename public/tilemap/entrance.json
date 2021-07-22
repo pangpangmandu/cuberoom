@@ -4,18 +4,8 @@
  "layers":[
         {
          "id":11,
-         "image":"..\/img\/\ubc30\uacbd 01_\ubbf8\uc220\uad00 \ubc16_01\uc678\uad00.jpg",
+         "image":"..\/img\/entrance_background.jpg",
          "name":"Image Layer 1",
-         "opacity":1,
-         "type":"imagelayer",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "id":12,
-         "image":"..\/img\/\ubc30\uacbd 01_\ubbf8\uc220\uad00 \ubc16_02\ub9c8\ud0b9.jpg",
-         "name":"Image Layer 2",
          "opacity":1,
          "type":"imagelayer",
          "visible":true,
@@ -23,8 +13,18 @@
          "y":0
         }, 
         {
+         "id":12,
+         "image":"..\/img\/entrance_background_marking.jpg",
+         "name":"Image Layer 2",
+         "opacity":1,
+         "type":"imagelayer",
+         "visible":false,
+         "x":0,
+         "y":0
+        }, 
+        {
          "id":13,
-         "image":"..\/img\/\ubc30\uacbd 01_\ubbf8\uc220\uad00 \ubc16_03\ub9c8\ud0b9\ucc38\uc870.jpg",
+         "image":"..\/img\/entrance_background_ref.jpg",
          "name":"Image Layer 3",
          "opacity":1,
          "type":"imagelayer",
@@ -57,7 +57,7 @@
                  "value":true
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":75,
          "x":0,
          "y":0
@@ -212,7 +212,7 @@
         {
          "columns":75,
          "firstgid":1,
-         "image":"..\/img\/\ubc30\uacbd 01_\ubbf8\uc220\uad00 \ubc16_01\uc678\uad00.jpg",
+         "image":"..\/img\/entrance_background.jpg",
          "imageheight":800,
          "imagewidth":1200,
          "margin":0,
