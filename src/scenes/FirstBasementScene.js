@@ -11,7 +11,7 @@ import {
 import { playerOnMapCreate, playerOnMapUpdate } from "../relation/playerOnMap";
 
 function backgroundStatic(scene) {
-	scene.add.sprite(800 / 2, 928 / 2, "firstBasementBackground");
+	scene.add.sprite(800 / 2, 928 / 2, "firstBasement-background");
 }
 
 class FirstBasementScene extends Phaser.Scene {
@@ -25,12 +25,12 @@ class FirstBasementScene extends Phaser.Scene {
 	}
 
 	preload() {
-		this.load.image("firstBasementBackground", "/img/b1_background.jpg");
+		this.load.image("firstBasement-background", "/img/b1_background.jpg");
 		this.load.image("collision-tileset", "/tilemap/simple_tile.png");
 		this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
 		this.load.image("popup", "/img/popup.png");
 		this.load.tilemapTiledJSON({
-			key: "firstBasementMap",
+			key: "firstBasement-map",
 			url: "/tilemap/first-basement.json",
 		});
 		for (const [key, file] of allCharacterImageNames()) {
@@ -43,12 +43,12 @@ class FirstBasementScene extends Phaser.Scene {
 		playerCreateAnimations(this);
 		backgroundStatic(this);
 
-		this.map = mapCreate(this, 'firstBasementMap');
+		this.map = mapCreate(this, 'firstBasement-map');
 		this.player = playerCreate(this, 64, 700);
 		this.playerOnMap = playerOnMapCreate();
 		this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 
-		this.map = mapCreateOverCharacterLayer(this.map, 'firstBasementBackground');
+		this.map = mapCreateOverCharacterLayer(this.map, 'firstBasement-background');
 
 		this.cameras.main.setBounds(
 			0,
