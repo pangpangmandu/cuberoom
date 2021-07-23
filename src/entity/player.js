@@ -1,13 +1,11 @@
 import { updateAnimation } from "./player/animation";
 
 export function playerCreate(scene, x, y) {
+  const phaser = scene.physics.add.sprite(x, y, 'player-down-2', 1);
+  phaser.setSize(16, 16, false).setOffset(0, 16);
+
   return {
-    phaser: scene.physics.add.sprite(
-      x,
-      y,
-      "player-down-2",
-      1
-    ),
+    phaser,
     prevAnim: null,
     prevMove: null,
   };
