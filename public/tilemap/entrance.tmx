@@ -8487,7 +8487,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="4" name="interaction" width="75" height="50" visible="0">
+ <layer id="4" name="interaction" width="75" height="50">
   <properties>
    <property name="cubemapAnchor" value="image1"/>
   </properties>
