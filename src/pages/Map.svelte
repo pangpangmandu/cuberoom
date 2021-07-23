@@ -5,7 +5,7 @@
 <main>
   <div class="guide">
     <img
-      src="/img/map_tutorial.png"
+      src="/img/ui/map_tutorial.png"
       alt="
         안녕하세요? 저는 이 작품을 만든 선우 훈 입니다.
         이 '큐브 스테이지'는 가상 미술관 관람을 위해 제작된 웹사이트입니다.
@@ -14,16 +14,16 @@
       "
     />
   </div>
-  <img class="flag" src="/img/map_click.png" alt="" />
+  <img class="flag" src="/img/ui/map_click.png" alt="" />
   <Link to="/game" style="position: absolute; top: 500px; left: 740px;">
-    <img src="/img/map_region.png" alt="클릭" />
+    <img src="/img/ui/map_gangnam.png" alt="클릭" />
   </Link>
 </main>
 
 <style>
   main {
     height: 100%;
-    background-image: url('/img/map_background.jpg');
+    background-image: url('/img/ui/map_background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
   }

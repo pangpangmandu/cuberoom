@@ -28,7 +28,7 @@ class EntranceScene extends Phaser.Scene {
     this.load.image("entrance-background", "/img/entrance_background.jpg");
     this.load.image("collision-tileset", "/tilemap/simple_tile.png");
     this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
-    this.load.image("popup", "/img/popup.png");
+    this.load.image("popup", "/img/ui-map/popup.png");
     this.load.tilemapTiledJSON({
       key: "entrance-map",
       url: "/tilemap/entrance.json",

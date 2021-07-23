@@ -28,7 +28,7 @@ class FirstBasementScene extends Phaser.Scene {
 		this.load.image("firstBasement-background", "/img/b1_background.jpg");
 		this.load.image("collision-tileset", "/tilemap/simple_tile.png");
 		this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
-		this.load.image("popup", "/img/popup.png");
+		this.load.image("popup", "/img/ui-map/popup.png");
 		this.load.tilemapTiledJSON({
 			key: "firstBasement-map",
 			url: "/tilemap/first-basement.json",
