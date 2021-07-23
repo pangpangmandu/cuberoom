@@ -18,7 +18,7 @@
     />
   </div>
   <img class="flag" src="/img/ui/map_click.png" alt="" />
-  <Link to="/game" style="position: absolute; top: calc(50% + 56px); left: calc(50% + 62px);">
+  <Link to="/game" style="position: absolute; top: calc(50% + 56px); left: calc(50% + 62px);" class="start-game">
     <img src="/img/ui/map_gangnam.png" alt="클릭" />
   </Link>
 </main>
@@ -57,11 +57,11 @@
     z-index: 2;
   }
 
-  :global(a) {
+  :global(a.start-game) {
     opacity: 0;
   }
 
-  :global(a:hover) {
+  :global(a.start-game:hover) {
     opacity: 1;
   }
 </style>
