@@ -3,6 +3,9 @@
 </script>
 
 <main>
+  <div class="seoul">
+    <img src="/img/ui/map_seoul.png" alt="" />
+  </div>
   <div class="guide">
     <img
       src="/img/ui/map_tutorial.png"
@@ -15,7 +18,7 @@
     />
   </div>
   <img class="flag" src="/img/ui/map_click.png" alt="" />
-  <Link to="/game" style="position: absolute; top: 500px; left: 740px;">
+  <Link to="/game" style="position: absolute; top: calc(50% + 56px); left: calc(50% + 62px);">
     <img src="/img/ui/map_gangnam.png" alt="클릭" />
   </Link>
 </main>
@@ -28,17 +31,37 @@
     background-size: cover;
   }
 
-  .guide {
+  .seoul {
+    position: absolute;
     width: 100%;
-    height: 50%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
+  .guide {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+  }
+
   .flag {
     position: absolute;
-    top: 400px;
-    left: 740px;
+    top: 50%;
+    left: calc(50% + 55px);
+    z-index: 2;
+  }
+
+  :global(a) {
+    opacity: 0;
+  }
+
+  :global(a:hover) {
+    opacity: 1;
   }
 </style>
