@@ -1,6 +1,7 @@
 import { log } from "../log";
 import { assert } from "../assert";
 import { popupCreate } from "../entity/popup";
+import EntranceScene from "../scenes/EntranceScene";
 
 export function playerOnMapCreate() {
   return {
@@ -53,6 +54,9 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
   const curTileName = curTile?.properties?.name;
   if (playerOnMap.prevTileName !== curTileName) {
     log(curTileName);
+    if (curTileName === 'image1' && scene instanceof EntranceScene) {
+      scene.scene.start('FirstFloorScene');
+    }
 
     for (const popup of scene.popups) {
       popup.phaser.destroy();
