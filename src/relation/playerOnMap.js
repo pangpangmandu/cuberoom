@@ -2,6 +2,8 @@ import { log } from "../log";
 import { assert } from "../assert";
 import { popupCreate } from "../entity/popup";
 import EntranceScene from "../scenes/EntranceScene";
+import FirstFloorScene from '../scenes/FirstFloorScene';
+import FirstBasementScene from '../scenes/FirstBasementScene';
 
 export function playerOnMapCreate() {
   return {
@@ -54,8 +56,20 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
   const curTileName = curTile?.properties?.name;
   if (playerOnMap.prevTileName !== curTileName) {
     log(curTileName);
-    if (curTileName === 'image1' && scene instanceof EntranceScene) {
-      scene.scene.start('FirstFloorScene');
+    if (scene instanceof EntranceScene) { // 나중에 많아지면 switch문으로 바꾸기
+      if (curTileName === 'image1') {
+        scene.scene.start('FirstFloorScene');
+      }
+    } else if (scene instanceof FirstFloorScene) {
+      if (curTileName === 'image1') {
+
+      } else if (curTileName === 'image2') {
+        scene.scene.start('FirstBasementScene'); // 데이터도 같이 넘겨 주기
+      }
+    } else if (scene instanceof FirstBasementScene) {
+      if (curTileName === 'image1') {
+        scene.scene.start('FirstFloorScene');
+      }
     }
 
     for (const popup of scene.popups) {
