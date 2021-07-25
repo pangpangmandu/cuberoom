@@ -71,22 +71,6 @@ class EntranceScene extends Phaser.Scene {
     this.input.on("pointerdown", (pointer) =>
       mapOnPointerDown(this.map, pointer)
     );
-
-    this.to1F = this.add.text(20, 670, '(temp) To 1F', {
-      font: '15px Arial',
-      fill: 'red',
-    }).setInteractive({ cursor: 'pointer' });
-		this.toB1 = this.add.text(20, 700, '(temp) To B1', {
-      font: '15px Arial',
-      fill: 'blue',
-    }).setInteractive({ cursor: 'pointer' });
-
-    this.to1F.on('pointerdown', function(e) {
-      this.scene.start('FirstFloorScene');
-    }, this);
-    this.toB1.on('pointerdown', function(e) { console.log(this)
-      this.scene.start('FirstBasementScene');
-    }, this);
   }
 
   update(_time, _delta) {
