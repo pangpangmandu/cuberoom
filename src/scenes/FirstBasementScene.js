@@ -11,7 +11,7 @@ import {
 import { playerOnMapCreate, playerOnMapUpdate } from "../relation/playerOnMap";
 
 function backgroundStatic(scene) {
-	scene.add.sprite(800 / 2, 928 / 2, "firstBasement-background");
+	scene.add.sprite(800 / 2, 1040 / 2, "firstBasement-background");
 }
 
 class FirstBasementScene extends Phaser.Scene {
@@ -25,7 +25,7 @@ class FirstBasementScene extends Phaser.Scene {
 	}
 
 	preload() {
-		this.load.image("firstBasement-background", "/img/b1_background.jpg");
+		this.load.image("firstBasement-background", "/img/b1_background.png");
 		this.load.image("collision-tileset", "/tilemap/simple_tile.png");
 		this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
 		this.load.image("popup", "/img/ui-map/popup.png");
@@ -44,7 +44,7 @@ class FirstBasementScene extends Phaser.Scene {
 		backgroundStatic(this);
 
 		this.map = mapCreate(this, 'firstBasement-map');
-		this.player = playerCreate(this, 64, 700);
+		this.player = playerCreate(this, 16*3, 16*32);
 		this.playerOnMap = playerOnMapCreate();
 		this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 

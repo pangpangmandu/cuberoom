@@ -44,7 +44,7 @@ class EntranceScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'entrance-map');
-    this.player = playerCreate(this, 100, 540);
+    this.player = playerCreate(this, 16*6, 16*34);
     this.playerOnMap = playerOnMapCreate();
     this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 

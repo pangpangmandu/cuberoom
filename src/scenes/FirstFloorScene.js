@@ -25,7 +25,7 @@ class FirstFloorScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("firstFloor-background", "/img/1f_background.jpg");
+    this.load.image("firstFloor-background", "/img/1f_background.png");
     this.load.image("collision-tileset", "/tilemap/simple_tile.png");
     this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
     this.load.image("popup", "/img/ui-map/popup.png");
@@ -44,7 +44,7 @@ class FirstFloorScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'firstFloor-map');
-    this.player = playerCreate(this, 80, 490);
+    this.player = playerCreate(this, 16*5, 16*31);
     this.playerOnMap = playerOnMapCreate();
     this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 
