@@ -22,6 +22,13 @@ class EntranceScene extends Phaser.Scene {
     this.cursors = null;
     this.playerOnMap = null;
     this.popups = [];
+    this.x = 16 * 6;
+    this.y = 16 * 34;
+  }
+
+  init(data) {
+    if (data.x) this.x = data.x;
+    if (data.y) this.y = data.y;
   }
 
   preload() {
@@ -44,7 +51,7 @@ class EntranceScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'entrance-map');
-    this.player = playerCreate(this, 16*6, 16*34);
+    this.player = playerCreate(this, this.x, this.y);
     this.playerOnMap = playerOnMapCreate();
     this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 

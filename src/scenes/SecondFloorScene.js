@@ -22,6 +22,13 @@ class SecondFloorScene extends Phaser.Scene {
     this.cursors = null;
     this.playerOnMap = null;
     this.popups = [];
+    this.x = 16 * 6;
+    this.y = 16 * 11;
+  }
+
+  init(data) {
+    if (data.x) this.x = data.x;
+    if (data.y) this.y = data.y;
   }
 
   preload() {
@@ -44,7 +51,7 @@ class SecondFloorScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'secondFloor-map');
-    this.player = playerCreate(this, 16*6, 16*11);
+    this.player = playerCreate(this, this.x, this.y);
     this.playerOnMap = playerOnMapCreate();
     this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 

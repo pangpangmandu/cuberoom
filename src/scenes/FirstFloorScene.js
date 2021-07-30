@@ -22,6 +22,14 @@ class FirstFloorScene extends Phaser.Scene {
     this.cursors = null;
     this.playerOnMap = null;
     this.popups = [];
+    // below are the player's spawn position
+    this.x = 16 * 5;
+    this.y = 16 * 31;
+  }
+
+  init(data) {
+    if (data.x) this.x = data.x;
+    if (data.y) this.y = data.y;
   }
 
   preload() {
@@ -44,7 +52,7 @@ class FirstFloorScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'firstFloor-map');
-    this.player = playerCreate(this, 16*5, 16*31);
+    this.player = playerCreate(this, this.x, this.y);
     this.playerOnMap = playerOnMapCreate();
     this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 

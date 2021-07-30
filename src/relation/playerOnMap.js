@@ -63,17 +63,17 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       }
     } else if (scene instanceof FirstFloorScene) {
       if (curTileName === 'image1') {
-        scene.scene.start('SecondFloorScene');
+        scene.scene.start('SecondFloorScene', { x: 16 * 6, y: 16 * 11 });
       } else if (curTileName === 'image2') {
-        scene.scene.start('FirstBasementScene'); // 데이터도 같이 넘겨 주기
+        scene.scene.start('FirstBasementScene', { x: 16 * 3, y: 16 * 32 });
       }
     } else if (scene instanceof FirstBasementScene) {
       if (curTileName === 'image1') {
-        scene.scene.start('FirstFloorScene', { x: 100, y: 200 });
+        scene.scene.start('FirstFloorScene', { x: 16 * 6, y: 16 * 11 });
       }
     } else if (scene instanceof SecondFloorScene) {
       if (curTileName === 'image2') {
-        scene.scene.start('FirstFloorScene');
+        scene.scene.start('FirstFloorScene', { x: 16 * 3, y: 16 * 11 });
       }
     }
 
