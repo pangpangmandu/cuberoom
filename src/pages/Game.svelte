@@ -3,6 +3,7 @@
   import EntranceScene from '../scenes/EntranceScene';
   import FirstFloorScene from '../scenes/FirstFloorScene';
   import FirstBasementScene from '../scenes/FirstBasementScene';
+  import SecondFloorScene from '../scenes/SecondFloorScene';
 
   const config = {
     type: Phaser.AUTO,
@@ -18,7 +19,7 @@
         gravity: { y: 0 },
       },
     },
-    scene: [EntranceScene, FirstFloorScene, FirstBasementScene],
+    scene: [EntranceScene, FirstFloorScene, FirstBasementScene, SecondFloorScene],
   };
 
   const game = new Phaser.Game(config);
