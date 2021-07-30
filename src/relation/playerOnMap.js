@@ -4,6 +4,7 @@ import { popupCreate } from "../entity/popup";
 import EntranceScene from "../scenes/EntranceScene";
 import FirstFloorScene from '../scenes/FirstFloorScene';
 import FirstBasementScene from '../scenes/FirstBasementScene';
+import SecondFloorScene from "../scenes/SecondFloorScene";
 
 export function playerOnMapCreate() {
   return {
@@ -62,12 +63,16 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       }
     } else if (scene instanceof FirstFloorScene) {
       if (curTileName === 'image1') {
-
+        scene.scene.start('SecondFloorScene');
       } else if (curTileName === 'image2') {
         scene.scene.start('FirstBasementScene'); // 데이터도 같이 넘겨 주기
       }
     } else if (scene instanceof FirstBasementScene) {
       if (curTileName === 'image1') {
+        scene.scene.start('FirstFloorScene', { x: 100, y: 200 });
+      }
+    } else if (scene instanceof SecondFloorScene) {
+      if (curTileName === 'image2') {
         scene.scene.start('FirstFloorScene');
       }
     }
@@ -77,14 +82,14 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
     }
     scene.popups.splice(0, scene.popups.length);
 
-    if (possibleTileNames.includes(curTileName)) {
-      // scene을 너무 mutable하게 쓰는 거 같아서 좀 아쉬운걸.
-      // 나중에 event를 남기는 걸로 바꿔보자.
-      //      const { x, y } = mapTileToWorldXY(map, curTile);
-      const imageName = parseImageName(curTileName);
-      const { x, y } = map.objects[imageName];
-      scene.popups.push(popupCreate(scene, { x, y, name: imageName }));
-    }
+    // if (possibleTileNames.includes(curTileName)) {
+    //   // scene을 너무 mutable하게 쓰는 거 같아서 좀 아쉬운걸.
+    //   // 나중에 event를 남기는 걸로 바꿔보자.
+    //   //      const { x, y } = mapTileToWorldXY(map, curTile);
+    //   const imageName = parseImageName(curTileName);
+    //   const { x, y } = map.objects[imageName];
+    //   scene.popups.push(popupCreate(scene, { x, y, name: imageName }));
+    // }
   }
 
   return {
