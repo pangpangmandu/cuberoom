@@ -17,7 +17,7 @@
       <div class="row">
         <button class="left"></button>
         <div class="center character">
-          <img src="/img/character/stop-1.png" alt="" height="90" />
+          <img src="/img/player/stop-1.png" alt="" height="90" />
         </div>
         <button class="right"></button>
       </div>
