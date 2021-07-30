@@ -18,7 +18,7 @@
          "name":"Image Layer 2",
          "opacity":1,
          "type":"imagelayer",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -24753,7 +24753,7 @@
                         {
                          "name":"name",
                          "type":"string",
-                         "value":"image1"
+                         "value":"up"
                         }],
                  "type":"image1"
                 }, 
@@ -24763,7 +24763,7 @@
                         {
                          "name":"name",
                          "type":"string",
-                         "value":"image2"
+                         "value":"down"
                         }],
                  "type":"image2"
                 }, 
@@ -24773,7 +24773,7 @@
                         {
                          "name":"name",
                          "type":"string",
-                         "value":"image1-popup"
+                         "value":"elevator"
                         }],
                  "type":"image3"
                 }, 
@@ -24783,7 +24783,7 @@
                         {
                          "name":"name",
                          "type":"string",
-                         "value":"image1-description"
+                         "value":"popup"
                         }],
                  "type":"image4"
                 }, 

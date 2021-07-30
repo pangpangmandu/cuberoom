@@ -8183,22 +8183,22 @@
   <image source="interactive-tile.png" width="96" height="64"/>
   <tile id="0" type="image1">
    <properties>
-    <property name="name" value="image1"/>
+    <property name="name" value="up"/>
    </properties>
   </tile>
   <tile id="1" type="image2">
    <properties>
-    <property name="name" value="image2"/>
+    <property name="name" value="down"/>
    </properties>
   </tile>
   <tile id="2" type="image3">
    <properties>
-    <property name="name" value="image1-popup"/>
+    <property name="name" value="elevator"/>
    </properties>
   </tile>
   <tile id="3" type="image4">
    <properties>
-    <property name="name" value="image1-description"/>
+    <property name="name" value="popup"/>
    </properties>
   </tile>
   <tile id="4">

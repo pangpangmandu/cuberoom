@@ -24654,7 +24654,7 @@
                         {
                          "name":"name",
                          "type":"string",
-                         "value":"image1"
+                         "value":"up"
                         }],
                  "type":"image1"
                 }, 
@@ -24664,7 +24664,7 @@
                         {
                          "name":"name",
                          "type":"string",
-                         "value":"image2"
+                         "value":"down"
                         }],
                  "type":"image2"
                 }, 
@@ -24674,7 +24674,7 @@
                         {
                          "name":"name",
                          "type":"string",
-                         "value":"image1-popup"
+                         "value":"elevator"
                         }],
                  "type":"image3"
                 }, 
@@ -24684,7 +24684,7 @@
                         {
                          "name":"name",
                          "type":"string",
-                         "value":"image1-description"
+                         "value":"popup"
                         }],
                  "type":"image4"
                 }, 

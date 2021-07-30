@@ -13,39 +13,39 @@ export function playerOnMapCreate() {
   };
 }
 
-const possibleTileNames = [
-  "image1-description",
-  "image1-popup",
-  "image2-description",
-  "image2-popup",
-  "image3-description",
-  "image3-popup",
-  "image4-description",
-  "image4-popup",
-  "image5-description",
-  "image6-description",
-  "image7-description",
-  "image8-description",
-  "image9-description",
-];
+// const possibleTileNames = [
+//   "image1-description",
+//   "image1-popup",
+//   "image2-description",
+//   "image2-popup",
+//   "image3-description",
+//   "image3-popup",
+//   "image4-description",
+//   "image4-popup",
+//   "image5-description",
+//   "image6-description",
+//   "image7-description",
+//   "image8-description",
+//   "image9-description",
+// ];
 
-const imageNames = [
-  "image1",
-  "image2",
-  "image3",
-  "image4",
-  "image5",
-  "image6",
-  "image7",
-  "image8",
-  "image9",
-];
+// const imageNames = [
+//   "image1",
+//   "image2",
+//   "image3",
+//   "image4",
+//   "image5",
+//   "image6",
+//   "image7",
+//   "image8",
+//   "image9",
+// ];
 
-function parseImageName(tileName) {
-  const imageName = tileName.substring(0, 6);
-  assert(imageNames.includes(imageName), "image name");
-  return imageName;
-}
+// function parseImageName(tileName) {
+//   const imageName = tileName.substring(0, 6);
+//   assert(imageNames.includes(imageName), "image name");
+//   return imageName;
+// }
 
 /**
  * 플레이어가 위치한 타일에 따라 특정 동작을 함
@@ -58,21 +58,21 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
   if (playerOnMap.prevTileName !== curTileName) {
     log(curTileName);
     if (scene instanceof EntranceScene) { // 나중에 많아지면 switch문으로 바꾸기
-      if (curTileName === 'image1') {
+      if (curTileName === 'up') {
         scene.scene.start('FirstFloorScene');
       }
     } else if (scene instanceof FirstFloorScene) {
-      if (curTileName === 'image1') {
+      if (curTileName === 'up') {
         scene.scene.start('SecondFloorScene', { x: 16 * 6, y: 16 * 11 });
-      } else if (curTileName === 'image2') {
+      } else if (curTileName === 'down') {
         scene.scene.start('FirstBasementScene', { x: 16 * 3, y: 16 * 32 });
       }
     } else if (scene instanceof FirstBasementScene) {
-      if (curTileName === 'image1') {
+      if (curTileName === 'up') {
         scene.scene.start('FirstFloorScene', { x: 16 * 6, y: 16 * 11 });
       }
     } else if (scene instanceof SecondFloorScene) {
-      if (curTileName === 'image2') {
+      if (curTileName === 'down') {
         scene.scene.start('FirstFloorScene', { x: 16 * 3, y: 16 * 11 });
       }
     }
