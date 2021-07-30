@@ -44,6 +44,14 @@ class FirstBasementScene extends Phaser.Scene {
 			this.load.image(key, file);
 			log("player image load ", [key, file]);
 		}
+		this.load.image('el-panel-B1', '/img/ui-map/el_panel_B1.png');
+    this.load.image('1F', '/img/ui-map/el_1F.png');
+    this.load.image('2F', '/img/ui-map/el_2F.png');
+    this.load.image('5F', '/img/ui-map/el_5F.png');
+    this.load.image('6F', '/img/ui-map/el_6F.png');
+    this.load.image('7F', '/img/ui-map/el_7F.png');
+    this.load.image('B1', '/img/ui-map/el_B1.png');
+    this.load.image('B2', '/img/ui-map/el_B2.png');
 	}
 
 	create() {

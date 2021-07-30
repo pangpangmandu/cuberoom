@@ -1,10 +1,11 @@
 import { log } from "../log";
 import { assert } from "../assert";
 import { popupCreate } from "../entity/popup";
+import { showElevatorPanel } from '../entity/map/elevator';
 import EntranceScene from "../scenes/EntranceScene";
 import FirstFloorScene from '../scenes/FirstFloorScene';
 import FirstBasementScene from '../scenes/FirstBasementScene';
-import SecondFloorScene from "../scenes/SecondFloorScene";
+import SecondFloorScene from '../scenes/SecondFloorScene';
 
 export function playerOnMapCreate() {
   return {
@@ -66,14 +67,20 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
         scene.scene.start('SecondFloorScene', { x: 16 * 6, y: 16 * 11 });
       } else if (curTileName === 'down') {
         scene.scene.start('FirstBasementScene', { x: 16 * 3, y: 16 * 32 });
+      } else if (curTileName === 'elevator') {
+        showElevatorPanel(scene, '1F', playerX + 200, playerY);
       }
     } else if (scene instanceof FirstBasementScene) {
       if (curTileName === 'up') {
         scene.scene.start('FirstFloorScene', { x: 16 * 6, y: 16 * 11 });
+      } else if (curTileName === 'elevator') {
+        showElevatorPanel(scene, 'B1', playerX + 200, playerY);
       }
     } else if (scene instanceof SecondFloorScene) {
       if (curTileName === 'down') {
         scene.scene.start('FirstFloorScene', { x: 16 * 3, y: 16 * 11 });
+      } else if (curTileName === 'elevator') {
+        showElevatorPanel(scene, '2F', playerX + 200, playerY);
       }
     }
 
