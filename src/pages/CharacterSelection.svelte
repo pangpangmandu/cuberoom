@@ -1,5 +1,50 @@
 <script>
   import { Link } from 'svelte-routing';
+
+  let skinNum = 1;
+  let eyeNum = 1;
+  let hairNum = 1;
+  let clothesNum = 1;
+
+  function increaseSkinNum() {
+    skinNum++;
+    if (skinNum > 3) skinNum = 1;
+  }
+
+  function decreaseSkinNum() {
+    skinNum--;
+    if (skinNum < 1) skinNum = 3;
+  }
+
+  function increaseEyeNum() {
+    eyeNum++;
+    if (eyeNum > 12) eyeNum = 1;
+  }
+
+  function decreaseEyeNum() {
+    eyeNum--;
+    if (eyeNum < 1) eyeNum = 12;
+  }
+
+  function increaseHairNum() {
+    hairNum++;
+    if (hairNum > 48) hairNum = 1;
+  }
+
+  function decreaseHairNum() {
+    hairNum--;
+    if (hairNum < 1) hairNum = 48;
+  }
+
+  function increaseClothesNum() {
+    clothesNum++;
+    if (clothesNum > 12) clothesNum = 1;
+  }
+
+  function decreaseClothesNum() {
+    clothesNum--;
+    if (clothesNum < 1) clothesNum = 12;
+  }
 </script>
 
 <main>
@@ -15,26 +60,29 @@
         <div style="width: 50px; margin-left: 12px; visibility: hidden;">(공백)</div>
       </div>
       <div class="row">
-        <button class="left"></button>
+        <button class="left" on:click={decreaseSkinNum}></button>
         <div class="center character">
-          <img src="/img/player/stop-1.png" alt="" height="90" />
+          <img src="/img/character/skin-{skinNum}.png" alt="" width="32" style="position: absolute;" />
+          <img src="/img/character/eye-{eyeNum}.png" alt="" width="18" style="position: absolute; top: 135px;" />
+          <img src="/img/character/hair-{hairNum}.png" alt="" width="32" style="position: absolute; top: 125px;" />
+          <img src="/img/character/clothes-{clothesNum}.png" alt="" width="32" style="position: absolute; top: 160px;" />
         </div>
-        <button class="right"></button>
+        <button class="right" on:click={increaseSkinNum}></button>
       </div>
       <div class="row">
-        <button class="left"></button>
+        <button class="left" on:click={increaseEyeNum}></button>
         <div class="center">얼굴</div>
-        <button class="right"></button>
+        <button class="right" on:click={decreaseEyeNum}></button>
       </div>
       <div class="row">
-        <button class="left"></button>
+        <button class="left" on:click={increaseHairNum}></button>
         <div class="center">머리색</div>
-        <button class="right"></button>
+        <button class="right" on:click={decreaseHairNum}></button>
       </div>
       <div class="row">
-        <button class="left"></button>
+        <button class="left" on:click={increaseClothesNum}></button>
         <div class="center">의상</div>
-        <button class="right"></button>
+        <button class="right" on:click={decreaseClothesNum}></button>
       </div>
       <Link to='/map' style="position: absolute; bottom: 24px; right: 24px;">
         <img src="/img/ui/decide.png" alt="결정" />
