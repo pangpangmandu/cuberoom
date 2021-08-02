@@ -1,7 +1,7 @@
 import { log } from "../log";
 import { assert } from "../assert";
 import { popupCreate } from "../entity/popup";
-import { showElevatorPanel } from '../entity/map/elevator';
+import { showElevatorPanel, hideElevatorPanel } from '../entity/map/elevator';
 import EntranceScene from "../scenes/EntranceScene";
 import FirstFloorScene from '../scenes/FirstFloorScene';
 import FirstBasementScene from '../scenes/FirstBasementScene';
@@ -58,6 +58,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
   const curTileName = curTile?.properties?.name;
   if (playerOnMap.prevTileName !== curTileName) {
     log(curTileName);
+    if (playerOnMap.prevTileName === 'elevator') hideElevatorPanel();
     if (scene instanceof EntranceScene) { // 나중에 많아지면 switch문으로 바꾸기
       if (curTileName === 'up') {
         scene.scene.start('FirstFloorScene');
