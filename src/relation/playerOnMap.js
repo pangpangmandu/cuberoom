@@ -75,6 +75,9 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
         scene.scene.start('FirstFloorScene', { x: 16 * 6, y: 16 * 11 });
       } else if (curTileName === 'elevator') {
         showElevatorPanel(scene, 'B1', playerX + 200, playerY);
+      } else if (curTileName === 'popup') {
+        // 작품마다 타일 번호를 다 다르게 매겨야겠다... 신마다 타일 각각 쓸 수 있으니까. 팝업 위치도 다 달라야 하고
+        popupCreate(scene, { x: playerX, y: playerY });
       }
     } else if (scene instanceof SecondFloorScene) {
       if (curTileName === 'down') {
