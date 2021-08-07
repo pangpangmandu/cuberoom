@@ -78,9 +78,17 @@ class EntranceScene extends Phaser.Scene {
     this.input.on("pointerdown", (pointer) =>
       mapOnPointerDown(this.map, pointer)
     );
+
+
   }
 
   update(_time, _delta) {
+    var pointer = this.input.activePointer;
+    if(pointer.isDown){
+      console.log(pointer.x +" "+pointer.y)
+      console.log(this.player.phaser.x + " "+parseInt(this.player.phaser.y/2-36))
+    }
+
     this.player = playerUpdate(this.player, this.cursors, this);
     mapUpdateMousePoint(this.map, this);
     this.playerOnMap = playerOnMapUpdate(
