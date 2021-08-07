@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { log } from "../log";
-import { playerCreate, playerUpdate } from "../entity/player";
+import { playerCreate, playerUpdate , playerMouseUpdate } from "../entity/player";
 import { allCharacterImageNames } from "../entity/player/image";
 import { playerCreateAnimations } from "../entity/player/animation";
 import { mapCreate, mapCreateOverCharacterLayer } from "../entity/map";
@@ -82,14 +82,26 @@ class SecondFloorScene extends Phaser.Scene {
   }
 
   update(_time, _delta) {
-    this.player = playerUpdate(this.player, this.cursors, this);
-    mapUpdateMousePoint(this.map, this);
-    this.playerOnMap = playerOnMapUpdate(
-      this.playerOnMap,
-      this.player,
-      this.map,
-      this
-    );
+    var pointer = this.input.activePointer;
+    if(pointer.isDown){
+      this.player = playerMouseUpdate(this.player,this.input.activePointer, this);
+      mapUpdateMousePoint(this.map, this);
+      this.playerOnMap = playerOnMapUpdate(
+        this.playerOnMap,
+        this.player,
+        this.map,
+        this
+      );
+    }else{
+      this.player = playerUpdate(this.player,this.cursors, this);
+      mapUpdateMousePoint(this.map, this);
+      this.playerOnMap = playerOnMapUpdate(
+        this.playerOnMap,
+        this.player,
+        this.map,
+        this
+      );
+    }
   }
 }
 

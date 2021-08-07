@@ -1,4 +1,4 @@
-import { updateAnimation } from "./player/animation";
+import { updateAnimation, updateMouseAnimation } from "./player/animation";
 
 export function playerCreate(scene, x, y) {
   const phaser = scene.physics.add.sprite(x, y, 'player-down-2', 1);
@@ -11,6 +11,56 @@ export function playerCreate(scene, x, y) {
   };
 }
 
+function mouseMove(player, pointer, scene) {
+  let moved = false;
+  let velocity = 100;
+
+  if (scene.cheat) {
+    velocity *= 10;
+  }
+
+  let newPrevMove = player.prevMove;
+  if(pointer.isDown){
+    if(pointer.worldX + 16< player.phaser.x){
+      if (player.prevMove !== "left") {
+        player.phaser.body.setVelocityX(-velocity);
+        newPrevMove = "left";
+      }
+      moved = true;
+    }else if(pointer.worldX > 16+player.phaser.x){
+      if (player.prevMove !== "right") {
+        player.phaser.body.setVelocityX(velocity);
+        newPrevMove = "right";
+      }
+      moved = true;
+    }else{
+      player.phaser.body.setVelocityX(0);
+    }
+  
+    if (pointer.worldY +16 < player.phaser.y) {
+      if (player.prevMove !== "up") {
+        player.phaser.body.setVelocityY(-velocity);
+        newPrevMove = "up";
+      }
+      moved = true;
+    } else if (pointer.worldY > 16+ player.phaser.y) {
+      if (player.prevMove !== "down") {
+        player.phaser.body.setVelocityY(velocity);
+        newPrevMove = "down";
+      }
+      moved = true;
+    } else {
+      player.phaser.body.setVelocityY(0);
+    }
+  
+  }
+  return {
+    ...player,
+    prevMove: newPrevMove,
+  };
+  
+}
+
 function move(player, cursors, scene) {
   let moved = false;
   let velocity = 100;
@@ -20,6 +70,7 @@ function move(player, cursors, scene) {
   }
 
   let newPrevMove = player.prevMove;
+
   if (cursors.left.isDown) {
     if (player.prevMove !== "left") {
       player.phaser.body.setVelocityX(-velocity);
@@ -65,5 +116,11 @@ function move(player, cursors, scene) {
 export function playerUpdate(player, cursors, scene) {
   let newPlayer = updateAnimation(player, cursors);
   newPlayer = move(newPlayer, cursors, scene);
+  return newPlayer;
+}
+
+export function playerMouseUpdate(player, pointer, scene) {
+  let newPlayer = updateMouseAnimation(player,  pointer);
+  newPlayer = mouseMove(newPlayer, pointer, scene);
   return newPlayer;
 }
