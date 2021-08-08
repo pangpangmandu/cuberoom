@@ -30,4 +30,27 @@
   div {
     flex: 1;
   }
+
+  @media (orientation: portrait) {
+    main {
+      overflow: hidden;
+    }
+
+    /* img {
+      width: 80%;
+      object-fit: scale-down;
+    }
+
+    div {
+      display: flex;
+      justify-content: center;
+    }
+    :global(a) {
+      width: 80%;
+    }
+
+    :global(a) img {
+      width: 100%;
+    } */
+  }
 </style>

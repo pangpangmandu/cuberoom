@@ -48,14 +48,14 @@
 </script>
 
 <main>
-  <div style="width: 100%; height: 20%;"></div>
-  <div style="display: flex; justify-content: center; align-items: flex-start;">
+  <!-- <div style="width: 100%; height: 20%;"></div> -->
+  <div class="block-container">
     <div class="block label">
       큐브 스테이지에 입장하기 위한 캐릭터를 만들어 주세요.
     </div>
     <div class="block form">
       <div class="row">
-        <div style="width: 50px; margin-right: 12px; font-size: 24px;">이름</div>
+        <div style="width: 50px; margin-right: 12px;">이름</div>
         <input />
         <div style="width: 50px; margin-left: 12px; visibility: hidden;">(공백)</div>
       </div>
@@ -84,13 +84,13 @@
         <div class="center">의상</div>
         <button class="right" on:click={decreaseClothesNum}></button>
       </div>
-      <Link to='/map' style="position: absolute; bottom: 24px; right: 24px;">
+      <Link to='/map' class="decide">
         <img src="/img/ui/decide.png" alt="결정" />
       </Link>
     </div>
-    <div style="width: 340px; height: 200px; visibility: hidden;"></div>
+    <!-- <div style="width: 340px; height: 200px; visibility: hidden;"></div> -->
   </div>
-  <Link to='/' style="position: absolute; bottom: 30px; right: 30px;">
+  <Link to='/' class="to-main">
     <img src="/img/ui/back_to_main.png" alt="메인으로" />
   </Link>
 </main>
@@ -109,6 +109,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .block-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20%;
+    margin-bottom: 200px;
   }
 
   .block {
@@ -138,6 +146,10 @@
   .row {
     display: flex;
     justify-content: center;
+  }
+
+  .row div {
+    font-size: 24px;
   }
 
   input {
@@ -189,5 +201,59 @@
   .right {
     background-image: url('/img/ui/arrow_right.png');
     margin-left: 12px;
+  }
+
+  :global(a.decide) {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+  }
+
+  :global(a.to-main) {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+  }
+
+  @media (orientation: portrait) {
+    main {
+      overflow: hidden;
+    }
+
+    .block-container {
+      flex-direction: column;
+      align-items: center;
+      margin: 0px;
+    }
+
+    .block.label {
+      width: 80%;
+      margin: 20px 0px 20px 0px;
+      font-size: 20px;
+    }
+
+    .block.form {
+      width: 80%;
+      height: fit-content;
+      padding-bottom: 60px;
+    }
+
+    .row div {
+      font-size: 20px;
+    }
+
+    :global(a.decide) {
+      bottom: 20px;
+      text-align: center;
+      width: 100%;
+      right: 0px;
+    }
+
+    /* :global(a.to-main) {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      width: 100%;
+    } */
   }
 </style>

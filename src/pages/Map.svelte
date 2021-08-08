@@ -18,7 +18,7 @@
     />
   </div>
   <img class="flag" src="/img/ui/map_click.png" alt="" />
-  <Link to="/game" style="position: absolute; top: calc(50% + 56px); left: calc(50% + 62px);" class="start-game">
+  <Link to="/game" class="start-game">
     <img src="/img/ui/map_gangnam.png" alt="클릭" />
   </Link>
 </main>
@@ -59,9 +59,22 @@
 
   :global(a.start-game) {
     opacity: 0;
+    position: absolute;
+    top: calc(50% + 56px);
+    left: calc(50% + 62px);
   }
 
   :global(a.start-game:hover) {
     opacity: 1;
+  }
+
+  @media (orientation: portrait) {
+    main {
+      overflow: hidden;
+    }
+
+    .guide img {
+      width: 90%;
+    }
   }
 </style>
