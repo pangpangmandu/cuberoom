@@ -3,9 +3,12 @@
 import { log } from "../log";
 import { openURL } from "../common/urlOpen";
 
+let popupSprite;
+let descriptionContainer;
+
 export function popupCreate(scene, { x, y, name }) {
   log(`create pop at x: ${x}, y: ${y}`);
-  const popupSprite = scene.add.sprite(x + 5, y - 10, "popup");
+  popupSprite = scene.add.sprite(x, y, "popup");
   popupSprite.setInteractive();
 
   // FIXME: event 등록 해제해야 하는지 확인 필요
@@ -21,19 +24,19 @@ export function popupCreate(scene, { x, y, name }) {
   // FIXME: event 등록 해제해야 하는지 확인 필요
   popupSprite.on("pointerdown", () => {
     // openURL(name);
-    const descriptionContainer = document.createElement('div');
+    descriptionContainer = document.createElement('div');
     descriptionContainer.style.position = 'absolute';
     descriptionContainer.style.top = '0px';
     descriptionContainer.style.left = '0px';
     descriptionContainer.style.width = '100%';
     descriptionContainer.style.height = '100%';
     descriptionContainer.style.display = 'flex';
-    descriptionContainer.style.justifyContent = 'center';
+    descriptionContainer.style.flexDirection = 'column';
+    descriptionContainer.style.justifyContent = 'flex-end';
     descriptionContainer.style.alignItems = 'center';
 
     const description = document.createElement('div');
     description.style.width = '460px';
-    // description.style.height = '150px';
     description.style.backgroundColor = 'white';
     description.style.borderColor = 'black';
     description.style.borderWidth = '4px';
@@ -41,6 +44,8 @@ export function popupCreate(scene, { x, y, name }) {
     description.style.padding = '12px';
     description.style.display = 'flex';
     description.style.justifyContent = 'space-between';
+    description.style.position = 'relative';
+    description.style.bottom = '150px';
 
     const left = document.createElement('div');
     left.style.width = '160px';
@@ -98,4 +103,9 @@ export function popupCreate(scene, { x, y, name }) {
     phaser: popupSprite,
     name,
   };
+}
+
+export function popupDestroy() {
+  popupSprite.destroy();
+  if (descriptionContainer) document.body.removeChild(descriptionContainer);
 }

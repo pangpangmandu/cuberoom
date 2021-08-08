@@ -1,6 +1,6 @@
 import { log } from "../log";
 import { assert } from "../assert";
-import { popupCreate } from "../entity/popup";
+import { popupCreate, popupDestroy } from "../entity/popup";
 import { showElevatorPanel, hideElevatorPanel } from '../entity/map/elevator';
 import EntranceScene from "../scenes/EntranceScene";
 import FirstFloorScene from '../scenes/FirstFloorScene';
@@ -64,6 +64,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
   if (playerOnMap.prevTileName !== curTileName) {
     log(curTileName);
     if (playerOnMap.prevTileName === 'elevator') hideElevatorPanel();
+    if (['work-1', 'work-2'].includes(playerOnMap.prevTileName)) popupDestroy();
 
     switch (scene.constructor) {
       case EntranceScene:
@@ -194,9 +195,11 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
           case 'elevator':
             showElevatorPanel(scene, 'B1');
             break;
-          case 'popup':
-            // 작품마다 타일 번호를 다 다르게 매겨야겠다... 신마다 타일 각각 쓸 수 있으니까. 팝업 위치도 다 달라야 하고
-            popupCreate(scene, { x: playerX, y: playerY });
+          case 'work-1':
+            popupCreate(scene, { x: 16 * 21, y: 16 * 43.5 });
+            break;
+          case 'work-2':
+            popupCreate(scene, { x: 16 * 28, y: 16 * 43.5 });
             break;
           default:
             break;
@@ -212,8 +215,11 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
           case 'elevator':
             showElevatorPanel(scene, 'B2');
             break;
-          case 'popup':
-            popupCreate(scene, { x: playerX, y: playerY });
+          case 'work-1':
+            popupCreate(scene, { x: 16 * 21, y: 16 * 24.5 });
+            break;
+          case 'work-2':
+            popupCreate(scene, { x: 16 * 28, y: 16 * 24.5 });
             break;
           default:
             break;
