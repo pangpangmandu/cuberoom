@@ -129,7 +129,8 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
           case 'elevator':
             showElevatorPanel(scene, '5F');
             break;
-          case 'popup':
+          case 'up2':
+            scene.scene.start('SixthFloorScene', { x: 16 * 46, y: 16 * 26 });
             break;
           default:
             break;
@@ -146,7 +147,8 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
           case 'elevator':
             showElevatorPanel(scene, '6F');
             break;
-          case 'popup':
+          case 'down2':
+            scene.scene.start('FifthFloorScene', { x: 16 * 46, y: 16 * 17 });
             break;
           default:
             break;
@@ -201,6 +203,12 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
           case 'work-2':
             popupCreate(scene, { x: 16 * 28, y: 16 * 43.5 });
             break;
+          case 'down2':
+            scene.scene.start('SecondBasementScene', { x: 16 * 37, y: 16 * 16 });
+            break;
+          case 'down3':
+            scene.scene.start('SecondBasementScene', { x: 16 * 3, y: 16 * 35 });
+            break;
           default:
             break;
         }
@@ -220,6 +228,12 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             break;
           case 'work-2':
             popupCreate(scene, { x: 16 * 28, y: 16 * 24.5 });
+            break;
+          case 'up2':
+            scene.scene.start('FirstBasementScene', { x: 16 * 37, y: 16 * 37 });
+            break;
+          case 'up3':
+            scene.scene.start('FirstBasementScene', { x: 16 * 3, y: 16 * 54 });
             break;
           default:
             break;
