@@ -76,5 +76,15 @@
     .guide img {
       width: 90%;
     }
+
+    :global(a.start-game) {
+      opacity: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .seoul {
+      overflow: hidden;
+    }
   }
 </style>

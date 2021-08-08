@@ -128,8 +128,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin-top: 20%;
-    margin-bottom: 200px;
+    padding-top: 10%;
   }
 
   .block {
@@ -236,11 +235,10 @@
     .block-container {
       flex-direction: column;
       align-items: center;
-      margin: 0px;
+      padding: 0px;
     }
 
     .block.label {
-      width: 80%;
       margin: 20px 0px 20px 0px;
       font-size: 20px;
     }
@@ -256,7 +254,7 @@
     }
 
     :global(a.decide) {
-      bottom: 20px;
+      bottom: 12px;
       text-align: center;
       width: 100%;
       right: 0px;
