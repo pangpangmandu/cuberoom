@@ -3,9 +3,11 @@
 
   let skinNum = 1;
   let eyeNum = 1;
-  let hairNum = 1;
+  let hairColorNum = 1;
+  let hairStyleNum = 1;
   let clothesNum = 1;
 
+  // 이 함수들 나중에 하나로 추상화하기
   function increaseSkinNum() {
     skinNum++;
     if (skinNum > 3) skinNum = 1;
@@ -26,14 +28,24 @@
     if (eyeNum < 1) eyeNum = 12;
   }
 
-  function increaseHairNum() {
-    hairNum++;
-    if (hairNum > 48) hairNum = 1;
+  function increaseHairColorNum() {
+    hairColorNum++;
+    if (hairColorNum > 4) hairColorNum = 1;
   }
 
-  function decreaseHairNum() {
-    hairNum--;
-    if (hairNum < 1) hairNum = 48;
+  function decreaseHairColorNum() {
+    hairColorNum--;
+    if (hairColorNum < 1) hairColorNum = 4;
+  }
+
+  function increaseHairStyleNum() {
+    hairStyleNum++;
+    if (hairStyleNum > 12) hairStyleNum = 1;
+  }
+
+  function decreaseHairStyleNum() {
+    hairStyleNum--;
+    if (hairStyleNum < 1) hairStyleNum = 12;
   }
 
   function increaseClothesNum() {
@@ -48,7 +60,6 @@
 </script>
 
 <main>
-  <!-- <div style="width: 100%; height: 20%;"></div> -->
   <div class="block-container">
     <div class="block label">
       큐브 스테이지에 입장하기 위한 캐릭터를 만들어 주세요.
@@ -62,10 +73,10 @@
       <div class="row">
         <button class="left" on:click={decreaseSkinNum}></button>
         <div class="center character">
-          <img src="/img/character/skin-{skinNum}.png" alt="" width="32" style="position: absolute;" />
-          <img src="/img/character/eye-{eyeNum}.png" alt="" width="18" style="position: absolute; top: 135px;" />
-          <img src="/img/character/hair-{hairNum}.png" alt="" width="32" style="position: absolute; top: 125px;" />
-          <img src="/img/character/clothes-{clothesNum}.png" alt="" width="32" style="position: absolute; top: 160px;" />
+          <img src="/img/character/Skincolor ({skinNum}).png" alt="" width="32" style="position: absolute;" />
+          <img src="/img/character/face ({eyeNum}).png" alt="" width="32" style="position: absolute;" />
+          <img src="/img/character/HairC0{hairColorNum} ({hairStyleNum}).png" alt="" width="32" style="position: absolute;" />
+          <img src="/img/character/Clothes ({clothesNum}).png" alt="" width="32" style="position: absolute;" />
         </div>
         <button class="right" on:click={increaseSkinNum}></button>
       </div>
@@ -75,9 +86,14 @@
         <button class="right" on:click={decreaseEyeNum}></button>
       </div>
       <div class="row">
-        <button class="left" on:click={increaseHairNum}></button>
+        <button class="left" on:click={increaseHairColorNum}></button>
         <div class="center">머리색</div>
-        <button class="right" on:click={decreaseHairNum}></button>
+        <button class="right" on:click={decreaseHairColorNum}></button>
+      </div>
+      <div class="row">
+        <button class="left" on:click={increaseHairStyleNum}></button>
+        <div class="center">머리모양</div>
+        <button class="right" on:click={decreaseHairStyleNum}></button>
       </div>
       <div class="row">
         <button class="left" on:click={increaseClothesNum}></button>
@@ -88,7 +104,6 @@
         <img src="/img/ui/decide.png" alt="결정" />
       </Link>
     </div>
-    <!-- <div style="width: 340px; height: 200px; visibility: hidden;"></div> -->
   </div>
   <Link to='/' class="to-main">
     <img src="/img/ui/back_to_main.png" alt="메인으로" />
@@ -101,8 +116,6 @@
     background-image: url('/img/ui/intro_background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    /* display: flex;
-    justify-content: center; */
   }
 
   div {
@@ -248,12 +261,5 @@
       width: 100%;
       right: 0px;
     }
-
-    /* :global(a.to-main) {
-      position: absolute;
-      bottom: 30px;
-      right: 30px;
-      width: 100%;
-    } */
   }
 </style>
