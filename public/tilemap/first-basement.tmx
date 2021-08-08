@@ -8305,10 +8305,10 @@
  <imagelayer id="23" name="Image Layer 1">
   <image source="../img/b1_background.png" width="800" height="1040"/>
  </imagelayer>
- <imagelayer id="24" name="Image Layer 2">
+ <imagelayer id="24" name="Image Layer 2" visible="0">
   <image source="../img/b1_background_marking.png" width="800" height="1040"/>
  </imagelayer>
- <imagelayer id="25" name="Image Layer 3">
+ <imagelayer id="25" name="Image Layer 3" visible="0">
   <image source="../img/b1_background_ref.png" width="800" height="1040"/>
  </imagelayer>
  <layer id="1" name="background" width="50" height="65" visible="0">
@@ -8380,7 +8380,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="3" name="collision" width="50" height="65">
+ <layer id="3" name="collision" width="50" height="65" visible="0">
   <properties>
    <property name="collides" type="bool" value="true"/>
   </properties>
@@ -8453,7 +8453,7 @@
 </data>
  </layer>
  <objectgroup id="10" name="objectLayer" visible="0"/>
- <layer id="7" name="overCharacter" width="50" height="65">
+ <layer id="7" name="overCharacter" width="50" height="65" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

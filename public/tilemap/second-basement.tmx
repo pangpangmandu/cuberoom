@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="50" height="46" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="12">
  <editorsettings>
-  <export target="first-basement.json" format="json"/>
+  <export target="second-basement.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="background" tilewidth="16" tileheight="16" tilecount="8160" columns="50">
   <image source="../img/b2_background.png" width="800" height="740"/>
@@ -8302,10 +8302,10 @@
    </properties>
   </tile>
  </tileset>
- <imagelayer id="23" name="Image Layer 1" visible="0">
+ <imagelayer id="23" name="Image Layer 1">
   <image source="../img/b2_background.png" width="800" height="740"/>
  </imagelayer>
- <imagelayer id="24" name="Image Layer 2">
+ <imagelayer id="24" name="Image Layer 2" visible="0">
   <image source="../img/b2_background_marking.png" width="800" height="740"/>
  </imagelayer>
  <imagelayer id="25" name="Image Layer 3" visible="0">
@@ -8465,7 +8465,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2270,2271,2272,2273,0,0,0,2277,2278,2279,2280,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="4" name="interaction" width="50" height="46">
+ <layer id="4" name="interaction" width="50" height="46" visible="0">
   <properties>
    <property name="cubemapAnchor" value="image1"/>
   </properties>
