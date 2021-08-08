@@ -6,6 +6,11 @@ import EntranceScene from "../scenes/EntranceScene";
 import FirstFloorScene from '../scenes/FirstFloorScene';
 import FirstBasementScene from '../scenes/FirstBasementScene';
 import SecondFloorScene from '../scenes/SecondFloorScene';
+import FifthFloorScene from '../scenes/FifthFloorScene';
+import SixthFloorScene from '../scenes/SixthFloorScene';
+import SeventhFloorScene from '../scenes/SeventhFloorScene';
+import EighthFloorScene from '../scenes/EighthFloorScene';
+import SecondBasementScene from '../scenes/SecondBasementScene';
 
 export function playerOnMapCreate() {
   return {
@@ -59,33 +64,163 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
   if (playerOnMap.prevTileName !== curTileName) {
     log(curTileName);
     if (playerOnMap.prevTileName === 'elevator') hideElevatorPanel();
-    if (scene instanceof EntranceScene) { // 나중에 많아지면 switch문으로 바꾸기
-      if (curTileName === 'up') {
-        scene.scene.start('FirstFloorScene');
-      }
-    } else if (scene instanceof FirstFloorScene) {
-      if (curTileName === 'up') {
-        scene.scene.start('SecondFloorScene', { x: 16 * 6, y: 16 * 11 });
-      } else if (curTileName === 'down') {
-        scene.scene.start('FirstBasementScene', { x: 16 * 3, y: 16 * 32 });
-      } else if (curTileName === 'elevator') {
-        showElevatorPanel(scene, '1F', playerX + 200, playerY);
-      }
-    } else if (scene instanceof FirstBasementScene) {
-      if (curTileName === 'up') {
-        scene.scene.start('FirstFloorScene', { x: 16 * 6, y: 16 * 11 });
-      } else if (curTileName === 'elevator') {
-        showElevatorPanel(scene, 'B1', playerX + 200, playerY);
-      } else if (curTileName === 'popup') {
-        // 작품마다 타일 번호를 다 다르게 매겨야겠다... 신마다 타일 각각 쓸 수 있으니까. 팝업 위치도 다 달라야 하고
-        popupCreate(scene, { x: playerX, y: playerY });
-      }
-    } else if (scene instanceof SecondFloorScene) {
-      if (curTileName === 'down') {
-        scene.scene.start('FirstFloorScene', { x: 16 * 3, y: 16 * 11 });
-      } else if (curTileName === 'elevator') {
-        showElevatorPanel(scene, '2F', playerX + 200, playerY);
-      }
+
+    switch (scene.constructor) {
+      case EntranceScene:
+        switch (curTileName) {
+          case 'up':
+            scene.scene.start('FirstFloorScene');
+            break;
+          case 'down':
+            break;
+          case 'elevator':
+            break;
+          case 'popup':
+            break;
+          default:
+            break;
+        }
+        break;
+      case FirstFloorScene:
+        switch (curTileName) {
+          case 'up':
+            scene.scene.start('SecondFloorScene', { x: 16 * 6, y: 16 * 11 });
+            break;
+          case 'down':
+            scene.scene.start('FirstBasementScene', { x: 16 * 3, y: 16 * 32 });
+            break;
+          case 'elevator':
+            showElevatorPanel(scene, '1F');
+            break;
+          case 'popup':
+            break;
+          default:
+            break;
+        }
+        break;
+      case SecondFloorScene:
+        switch (curTileName) {
+          case 'up':
+            // 근데 2층에서 바로 5층으로 가는 게 맞나..??
+            scene.scene.start('FifthFloorScene', { x: 16 * 6, y: 16 * 11 });
+            break;
+          case 'down':
+            scene.scene.start('FirstFloorScene', { x: 16 * 3, y: 16 * 11 });
+            break;
+          case 'elevator':
+            showElevatorPanel(scene, '2F');
+            break;
+          case 'popup':
+            break;
+          default:
+            break;
+        }
+        break;
+      case FifthFloorScene:
+        switch (curTileName) {
+          case 'up':
+            scene.scene.start('SixthFloorScene', { x: 16 * 6, y: 16 * 21 });
+            break;
+          case 'down':
+            // 근데 5층에서 바로 2층으로 가는 게 맞나..??
+            scene.scene.start('SecondFloorScene', { x: 16 * 3, y: 16 * 11 });
+            break;
+          case 'elevator':
+            showElevatorPanel(scene, '5F');
+            break;
+          case 'popup':
+            break;
+          default:
+            break;
+        }
+        break;
+      case SixthFloorScene:
+        switch (curTileName) {
+          case 'up':
+            scene.scene.start('SeventhFloorScene', { x: 16 * 6, y: 16 * 11 });
+            break;
+          case 'down':
+            scene.scene.start('FifthFloorScene', { x: 16 * 3, y: 16 * 11 });
+            break;
+          case 'elevator':
+            showElevatorPanel(scene, '6F');
+            break;
+          case 'popup':
+            break;
+          default:
+            break;
+        }
+        break;
+      case SeventhFloorScene:
+        switch (curTileName) {
+          case 'up':
+            scene.scene.start('EighthFloorScene', { x: 16 * 6, y: 16 * 20 });
+            break;
+          case 'down':
+            scene.scene.start('SixthFloorScene', { x: 16 * 3, y: 16 * 21 });
+            break;
+          case 'elevator':
+            showElevatorPanel(scene, '7F');
+            break;
+          case 'popup':
+            break;
+          default:
+            break;
+        }
+        break;
+      case EighthFloorScene:
+        switch (curTileName) {
+          case 'up':
+            break;
+          case 'down':
+            scene.scene.start('SeventhFloorScene', { x: 16 * 6, y: 16 * 11 });
+            break;
+          case 'elevator':
+            break;
+          case 'popup':
+            break;
+          default:
+            break;
+        }
+        break;
+      case FirstBasementScene:
+        switch (curTileName) {
+          case 'up':
+            scene.scene.start('FirstFloorScene', { x: 16 * 6, y: 16 * 11 });
+            break;
+          case 'down':
+            scene.scene.start('SecondBasementScene', { x: 16 * 3, y: 16 * 13 });
+            break;
+          case 'elevator':
+            showElevatorPanel(scene, 'B1');
+            break;
+          case 'popup':
+            // 작품마다 타일 번호를 다 다르게 매겨야겠다... 신마다 타일 각각 쓸 수 있으니까. 팝업 위치도 다 달라야 하고
+            popupCreate(scene, { x: playerX, y: playerY });
+            break;
+          default:
+            break;
+        }
+        break;
+      case SecondBasementScene:
+        switch (curTileName) {
+          case 'up':
+            scene.scene.start('FirstBasementScene', { x: 16 * 6, y: 16 * 32 });
+            break;
+          case 'down':
+            break;
+          case 'elevator':
+            showElevatorPanel(scene, 'B2');
+            break;
+          case 'popup':
+            popupCreate(scene, { x: playerX, y: playerY });
+            break;
+          default:
+            break;
+        }
+        break;
+      default:
+        break;
     }
 
     for (const popup of scene.popups) {
