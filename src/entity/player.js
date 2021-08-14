@@ -22,12 +22,20 @@ function mouseMove(player, pointer, scene) {
   let newPrevMove = player.prevMove;
   if(pointer.isDown){
     if(pointer.worldX + 16< player.phaser.x){
+      velocity *= parseInt(player.phaser.x - pointer.worldX) * 0.007;
+      if(velocity < 100){
+        velocity = 100;
+      }
       if (player.prevMove !== "left") {
         player.phaser.body.setVelocityX(-velocity);
         newPrevMove = "left";
       }
       moved = true;
     }else if(pointer.worldX > 16+player.phaser.x){
+      velocity *= parseInt( pointer.worldX - player.phaser.x) * 0.007;
+      if(velocity < 100){
+        velocity = 100;
+      }
       if (player.prevMove !== "right") {
         player.phaser.body.setVelocityX(velocity);
         newPrevMove = "right";
@@ -38,12 +46,21 @@ function mouseMove(player, pointer, scene) {
     }
   
     if (pointer.worldY +16 < player.phaser.y) {
+      velocity *= parseInt( player.phaser.y - pointer.worldY) * 0.015;
+      if(velocity < 100){
+        velocity = 100;
+      }
+      
       if (player.prevMove !== "up") {
         player.phaser.body.setVelocityY(-velocity);
         newPrevMove = "up";
       }
       moved = true;
     } else if (pointer.worldY > 16+ player.phaser.y) {
+      velocity *= parseInt(  pointer.worldY -player.phaser.y) * 0.015;
+      if(velocity < 100){
+        velocity = 100;
+      }
       if (player.prevMove !== "down") {
         player.phaser.body.setVelocityY(velocity);
         newPrevMove = "down";
