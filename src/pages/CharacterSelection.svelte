@@ -1,11 +1,13 @@
 <script>
-  import { Link } from 'svelte-routing';
+  import { Link, navigate } from 'svelte-routing';
+  import axios from 'axios';
 
   let skinNum = 1;
   let eyeNum = 1;
   let hairColorNum = 1;
   let hairStyleNum = 1;
   let clothesNum = 1;
+  let name = '';
 
   // 이 함수들 나중에 하나로 추상화하기
   function increaseSkinNum() {
@@ -57,6 +59,24 @@
     clothesNum--;
     if (clothesNum < 1) clothesNum = 12;
   }
+
+  function decide() {
+    axios.post('http://localhost:3000/character-selection', {
+      name,
+      faceS: eyeNum,
+      hairS: hairStyleNum,
+      hairC: hairColorNum,
+      skin: skinNum,
+      cloth: clothesNum,
+    })
+    .then((res) => {
+      window.playerImgUrl = res.data; // 약간 임시방편..ㅠㅠ
+      navigate('/map');
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }
 </script>
 
 <main>
@@ -67,7 +87,7 @@
     <div class="block form">
       <div class="row">
         <div style="width: 50px; margin-right: 12px;">이름</div>
-        <input />
+        <input bind:value={name} />
         <div style="width: 50px; margin-left: 12px; visibility: hidden;">(공백)</div>
       </div>
       <div class="row">
@@ -100,9 +120,9 @@
         <div class="center">의상</div>
         <button class="right" on:click={decreaseClothesNum}></button>
       </div>
-      <Link to='/map' class="decide">
+      <button class="decide" on:click={decide}>
         <img src="/img/ui/decide.png" alt="결정" />
-      </Link>
+      </button>
     </div>
   </div>
   <Link to='/' class="to-main">
@@ -215,7 +235,7 @@
     margin-left: 12px;
   }
 
-  :global(a.decide) {
+  .decide {
     position: absolute;
     bottom: 24px;
     right: 24px;
@@ -253,7 +273,7 @@
       font-size: 20px;
     }
 
-    :global(a.decide) {
+    .decide {
       bottom: 12px;
       text-align: center;
       width: 100%;
