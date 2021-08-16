@@ -2,7 +2,9 @@ import { updateAnimation, updateMouseAnimation } from "./player/animation";
 
 export function playerCreate(scene, x, y) {
   const phaser = scene.physics.add.sprite(x, y, 'player-down-2', 1);
-  phaser.setSize(16, 16, false).setOffset(0, 16);
+  // phaser.setScale(0.8);
+  // phaser.setSize(16, 16, false).setOffset(0, 16);
+  phaser.setSize(20, 20, false).setOffset(0, 20);
 
   return {
     phaser,
@@ -44,13 +46,13 @@ function mouseMove(player, pointer, scene) {
     }else{
       player.phaser.body.setVelocityX(0);
     }
-  
+
     if (pointer.worldY +16 < player.phaser.y) {
       velocity *= parseInt( player.phaser.y - pointer.worldY) * 0.015;
       if(velocity < 100){
         velocity = 100;
       }
-      
+
       if (player.prevMove !== "up") {
         player.phaser.body.setVelocityY(-velocity);
         newPrevMove = "up";
@@ -69,13 +71,13 @@ function mouseMove(player, pointer, scene) {
     } else {
       player.phaser.body.setVelocityY(0);
     }
-  
+
   }
   return {
     ...player,
     prevMove: newPrevMove,
   };
-  
+
 }
 
 function move(player, cursors, scene) {
