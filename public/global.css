@@ -18,26 +18,3 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	overflow: hidden;
 }
-
-#chat {
-	bottom: 10vh;
-	width: 80vw;
-	left: 10vw;
-	right: 10vw;
-	position: fixed;
-	z-index: 999;
-	display: flex;
-	/* border: thick solid #333; */
-
-}
-
-#chat-input{
-	border: thick solid #333;
-	width: 80vw;
-	height: 30px;
-}
-
-#chat-submit{
-	border: thick solid #333;
-	border-left: none;
-}
