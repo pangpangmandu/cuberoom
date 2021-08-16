@@ -9,6 +9,32 @@
   import SeventhFloorScene from '../scenes/SeventhFloorScene';
   import EighthFloorScene from '../scenes/EighthFloorScene';
   import SecondBasementScene from '../scenes/SecondBasementScene';
+  import { io } from 'socket.io-client';
+
+  const socket = io.connect('http://localhost:3000');
+  let chat = '';
+  let chatTimer;
+
+  socket.on('connect', () => {
+    socket.emit('addPlayer', { id: socket.id, floor: 'entrance' }); // 아니다 이건 각 신으로 옮겨야 함
+  });
+
+  socket.on('disconnect', () => {
+    window.socket = undefined;
+    window.playerImgUrl = undefined;
+  })
+
+  socket.on('connect_error', (err) => {
+    console.error(err);
+  });
+
+  window.socket = socket;
+
+  function addChat() {
+    clearTimeout(chatTimer);
+    socket.emit('addChat', { id: 0, chat });
+    chatTimer = setTimeout(socket.emit('removeChat', { id: 0 }), 30000); // 30초 뒤에 말풍선 삭제
+  }
 
   const config = {
     type: Phaser.AUTO,
@@ -30,3 +56,38 @@
   const game = new Phaser.Game(config);
   window.game = game;
 </script>
+
+<div id="chat">
+  <input placeholder="엔터 키를 누르면 대화할 수 있습니다." bind:value={chat} />
+  <button on:click={addChat}>↵</button>
+</div>
+
+<style>
+  #chat {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    background-color: black;
+    padding: 5px;
+  }
+
+  #chat input {
+    flex: 1;
+    margin-right: 5px;
+    font-family: NeoDunggeunmo;
+    padding: 5px;
+    border: none;
+  }
+
+  #chat input:focus {
+    outline: none;
+  }
+
+  #chat button {
+    background-color: lightgrey;
+    font-family: NeoDunggeunmo;
+    border: none;
+  }
+</style>
