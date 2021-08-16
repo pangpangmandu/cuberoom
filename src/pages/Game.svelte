@@ -12,6 +12,8 @@
   import { io } from 'socket.io-client';
 
   const socket = io.connect('http://localhost:3000');
+  window.socket = socket;
+
   let chat = '';
   let chatTimer;
 
@@ -28,12 +30,18 @@
     console.error(err);
   });
 
-  window.socket = socket;
+  socket.on('addChat', (data) => {
+    console.log('addChat', data);
+  });
+
+  socket.on('removeChat', () => {
+    console.log('removeChat');
+  });
 
   function addChat() {
     clearTimeout(chatTimer);
     socket.emit('addChat', { id: 0, chat });
-    chatTimer = setTimeout(socket.emit('removeChat', { id: 0 }), 30000); // 30초 뒤에 말풍선 삭제
+    chatTimer = setTimeout(() => socket.emit('removeChat', { id: 0 }), 3000); // 3초 뒤에 말풍선 삭제
   }
 
   const config = {
