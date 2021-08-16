@@ -78,15 +78,16 @@
     bottom: 10px;
     display: flex;
     background-color: black;
-    padding: 5px;
+    padding: 10px;
   }
 
   #chat input {
     flex: 1;
-    margin-right: 5px;
+    margin-right: 10px;
     font-family: NeoDunggeunmo;
-    padding: 5px;
+    padding: 14px;
     border: none;
+    font-size: 20px;
   }
 
   #chat input:focus {
@@ -97,5 +98,27 @@
     background-color: lightgrey;
     font-family: NeoDunggeunmo;
     border: none;
+    font-size: 30px;
+    width: 60px;
+  }
+
+  @media (orientation: portrait) {
+    #chat {
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      padding: 10px;
+    }
+
+    #chat input {
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    #chat button {
+      width: 50px;
+      font-size: 24px;
+    }
   }
 </style>
