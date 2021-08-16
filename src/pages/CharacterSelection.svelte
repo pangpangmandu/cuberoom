@@ -239,9 +239,17 @@
     margin-right: 12px;
   }
 
+  .left:active {
+    background-image: url('/img/ui/arrow_left_pressed.png');
+  }
+
   .right {
     background-image: url('/img/ui/arrow_right.png');
     margin-left: 12px;
+  }
+
+  .right:active {
+    background-image: url('/img/ui/arrow_right_pressed.png');
   }
 
   .decide {
