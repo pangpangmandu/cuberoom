@@ -71,6 +71,7 @@
     })
     .then((res) => {
       window.playerImgUrl = res.data; // 약간 임시방편..ㅠㅠ
+      window.playerName = name; // 이것도,,,,
       navigate('/map');
     })
     .catch((err) => {
@@ -85,20 +86,18 @@
       큐브 스테이지에 입장하기 위한 캐릭터를 만들어 주세요.
     </div>
     <div class="block form">
-      <div class="row">
+      <div class="row whole">
         <div style="width: 50px; margin-right: 12px;">이름</div>
         <input bind:value={name} />
         <div style="width: 50px; margin-left: 12px; visibility: hidden;">(공백)</div>
       </div>
-      <div class="row">
-        <button class="left" on:click={decreaseSkinNum}></button>
+      <div class="row whole">
         <div class="center character">
-          <img src="/img/character/Skincolor ({skinNum}).png" alt="" width="32" style="position: absolute;" />
-          <img src="/img/character/face ({eyeNum}).png" alt="" width="32" style="position: absolute;" />
-          <img src="/img/character/HairC0{hairColorNum} ({hairStyleNum}).png" alt="" width="32" style="position: absolute;" />
-          <img src="/img/character/Clothes ({clothesNum}).png" alt="" width="32" style="position: absolute;" />
+          <img src="/img/character/Skincolor ({skinNum}).png" alt="" width="48" style="position: absolute;" />
+          <img src="/img/character/face ({eyeNum}).png" alt="" width="48" style="position: absolute;" />
+          <img src="/img/character/HairC0{hairColorNum} ({hairStyleNum}).png" alt="" width="48" style="position: absolute;" />
+          <img src="/img/character/Clothes ({clothesNum}).png" alt="" width="48" style="position: absolute;" />
         </div>
-        <button class="right" on:click={increaseSkinNum}></button>
       </div>
       <div class="row">
         <button class="left" on:click={increaseEyeNum}></button>
@@ -119,6 +118,11 @@
         <button class="left" on:click={increaseClothesNum}></button>
         <div class="center">의상</div>
         <button class="right" on:click={decreaseClothesNum}></button>
+      </div>
+      <div class="row">
+        <button class="left" on:click={increaseSkinNum}></button>
+        <div class="center">피부색</div>
+        <button class="right" on:click={decreaseSkinNum}></button>
       </div>
       <button class="decide" on:click={decide}>
         <img src="/img/ui/decide.png" alt="결정" />
@@ -171,6 +175,7 @@
     height: 400px;
     display: grid;
     grid-template-rows: 1fr 3fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     padding: 20px 0px;
     position: relative;
   }
@@ -178,6 +183,10 @@
   .row {
     display: flex;
     justify-content: center;
+  }
+
+  .row.whole {
+    grid-column: 1 / 3;
   }
 
   .row div {
@@ -238,7 +247,7 @@
   .decide {
     position: absolute;
     bottom: 24px;
-    right: 24px;
+    right: 48px;
   }
 
   :global(a.to-main) {
@@ -249,7 +258,8 @@
 
   @media (orientation: portrait) {
     main {
-      overflow: hidden;
+      overflow: scroll;
+      margin-bottom: 20px;
     }
 
     .block-container {
@@ -266,18 +276,33 @@
     .block.form {
       width: 80%;
       height: fit-content;
-      padding-bottom: 60px;
+      grid-template-rows: 1fr 3fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr;
     }
+
+    .row.whole {
+    grid-column: 1;
+  }
 
     .row div {
       font-size: 20px;
     }
 
     .decide {
-      bottom: 12px;
+      position: absolute;
       text-align: center;
-      width: 100%;
-      right: 0px;
+      left: 24px;
+      bottom: -63px;
+    }
+
+    .decide img {
+      border: 3px solid black;
+    }
+
+    :global(a.to-main) {
+      position: relative;
+      bottom: -20px;
+      left: calc(90% - 160px + 4px);
     }
   }
 </style>
