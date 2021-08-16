@@ -13,7 +13,7 @@ export function* allCharacterImageNames() {
     for (let i = 1; i < 5; i += 1) {
       yield [
         `player-${direction}-${i}`,
-        `/img/player/${direction}-${i}.png`,
+        `http://localhost:3000/static${window.playerImgUrl}${direction}-${i}.png`,
       ];
     }
   }
