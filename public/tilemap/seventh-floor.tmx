@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="50" height="38" tilewidth="16" tileheight="16" infinite="0" nextlayerid="23" nextobjectid="12">
  <editorsettings>
-  <export target="first-floor.json" format="json"/>
+  <export target="seventh-floor.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="background" tilewidth="16" tileheight="16" tilecount="8160" columns="50">
   <image source="../img/7f_background.png" width="800" height="608"/>
