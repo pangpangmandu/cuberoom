@@ -3,10 +3,10 @@
 </script>
 
 <main>
-  <img src="/img/ui/title.png" alt="큐브 스테이지" />
-  <div>
+  <img src="/img/ui/title.png" alt="큐브 룸" width="40%" />
+  <div style="text-align: center;">
     <Link to="character-selection">
-      <img src="/img/ui/start.png" alt="시작하기" />
+      <img src="/img/ui/start.png" alt="시작하기" width="60%" />
     </Link>
   </div>
 </main>
@@ -23,7 +23,7 @@
   }
 
   img {
-    object-fit: none;
+    object-fit: contain;
     flex: 1;
   }
 
@@ -35,22 +35,5 @@
     main {
       overflow: hidden;
     }
-
-    /* img {
-      width: 80%;
-      object-fit: scale-down;
-    }
-
-    div {
-      display: flex;
-      justify-content: center;
-    }
-    :global(a) {
-      width: 80%;
-    }
-
-    :global(a) img {
-      width: 100%;
-    } */
   }
 </style>
