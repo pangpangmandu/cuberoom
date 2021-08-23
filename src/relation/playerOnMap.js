@@ -70,7 +70,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       case EntranceScene:
         switch (curTileName) {
           case 'up':
-            scene.scene.start('FirstFloorScene');
+            scene.scene.start('FirstFloorScene', { x: 16 * 5, y: 16 * 30 });
             break;
           case 'down':
             break;
@@ -93,7 +93,8 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
           case 'elevator':
             showElevatorPanel(scene, '1F');
             break;
-          case 'popup':
+          case 'out':
+            scene.scene.start('EntranceScene', { x: 16 * 27, y: 16 * 29 });
             break;
           default:
             break;
@@ -192,7 +193,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             scene.scene.start('FirstFloorScene', { x: 16 * 6, y: 16 * 11 });
             break;
           case 'down':
-            scene.scene.start('SecondBasementScene', { x: 16 * 3, y: 16 * 13 });
+            scene.scene.start('SecondBasementScene', { x: 16 * 6, y: 16 * 13 });
             break;
           case 'elevator':
             showElevatorPanel(scene, 'B1');
@@ -218,22 +219,17 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
           case 'up':
             scene.scene.start('FirstBasementScene', { x: 16 * 6, y: 16 * 32 });
             break;
-          case 'down':
-            break;
           case 'elevator':
             showElevatorPanel(scene, 'B2');
             break;
           case 'work-1':
-            popupCreate(scene, { x: 16 * 21, y: 16 * 24.5 });
+            popupCreate(scene, { x: 16 * 21, y: 16 * 24.5 }); // 여기도 바꿔야 함
             break;
           case 'work-2':
-            popupCreate(scene, { x: 16 * 28, y: 16 * 24.5 });
+            popupCreate(scene, { x: 16 * 21, y: 16 * 20 });
             break;
-          case 'up2':
-            scene.scene.start('FirstBasementScene', { x: 16 * 37, y: 16 * 37 });
-            break;
-          case 'up3':
-            scene.scene.start('FirstBasementScene', { x: 16 * 3, y: 16 * 54 });
+          case 'work-3':
+            popupCreate(scene, { x: 16 * 42, y: 16 * 28 });
             break;
           default:
             break;
