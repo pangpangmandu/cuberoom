@@ -13,8 +13,8 @@ export function* allCharacterImageNames() {
     for (let i = 1; i < 5; i += 1) {
       yield [
         `player-${direction}-${i}`,
-        // `http://localhost:3000/static${window.playerImgUrl}${direction}-${i}.png`,
-        `https://cuberoom.net/static${window.playerImgUrl}${direction}-${i}.png`,
+        `http://localhost:3000/static${window.playerImgUrl}${direction}-${i}.png`,
+        // `https://cuberoom.net/static${window.playerImgUrl}${direction}-${i}.png`,
       ];
     }
   }
