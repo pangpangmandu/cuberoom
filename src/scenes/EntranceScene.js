@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-import { log } from "../log";
 import { playerCreate, playerUpdate, playerMouseUpdate } from "../entity/player";
 import { allCharacterImageNames } from "../entity/player/image";
 import { playerCreateAnimations } from "../entity/player/animation";
@@ -24,6 +23,35 @@ class EntranceScene extends Phaser.Scene {
     this.popups = [];
     this.x = 16 * 6;
     this.y = 16 * 34;
+    this.socket = window.socket;
+    this.players = {};
+    this.playerInfo = null;
+
+    // 이 코드가 왜 두 번째로 띄운 창에서는 실행이 안 돼서 playerInfo를 채우지 못하는거지.....
+    this.socket.on('addPlayer', (data) => {
+      const id = data.id;
+      if (!this.playerInfo) this.playerInfo = data;
+      if (this.playerInfo.id !== id) {
+        this.players[data.id] = data;
+        this.players[id].player = playerCreate(this, data.x, data.y);
+      }
+    });
+
+    this.socket.on('removePlayer', (data) => {
+      this.players[data.id].player.phaser.destroy(true);
+      delete this.players[data.id];
+    });
+
+    this.socket.on('playerList', (data) => {
+      for (const [id, player] of Object.entries(data)) {
+        // if (player.floor === 'entrance' && this.playerInfo.id !== id) {
+        if (this.playerInfo.id !== id) {
+          // 이 두 줄은 나중에 이미지까지 변하게 하는 코드로 업데이트하기
+          this.players[id].player.phaser.x = player.x;
+          this.players[id].player.phaser.y = player.y;
+        }
+      }
+    });
   }
 
   init(data) {
@@ -40,9 +68,8 @@ class EntranceScene extends Phaser.Scene {
       key: "entrance-map",
       url: "/tilemap/entrance.json",
     });
-    for (const [key, file] of allCharacterImageNames()) {
+    for (const [key, file] of allCharacterImageNames(window.playerImgUrl)) {
       this.load.image(key, file);
-      log("player image load ", [key, file]);
     }
   }
 
@@ -51,7 +78,18 @@ class EntranceScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'entrance-map');
-    this.player = playerCreate(this, this.x, this.y);
+    this.player = playerCreate(this, this.x, this.y); // 소켓 연결 되면 이 부분을 지워야 함
+    this.players[this.socket.id] = this.player;
+
+    this.socket.emit('addPlayer', {
+      id: this.socket.id,
+      name: window.playerName,
+      imgUrl: window.playerImgUrl,
+      floor: 'entrance',
+      x: this.x,
+      y: this.y,
+    });
+
     this.playerOnMap = playerOnMapCreate();
     this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
 
@@ -67,7 +105,6 @@ class EntranceScene extends Phaser.Scene {
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.input.keyboard.on("keydown-SPACE", () => {
-      log("Space");
       if (this.cheat === true) {
         this.cheat = false;
       } else {
@@ -78,18 +115,11 @@ class EntranceScene extends Phaser.Scene {
     this.input.on("pointerdown", (pointer) =>
       mapOnPointerDown(this.map, pointer)
     );
-
-
   }
 
   update(_time, _delta) {
-    var pointer = this.input.activePointer;
-    if(pointer.isDown){
-      console.log("mouse coordinate : "+pointer.worldX +" "+pointer.worldY);
-      console.log("this.player coordinate : "+this.player.phaser.x + " "+parseInt(this.player.phaser.y));
-    }
-
-    if(pointer.isDown){
+    const pointer = this.input.activePointer;
+    if (pointer.isDown) {
       this.player = playerMouseUpdate(this.player,this.input.activePointer, this);
       mapUpdateMousePoint(this.map, this);
       this.playerOnMap = playerOnMapUpdate(
@@ -98,8 +128,8 @@ class EntranceScene extends Phaser.Scene {
         this.map,
         this
       );
-    }else{
-      this.player = playerUpdate(this.player,this.cursors, this);
+    } else {
+      this.player = playerUpdate(this.player, this.cursors, this);
       mapUpdateMousePoint(this.map, this);
       this.playerOnMap = playerOnMapUpdate(
         this.playerOnMap,
@@ -109,6 +139,11 @@ class EntranceScene extends Phaser.Scene {
       );
     }
 
+    this.socket.emit('movePlayer', {
+      id: this.socket.id,
+      x: this.player.phaser.x,
+      y: this.player.phaser.y,
+    });
   }
 }
 
