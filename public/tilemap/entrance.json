@@ -4,7 +4,7 @@
  "layers":[
         {
          "id":11,
-         "image":"..\/img\/entrance_background.jpg",
+         "image":"..\/img\/entrance_background.png",
          "name":"Image Layer 1",
          "opacity":1,
          "type":"imagelayer",
@@ -212,7 +212,7 @@
         {
          "columns":75,
          "firstgid":1,
-         "image":"..\/img\/entrance_background.jpg",
+         "image":"..\/img\/entrance_background.png",
          "imageheight":800,
          "imagewidth":1200,
          "margin":0,

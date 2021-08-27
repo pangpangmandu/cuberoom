@@ -8302,13 +8302,13 @@
    </properties>
   </tile>
  </tileset>
- <imagelayer id="17" name="Image Layer 1" visible="0">
+ <imagelayer id="17" name="Image Layer 1">
   <image source="../img/2f_background.png" width="800" height="608"/>
  </imagelayer>
  <imagelayer id="18" name="Image Layer 2" visible="0">
   <image source="../img/2f_background_marking.png" width="800" height="608"/>
  </imagelayer>
- <imagelayer id="19" name="Image Layer 3">
+ <imagelayer id="19" name="Image Layer 3" visible="0">
   <image source="../img/2f_background_ref.png" width="800" height="608"/>
  </imagelayer>
  <layer id="1" name="background" width="50" height="38" visible="0">
