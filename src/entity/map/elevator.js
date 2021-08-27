@@ -35,6 +35,8 @@ export function showElevatorPanel(scene, floor) {
   panel.style.width = '224px';
   panel.style.height = '472px';
   panel.style.position = 'relative';
+  panel.onmousedown = () => window.game.input.enabled = false;
+  panel.onmouseup = () => window.game.input.enabled = true;
 
   panelContainer.appendChild(panel);
 

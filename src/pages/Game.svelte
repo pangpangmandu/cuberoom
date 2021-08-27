@@ -18,10 +18,6 @@
   let chat = '';
   let chatTimer;
 
-  socket.on('connect', () => {
-    socket.emit('addPlayer', { id: socket.id, floor: 'entrance' }); // 아니다 이건 각 신으로 옮겨야 함
-  });
-
   socket.on('disconnect', () => {
     window.socket = undefined;
     window.playerImgUrl = undefined;
@@ -31,18 +27,10 @@
     console.error(err);
   });
 
-  socket.on('addChat', (data) => {
-    console.log('addChat', data);
-  });
-
-  socket.on('removeChat', () => {
-    console.log('removeChat');
-  });
-
   function addChat() {
     clearTimeout(chatTimer);
-    socket.emit('addChat', { id: 0, chat });
-    chatTimer = setTimeout(() => socket.emit('removeChat', { id: 0 }), 3000); // 3초 뒤에 말풍선 삭제
+    socket.emit('addChat', { id: socket.id, chat });
+    chatTimer = setTimeout(() => socket.emit('removeChat', { id: socket.id }), 3000); // 3초 뒤에 말풍선 삭제
   }
 
   const config = {
@@ -66,7 +54,11 @@
   window.game = game;
 </script>
 
-<div id="chat">
+<div
+  id="chat"
+  on:mousedown={() => game.input.enabled = false}
+  on:mouseup={() => game.input.enabled = true}
+>
   <input placeholder="엔터 키를 누르면 대화할 수 있습니다." bind:value={chat} />
   <button on:click={addChat}>↵</button>
 </div>
