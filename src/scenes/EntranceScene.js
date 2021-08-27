@@ -24,15 +24,13 @@ class EntranceScene extends Phaser.Scene {
     this.y = 16 * 34;
     this.socket = window.socket;
     this.players = {};
-    this.playerInfo = null;
 
-    // 이 코드가 왜 두 번째로 띄운 창에서는 실행이 안 돼서 playerInfo를 채우지 못하는거지.....
+    // 이 코드가 왜 두 번째로 띄운 창에서는 실행이 안 되는 거지.....
     this.socket.on('addPlayer', (data) => {
       const id = data.id;
-      if (!this.playerInfo) this.playerInfo = data;
-      if (this.playerInfo.id !== id) {
-        this.players[data.id] = data;
-        this.players[id].player = playerCreate(this, data.x, data.y);
+      if (this.socket.id !== id) {
+        this.players[id] = data;
+        this.players[id].player = playerCreate(this, data.x, data.y, data.name, data.chat, data.id);
       }
     });
 
@@ -43,11 +41,25 @@ class EntranceScene extends Phaser.Scene {
 
     this.socket.on('playerList', (data) => {
       for (const [id, player] of Object.entries(data)) {
-        // if (player.floor === 'entrance' && this.playerInfo.id !== id) {
-        if (this.playerInfo.id !== id) {
-          // 이 두 줄은 나중에 이미지까지 변하게 하는 코드로 업데이트하기
+        const directions = ['left', 'right', 'up', 'down'];
+        for (const direction of directions) {
+          for (let i = 1; i < 5; i += 1) {
+            this.load.image(`${player.id}-${direction}-${i}`, `http://localhost:3000/static${player.imgUrl}${direction}-${i}.png`);
+          }
+        }
+        this.load.start();
+
+        // if (player.floor === 'entrance' && this.socket.id !== id) {
+        if (this.socket.id !== id) {
           this.players[id].player.phaser.x = player.x;
           this.players[id].player.phaser.y = player.y;
+          this.players[id].player.nameLabel.x = player.x;
+          this.players[id].player.nameLabel.y = player.y - 30;
+          this.players[id].player.chatBubble.x = player.x;
+          this.players[id].player.chatBubble.y = player.y - 45;
+          // this.players[id].player.phaser.anims.play(`player-${player.direction}`, true);
+          // this.players[id].player.phaser.anims.play(`player-${player.direction}-stop`, true);
+          this.players[id].player.phaser.setTexture(`${player.id}-${player.direction}-${2}`);
         }
       }
     });
@@ -85,7 +97,7 @@ class EntranceScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'entrance-map');
-    this.player = playerCreate(this, this.x, this.y); // 소켓 연결 되면 이 부분을 지워야 함
+    this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl); // 소켓 연결 되면 이 부분을 지워야 함
     this.players[this.socket.id] = this.player;
 
     this.socket.emit('addPlayer', {
@@ -99,8 +111,8 @@ class EntranceScene extends Phaser.Scene {
 
     this.playerOnMap = playerOnMapCreate();
     this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
-    // this.physics.add.collider(this.player.nameLabel, this.map.collisionLayer);
-    // this.physics.add.collider(this.player.chatBubble, this.map.collisionLayer);
+    this.physics.add.collider(this.player.nameLabel, this.map.collisionLayer);
+    this.physics.add.collider(this.player.chatBubble, this.map.collisionLayer);
 
     this.map = mapCreateOverCharacterLayer(this.map, 'entrance-background');
 
@@ -151,6 +163,7 @@ class EntranceScene extends Phaser.Scene {
 
     this.socket.emit('movePlayer', {
       id: this.socket.id,
+      direction: this.player.prevMove,
       x: this.player.phaser.x,
       y: this.player.phaser.y,
     });

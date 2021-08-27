@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { log } from "../log";
+// import { log } from "../log";
 import { playerCreate, playerUpdate ,playerMouseUpdate } from "../entity/player";
 import { allCharacterImageNames } from "../entity/player/image";
 import { playerCreateAnimations } from "../entity/player/animation";
@@ -21,9 +21,58 @@ class FirstFloorScene extends Phaser.Scene {
     this.player = null;
     this.cursors = null;
     this.playerOnMap = null;
-    // below are the player's spawn position
+    // below are the player's spwan position
     this.x = 16 * 5;
     this.y = 16 * 31;
+    this.socket = window.socket;
+    this.players = {};
+
+    // 이 코드가 왜 두 번째로 띄운 창에서는 실행이 안 되는 거지.....
+    this.socket.on('addPlayer', (data) => {
+      const id = data.id;
+      if (this.socket.id !== id) {
+        this.players[id] = data;
+        this.players[id].player = playerCreate(this, data.x, data.y, data.name, data.chat, data.id);
+      }
+    });
+
+    this.socket.on('removePlayer', (data) => {
+      this.players[data.id].player.phaser.destroy(true);
+      delete this.players[data.id];
+    });
+
+    this.socket.on('playerList', (data) => {
+      for (const [id, player] of Object.entries(data)) {
+        const directions = ['left', 'right', 'up', 'down'];
+        for (const direction of directions) {
+          for (let i = 1; i < 5; i += 1) {
+            this.load.image(`${player.id}-${direction}-${i}`, `http://localhost:3000/static${player.imgUrl}${direction}-${i}.png`);
+          }
+        }
+        this.load.start();
+
+        // if (player.floor === 'entrance' && this.socket.id !== id) {
+        if (this.socket.id !== id) {
+          this.players[id].player.phaser.x = player.x;
+          this.players[id].player.phaser.y = player.y;
+          this.players[id].player.nameLabel.x = player.x;
+          this.players[id].player.nameLabel.y = player.y - 30;
+          this.players[id].player.chatBubble.x = player.x;
+          this.players[id].player.chatBubble.y = player.y - 45;
+          // this.players[id].player.phaser.anims.play(`player-${player.direction}`, true);
+          // this.players[id].player.phaser.anims.play(`player-${player.direction}-stop`, true);
+          this.players[id].player.phaser.setTexture(`${player.id}-${player.direction}-${2}`);
+        }
+      }
+    });
+
+    this.socket.on('addChat', (data) => {
+      this.players[data.id].chatBubble.setText(data.chat);
+    });
+
+    this.socket.on('removeChat', () => {
+      this.players[data.id].chatBubble.setText('');
+    });
   }
 
   init(data) {
@@ -40,9 +89,8 @@ class FirstFloorScene extends Phaser.Scene {
       key: "firstFloor-map",
       url: "/tilemap/first-floor.json",
     });
-    for (const [key, file] of allCharacterImageNames()) {
+    for (const [key, file] of allCharacterImageNames(window.playerImgUrl)) {
       this.load.image(key, file);
-      log("player image load ", [key, file]);
     }
   }
 
@@ -51,9 +99,22 @@ class FirstFloorScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'firstFloor-map');
-    this.player = playerCreate(this, this.x, this.y);
+    this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl); // 소켓 연결 되면 이 부분을 지워야 함
+    this.players[this.socket.id] = this.player;
+
+    this.socket.emit('addPlayer', {
+      id: this.socket.id,
+      name: window.playerName,
+      imgUrl: window.playerImgUrl,
+      floor: 'entrance',
+      x: this.x,
+      y: this.y,
+    });
+
     this.playerOnMap = playerOnMapCreate();
     this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
+    this.physics.add.collider(this.player.nameLabel, this.map.collisionLayer);
+    this.physics.add.collider(this.player.chatBubble, this.map.collisionLayer);
 
     this.map = mapCreateOverCharacterLayer(this.map, 'firstFloor-background');
 
@@ -82,7 +143,6 @@ class FirstFloorScene extends Phaser.Scene {
   }
 
   update(_time, _delta) {
-
     var pointer = this.input.activePointer;
     if(pointer.isDown){
       this.player = playerMouseUpdate(this.player,this.input.activePointer, this);
@@ -103,6 +163,15 @@ class FirstFloorScene extends Phaser.Scene {
         this
       );
     }
+
+    this.socket.emit('movePlayer', {
+      id: this.socket.id,
+      direction: this.player.prevMove,
+      x: this.player.phaser.x,
+      y: this.player.phaser.y,
+    });
+
+    // this.map = mapCreateOverCharacterLayer(this.map, 'entrance-background');
   }
 }
 
