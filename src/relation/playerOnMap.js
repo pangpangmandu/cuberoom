@@ -1,5 +1,4 @@
 import { log } from "../log";
-import { assert } from "../assert";
 import { popupCreate, popupDestroy } from "../entity/popup";
 import { showElevatorPanel, hideElevatorPanel } from '../entity/map/elevator';
 import EntranceScene from "../scenes/EntranceScene";
@@ -11,6 +10,7 @@ import SixthFloorScene from '../scenes/SixthFloorScene';
 import SeventhFloorScene from '../scenes/SeventhFloorScene';
 import EighthFloorScene from '../scenes/EighthFloorScene';
 import SecondBasementScene from '../scenes/SecondBasementScene';
+import { popupPos } from "../entity/works";
 
 export function playerOnMapCreate() {
   return {
@@ -18,40 +18,6 @@ export function playerOnMapCreate() {
     prevTileName: null,
   };
 }
-
-// const possibleTileNames = [
-//   "image1-description",
-//   "image1-popup",
-//   "image2-description",
-//   "image2-popup",
-//   "image3-description",
-//   "image3-popup",
-//   "image4-description",
-//   "image4-popup",
-//   "image5-description",
-//   "image6-description",
-//   "image7-description",
-//   "image8-description",
-//   "image9-description",
-// ];
-
-// const imageNames = [
-//   "image1",
-//   "image2",
-//   "image3",
-//   "image4",
-//   "image5",
-//   "image6",
-//   "image7",
-//   "image8",
-//   "image9",
-// ];
-
-// function parseImageName(tileName) {
-//   const imageName = tileName.substring(0, 6);
-//   assert(imageNames.includes(imageName), "image name");
-//   return imageName;
-// }
 
 /**
  * 플레이어가 위치한 타일에 따라 특정 동작을 함
@@ -198,17 +164,23 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
           case 'elevator':
             showElevatorPanel(scene, 'B1');
             break;
-          case 'work-1':
-            popupCreate(scene, { x: 16 * 21, y: 16 * 43.5 });
-            break;
-          case 'work-2':
-            popupCreate(scene, { x: 16 * 28, y: 16 * 43.5 });
-            break;
           case 'down2':
             scene.scene.start('SecondBasementScene', { x: 16 * 37, y: 16 * 16 });
             break;
           case 'down3':
             scene.scene.start('SecondBasementScene', { x: 16 * 3, y: 16 * 35 });
+            break;
+          case 'work-1':
+            popupCreate(scene, popupPos[1], 1);
+            break;
+          case 'work-2':
+            popupCreate(scene, popupPos[2], 2);
+            break;
+          case 'work-3':
+            popupCreate(scene, popupPos[3], 3);
+            break;
+          case 'work-4':
+            popupCreate(scene, popupPos[4], 4);
             break;
           default:
             break;
@@ -222,14 +194,17 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
           case 'elevator':
             showElevatorPanel(scene, 'B2');
             break;
-          case 'work-1':
-            popupCreate(scene, { x: 16 * 21, y: 16 * 24.5 }); // 여기도 바꿔야 함
+          case 'work-5':
+            popupCreate(scene, popupPos[5], 5);
             break;
-          case 'work-2':
-            popupCreate(scene, { x: 16 * 21, y: 16 * 20 });
+          case 'work-6':
+            popupCreate(scene, popupPos[6], 6);
             break;
-          case 'work-3':
-            popupCreate(scene, { x: 16 * 42, y: 16 * 28 });
+          case 'work-7':
+            popupCreate(scene, popupPos[7], 7);
+            break;
+          case 'work-8':
+            popupCreate(scene, popupPos[8], 8);
             break;
           default:
             break;
@@ -243,15 +218,6 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       popup.phaser.destroy();
     }
     scene.popups.splice(0, scene.popups.length);
-
-    // if (possibleTileNames.includes(curTileName)) {
-    //   // scene을 너무 mutable하게 쓰는 거 같아서 좀 아쉬운걸.
-    //   // 나중에 event를 남기는 걸로 바꿔보자.
-    //   //      const { x, y } = mapTileToWorldXY(map, curTile);
-    //   const imageName = parseImageName(curTileName);
-    //   const { x, y } = map.objects[imageName];
-    //   scene.popups.push(popupCreate(scene, { x, y, name: imageName }));
-    // }
   }
 
   return {
