@@ -1,3 +1,5 @@
+import startScene from '../map/startScene';
+
 let panelContainer;
 
 function elButton(x, y, floor) {
@@ -39,49 +41,49 @@ export function showElevatorPanel(scene, floor) {
   const buttonTo1F = elButton(56, 276, '1F');
   buttonTo1F.onclick = () => {
     hideElevatorPanel();
-    scene.scene.start('FirstFloorScene', { x: 16 * 9, y: 16 * 21 });
+    startScene(scene, 'FirstFloorScene', { x: 16 * 9, y: 16 * 21 });
   }
   panel.appendChild(buttonTo1F);
 
   const buttonTo2F = elButton(120, 276, '2F');
   buttonTo2F.onclick = () => {
     hideElevatorPanel();
-    scene.scene.start('SecondFloorScene', { x: 16 * 9, y: 16 * 21 });
+    startScene(scene, 'SecondFloorScene', { x: 16 * 9, y: 16 * 21 });
   }
   panel.appendChild(buttonTo2F);
 
   const buttonTo5F = elButton(56, 212, '5F');
   buttonTo5F.onclick = () => {
     hideElevatorPanel();
-    scene.scene.start('FifthFloorScene', { x: 16 * 9, y: 16 * 22 });
+    startScene(scene, 'FifthFloorScene', { x: 16 * 9, y: 16 * 22 });
   }
   panel.appendChild(buttonTo5F);
 
   const buttonTo6F = elButton(120, 212, '6F');
   buttonTo6F.onclick = () => {
     hideElevatorPanel();
-    scene.scene.start('SixthFloorScene', { x: 16 * 9, y: 16 * 30 });
+    startScene(scene, 'SixthFloorScene', { x: 16 * 9, y: 16 * 30 });
   }
   panel.appendChild(buttonTo6F);
 
   const buttonTo7F = elButton(56, 148, '7F');
   buttonTo7F.onclick = () => {
     hideElevatorPanel();
-    scene.scene.start('SeventhFloorScene', { x: 16 * 9, y: 16 * 22 });
+    startScene(scene, 'SeventhFloorScene', { x: 16 * 9, y: 16 * 22 });
   }
   panel.appendChild(buttonTo7F);
 
   const buttonToB1 = elButton(120, 340, 'B1');
   buttonToB1.onclick = () => {
     hideElevatorPanel();
-    scene.scene.start('FirstBasementScene', { x: 16 * 9, y: 16 * 42 });
+    startScene(scene, 'FirstBasementScene', { x: 16 * 9, y: 16 * 42 });
   }
   panel.appendChild(buttonToB1);
 
   const buttonToB2 = elButton(56, 340, 'B2');
   buttonToB2.onclick = () => {
     hideElevatorPanel();
-    scene.scene.start('SecondBasementScene', { x: 16 * 9, y: 16 * 23 });
+    startScene(scene, 'SecondBasementScene', { x: 16 * 9, y: 16 * 23 });
   }
   panel.appendChild(buttonToB2);
 
