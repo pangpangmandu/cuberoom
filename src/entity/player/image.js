@@ -8,13 +8,13 @@ export function* animationFrames(direction) {
   }
 }
 
-export function* allCharacterImageNames() {
+export function* allCharacterImageNames(playerImgUrl) {
   for (const direction of directions) {
     for (let i = 1; i < 5; i += 1) {
       yield [
         `player-${direction}-${i}`,
-        `http://localhost:3000/static${window.playerImgUrl}${direction}-${i}.png`,
-        // `https://cuberoom.net/static${window.playerImgUrl}${direction}-${i}.png`,
+        `http://localhost:3000/static${playerImgUrl}${direction}-${i}.png`,
+        // `https://cuberoom.net/static${playerImgUrl}${direction}-${i}.png`,
       ];
     }
   }
