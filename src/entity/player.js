@@ -2,14 +2,35 @@ import { updateAnimation, updateMouseAnimation } from "./player/animation";
 
 export function playerCreate(scene, x, y) {
   const phaser = scene.physics.add.sprite(x, y, 'player-down-2', 1);
-  // phaser.setScale(0.8);
-  // phaser.setSize(16, 16, false).setOffset(0, 16);
   phaser.setSize(20, 20, false).setOffset(0, 20);
+
+  const nameLabel = scene.add.text(x, y-30, (window.playerName || '이름없음'), {
+    fontFamily: '28px NeoDunggeunmo',
+    fill: '#ffffff',
+    stroke: '#000000',
+    strokeThickness: 2,
+    align: 'center',
+  });
+
+  const chatBubble = scene.add.text(x, y-45, '채팅', {
+    fontFamily: '28px NeoDunggeunmo',
+    fill: '#ffffff',
+    align: 'center',
+  });
+
+  nameLabel.setOrigin(0.5, 0.5);
+  chatBubble.setOrigin(0.5, 0.5);
+  nameLabel.setResolution(window.devicePixelRatio / 2)
+  chatBubble.setResolution(window.devicePixelRatio / 2)
+
+  scene.physics.world.enable([nameLabel, chatBubble]);
 
   return {
     phaser,
     prevAnim: null,
     prevMove: null,
+    nameLabel,
+    chatBubble,
   };
 }
 
@@ -30,6 +51,8 @@ function mouseMove(player, pointer, scene) {
       }
       if (player.prevMove !== "left") {
         player.phaser.body.setVelocityX(-velocity);
+        player.nameLabel.body.setVelocityX(-velocity);
+        player.chatBubble.body.setVelocityX(-velocity);
         newPrevMove = "left";
       }
       moved = true;
@@ -40,11 +63,15 @@ function mouseMove(player, pointer, scene) {
       }
       if (player.prevMove !== "right") {
         player.phaser.body.setVelocityX(velocity);
+        player.nameLabel.body.setVelocityX(velocity);
+        player.chatBubble.body.setVelocityX(velocity);
         newPrevMove = "right";
       }
       moved = true;
     }else{
       player.phaser.body.setVelocityX(0);
+      player.nameLabel.body.setVelocityX(0);
+      player.chatBubble.body.setVelocityX(0);
     }
 
     if (pointer.worldY +16 < player.phaser.y) {
@@ -55,6 +82,8 @@ function mouseMove(player, pointer, scene) {
 
       if (player.prevMove !== "up") {
         player.phaser.body.setVelocityY(-velocity);
+        player.nameLabel.body.setVelocityY(-velocity);
+        player.chatBubble.body.setVelocityY(-velocity);
         newPrevMove = "up";
       }
       moved = true;
@@ -65,11 +94,15 @@ function mouseMove(player, pointer, scene) {
       }
       if (player.prevMove !== "down") {
         player.phaser.body.setVelocityY(velocity);
+        player.nameLabel.body.setVelocityY(velocity);
+        player.chatBubble.body.setVelocityY(velocity);
         newPrevMove = "down";
       }
       moved = true;
     } else {
       player.phaser.body.setVelocityY(0);
+      player.nameLabel.body.setVelocityY(0);
+      player.chatBubble.body.setVelocityY(0);
     }
 
   }
@@ -93,37 +126,51 @@ function move(player, cursors, scene) {
   if (cursors.left.isDown) {
     if (player.prevMove !== "left") {
       player.phaser.body.setVelocityX(-velocity);
+      player.nameLabel.body.setVelocityX(-velocity);
+      player.chatBubble.body.setVelocityX(-velocity);
       newPrevMove = "left";
     }
     moved = true;
   } else if (cursors.right.isDown) {
     if (player.prevMove !== "right") {
       player.phaser.body.setVelocityX(velocity);
+      player.nameLabel.body.setVelocityX(velocity);
+      player.chatBubble.body.setVelocityX(velocity);
       newPrevMove = "right";
     }
     moved = true;
   } else {
     player.phaser.body.setVelocityX(0);
+    player.nameLabel.body.setVelocityX(0);
+    player.chatBubble.body.setVelocityX(0);
   }
 
   if (cursors.up.isDown) {
     if (player.prevMove !== "up") {
       player.phaser.body.setVelocityY(-velocity);
+      player.nameLabel.body.setVelocityY(-velocity);
+      player.chatBubble.body.setVelocityY(-velocity);
       newPrevMove = "up";
     }
     moved = true;
   } else if (cursors.down.isDown) {
     if (player.prevMove !== "down") {
       player.phaser.body.setVelocityY(velocity);
+      player.nameLabel.body.setVelocityY(velocity);
+      player.chatBubble.body.setVelocityY(velocity);
       newPrevMove = "down";
     }
     moved = true;
   } else {
     player.phaser.body.setVelocityY(0);
+    player.nameLabel.body.setVelocityY(0);
+    player.chatBubble.body.setVelocityY(0);
   }
 
   if (moved === false) {
     player.phaser.body.setVelocity(0);
+    player.nameLabel.body.setVelocityY(0);
+    player.chatBubble.body.setVelocityY(0);
   }
 
   return {
