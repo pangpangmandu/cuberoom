@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-// import { log } from "../log";
 import { playerCreate, playerUpdate, playerMouseUpdate } from "../entity/player";
 import { allCharacterImageNames } from "../entity/player/image";
 import { playerCreateAnimations } from "../entity/player/animation";
@@ -128,7 +127,6 @@ class FirstBasementScene extends Phaser.Scene {
 
 		this.cursors = this.input.keyboard.createCursorKeys();
 		this.input.keyboard.on("keydown-SPACE", () => {
-			log("Space");
 			if (this.cheat === true) {
 				this.cheat = false;
 			} else {
@@ -142,7 +140,7 @@ class FirstBasementScene extends Phaser.Scene {
 	}
 
 	update(_time, _delta) {
-		var pointer = this.input.activePointer;
+		const pointer = this.input.activePointer;
 		if(pointer.isDown){
 			this.player = playerMouseUpdate(this.player,this.input.activePointer, this);
 			mapUpdateMousePoint(this.map, this);
@@ -169,6 +167,8 @@ class FirstBasementScene extends Phaser.Scene {
       x: this.player.phaser.x,
       y: this.player.phaser.y,
     });
+
+		// this.map = mapCreateOverCharacterLayer(this.map, 'entrance-background');
 	}
 }
 

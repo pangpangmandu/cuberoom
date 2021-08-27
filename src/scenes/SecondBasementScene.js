@@ -151,7 +151,7 @@ class SecondBasementScene extends Phaser.Scene {
 		// 	this
 		// );
 
-		var pointer = this.input.activePointer;
+		const pointer = this.input.activePointer;
 		if(pointer.isDown){
 			this.player = playerMouseUpdate(this.player,this.input.activePointer, this);
 			mapUpdateMousePoint(this.map, this);

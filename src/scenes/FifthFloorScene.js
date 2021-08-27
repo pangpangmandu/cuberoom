@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-// import { log } from "../log";
 import { playerCreate, playerUpdate } from "../entity/player";
 import { allCharacterImageNames } from "../entity/player/image";
 import { playerCreateAnimations } from "../entity/player/animation";
@@ -21,8 +20,6 @@ class FifthFloorScene extends Phaser.Scene {
     this.player = null;
     this.cursors = null;
     this.playerOnMap = null;
-    this.popups = [];
-    // below are the player's spawn position
     this.x = 16 * 5;
     this.y = 16 * 31;
     this.socket = window.socket;
@@ -92,7 +89,6 @@ class FifthFloorScene extends Phaser.Scene {
     });
     for (const [key, file] of allCharacterImageNames(window.playerImgUrl)) {
       this.load.image(key, file);
-      // log("player image load ", [key, file]);
     }
   }
 
@@ -131,7 +127,6 @@ class FifthFloorScene extends Phaser.Scene {
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.input.keyboard.on("keydown-SPACE", () => {
-      log("Space");
       if (this.cheat === true) {
         this.cheat = false;
       } else {
@@ -145,17 +140,7 @@ class FifthFloorScene extends Phaser.Scene {
   }
 
   update(_time, _delta) {
-  //   this.player = playerUpdate(this.player, this.cursors, this);
-  //   mapUpdateMousePoint(this.map, this);
-  //   this.playerOnMap = playerOnMapUpdate(
-  //     this.playerOnMap,
-  //     this.player,
-  //     this.map,
-  //     this
-  //   );
-  // }
-
-    var pointer = this.input.activePointer;
+    const pointer = this.input.activePointer;
     if(pointer.isDown){
       this.player = playerMouseUpdate(this.player,this.input.activePointer, this);
       mapUpdateMousePoint(this.map, this);
@@ -175,6 +160,15 @@ class FifthFloorScene extends Phaser.Scene {
         this
       );
     }
+
+    this.socket.emit('movePlayer', {
+      id: this.socket.id,
+      direction: this.player.prevMove,
+      x: this.player.phaser.x,
+      y: this.player.phaser.y,
+    });
+
+    // this.map = mapCreateOverCharacterLayer(this.map, 'entrance-background');
   }
 }
 
