@@ -21,7 +21,6 @@ class SecondBasementScene extends Phaser.Scene {
 		this.player = null;
 		this.cursors = null;
 		this.playerOnMap = null;
-		this.popups = [];
 		this.x = 16 * 3;
 		this.y = 16 * 32;
 	}

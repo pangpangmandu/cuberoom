@@ -21,7 +21,6 @@ class SecondFloorScene extends Phaser.Scene {
     this.player = null;
     this.cursors = null;
     this.playerOnMap = null;
-    this.popups = [];
     this.x = 16 * 6;
     this.y = 16 * 11;
   }

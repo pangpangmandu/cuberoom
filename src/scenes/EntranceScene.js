@@ -20,7 +20,6 @@ class EntranceScene extends Phaser.Scene {
     this.player = null;
     this.cursors = null;
     this.playerOnMap = null;
-    this.popups = [];
     this.x = 16 * 6;
     this.y = 16 * 34;
     this.socket = window.socket;
@@ -52,6 +51,14 @@ class EntranceScene extends Phaser.Scene {
         }
       }
     });
+
+    this.socket.on('addChat', (data) => {
+      this.players[data.id].chatBubble.setText(data.chat);
+    });
+
+    this.socket.on('removeChat', () => {
+      this.players[data.id].chatBubble.setText('');
+    });
   }
 
   init(data) {
@@ -60,7 +67,7 @@ class EntranceScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("entrance-background", "/img/entrance_background.jpg");
+    this.load.image("entrance-background", "/img/entrance_background.png");
     this.load.image("collision-tileset", "/tilemap/simple_tile.png");
     this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
     this.load.image("popup", "/img/ui-map/popup.png");
@@ -92,6 +99,8 @@ class EntranceScene extends Phaser.Scene {
 
     this.playerOnMap = playerOnMapCreate();
     this.physics.add.collider(this.player.phaser, this.map.collisionLayer);
+    // this.physics.add.collider(this.player.nameLabel, this.map.collisionLayer);
+    // this.physics.add.collider(this.player.chatBubble, this.map.collisionLayer);
 
     this.map = mapCreateOverCharacterLayer(this.map, 'entrance-background');
 
@@ -102,6 +111,7 @@ class EntranceScene extends Phaser.Scene {
       this.map.phaser.heightInPixels
     );
     this.cameras.main.startFollow(this.player.phaser, true, 0.1, 0.1);
+    this.cameras.main.fadeIn(500);
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.input.keyboard.on("keydown-SPACE", () => {
@@ -144,6 +154,8 @@ class EntranceScene extends Phaser.Scene {
       x: this.player.phaser.x,
       y: this.player.phaser.y,
     });
+
+    // this.map = mapCreateOverCharacterLayer(this.map, 'entrance-background');
   }
 }
 

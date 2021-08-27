@@ -21,7 +21,6 @@ class SixthFloorScene extends Phaser.Scene {
     this.player = null;
     this.cursors = null;
     this.playerOnMap = null;
-    this.popups = [];
     // below are the player's spawn position
     this.x = 16 * 5;
     this.y = 16 * 31;

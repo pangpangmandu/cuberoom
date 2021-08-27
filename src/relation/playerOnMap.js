@@ -213,11 +213,6 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       default:
         break;
     }
-
-    for (const popup of scene.popups) {
-      popup.phaser.destroy();
-    }
-    scene.popups.splice(0, scene.popups.length);
   }
 
   return {
