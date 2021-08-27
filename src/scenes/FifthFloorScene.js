@@ -41,14 +41,6 @@ class FifthFloorScene extends Phaser.Scene {
 
     this.socket.on('playerList', (data) => {
       for (const [id, player] of Object.entries(data)) {
-        const directions = ['left', 'right', 'up', 'down'];
-        for (const direction of directions) {
-          for (let i = 1; i < 5; i += 1) {
-            this.load.image(`${player.id}-${direction}-${i}`, `http://localhost:3000/static${player.imgUrl}${direction}-${i}.png`);
-          }
-        }
-        this.load.start();
-
         // if (player.floor === 'entrance' && this.socket.id !== id) {
         if (this.socket.id !== id) {
           this.players[id].player.phaser.x = player.x;
