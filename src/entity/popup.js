@@ -1,13 +1,10 @@
-/* eslint-disable import/prefer-default-export */
-
-import { log } from "../log";
-import { openURL } from "../common/urlOpen";
+import works from './works';
 
 let popupSprite;
 let descriptionContainer;
 
-export function popupCreate(scene, { x, y, name }) {
-  log(`create pop at x: ${x}, y: ${y}`);
+export function popupCreate(scene, { x, y }, workNum) {
+  const work = works[workNum];
   popupSprite = scene.add.sprite(x, y, "popup");
   popupSprite.setInteractive();
 
@@ -23,7 +20,6 @@ export function popupCreate(scene, { x, y, name }) {
 
   // FIXME: event 등록 해제해야 하는지 확인 필요
   popupSprite.on("pointerdown", () => {
-    // openURL(name);
     descriptionContainer = document.createElement('div');
     descriptionContainer.style.position = 'absolute';
     descriptionContainer.style.top = '0px';
@@ -36,40 +32,47 @@ export function popupCreate(scene, { x, y, name }) {
     descriptionContainer.style.alignItems = 'center';
 
     const description = document.createElement('div');
-    description.style.width = '460px';
+    description.style.minWidth = '460px';
+    description.style.maxWidth = '600px';
     description.style.backgroundColor = 'white';
     description.style.borderColor = 'black';
     description.style.borderWidth = '4px';
     description.style.borderStyle = 'solid';
-    description.style.padding = '12px';
+    description.style.padding = '24px';
     description.style.display = 'flex';
     description.style.justifyContent = 'space-between';
     description.style.position = 'relative';
     description.style.bottom = '150px';
 
-    const left = document.createElement('div');
+    const left = document.createElement('img');
+    left.src = work.imgUrl;
     left.style.width = '160px';
     left.style.height = '160px';
-    left.style.backgroundColor = 'coral';
     left.style.marginRight = '24px';
 
     const right = document.createElement('div');
     right.style.flex = '1';
     right.style.position = 'relative';
+
     let div = document.createElement('div');
-    div.appendChild(document.createTextNode('작품 제목'));
+    div.appendChild(document.createTextNode(work.title));
     right.appendChild(div);
+
     div = document.createElement('div');
-    div.appendChild(document.createTextNode('작가'));
+    div.style.marginBottom = '16px';
+    div.appendChild(document.createTextNode(work.medium));
     right.appendChild(div);
+
     div = document.createElement('div');
-    div.appendChild(document.createTextNode('재료 크기 제작 연도'));
+    div.style.wordBreak = 'keep-all';
+    div.style.marginBottom = '16px';
+    div.appendChild(document.createTextNode(work.description));
     right.appendChild(div);
+
     div = document.createElement('div');
-    div.appendChild(document.createTextNode('미술관 측 설명'));
-    right.appendChild(div);
-    div = document.createElement('div');
-    div.appendChild(document.createTextNode('묘사'));
+    div.style.wordBreak = 'keep-all';
+    div.style.marginBottom = '32px';
+    div.appendChild(document.createTextNode(work.alt));
     right.appendChild(div);
 
     const closeButton = document.createElement('button');
@@ -83,7 +86,7 @@ export function popupCreate(scene, { x, y, name }) {
     closeButton.onclick = () => document.body.removeChild(descriptionContainer);
 
     const link = document.createElement('a');
-    link.href = '';
+    link.href = work.url;
     link.style.position = 'absolute';
     link.style.right = '0px';
     link.style.bottom = '0px';
@@ -101,7 +104,6 @@ export function popupCreate(scene, { x, y, name }) {
 
   return {
     phaser: popupSprite,
-    name,
   };
 }
 
