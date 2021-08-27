@@ -101,29 +101,29 @@
         </div>
       </div>
       <div class="row">
-        <button class="left" on:click={increaseEyeNum}></button>
+        <button class="left" on:click={decreaseEyeNum}></button>
         <div class="center">얼굴</div>
-        <button class="right" on:click={decreaseEyeNum}></button>
+        <button class="right" on:click={increaseEyeNum}></button>
       </div>
       <div class="row">
-        <button class="left" on:click={increaseHairColorNum}></button>
+        <button class="left" on:click={decreaseHairColorNum}></button>
         <div class="center">머리색</div>
-        <button class="right" on:click={decreaseHairColorNum}></button>
+        <button class="right" on:click={increaseHairColorNum}></button>
       </div>
       <div class="row">
-        <button class="left" on:click={increaseHairStyleNum}></button>
+        <button class="left" on:click={decreaseHairStyleNum}></button>
         <div class="center">머리모양</div>
-        <button class="right" on:click={decreaseHairStyleNum}></button>
+        <button class="right" on:click={increaseHairStyleNum}></button>
       </div>
       <div class="row">
-        <button class="left" on:click={increaseClothesNum}></button>
+        <button class="left" on:click={decreaseClothesNum}></button>
         <div class="center">의상</div>
-        <button class="right" on:click={decreaseClothesNum}></button>
+        <button class="right" on:click={increaseClothesNum}></button>
       </div>
       <div class="row">
-        <button class="left" on:click={increaseSkinNum}></button>
+        <button class="left" on:click={decreaseSkinNum}></button>
         <div class="center">피부색</div>
-        <button class="right" on:click={decreaseSkinNum}></button>
+        <button class="right" on:click={increaseSkinNum}></button>
       </div>
       <button class="decide" on:click={decide}>
         <img src="/img/ui/decide.png" alt="결정" />
