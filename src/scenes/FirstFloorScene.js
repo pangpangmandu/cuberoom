@@ -64,6 +64,7 @@ class FirstFloorScene extends Phaser.Scene {
       this.map.phaser.heightInPixels
     );
     this.cameras.main.startFollow(this.player.phaser, true, 0.1, 0.1);
+    this.cameras.main.fadeIn(500);
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.input.keyboard.on("keydown-SPACE", () => {
