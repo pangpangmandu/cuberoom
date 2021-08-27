@@ -11,7 +11,7 @@ import {
 import { playerOnMapCreate, playerOnMapUpdate } from "../relation/playerOnMap";
 
 function backgroundStatic(scene) {
-	scene.add.sprite(800 / 2, 1040 / 2, "firstBasement-background");
+	scene.add.sprite(800 / 2, 1220 / 2, "firstBasement-background");
 }
 
 class FirstBasementScene extends Phaser.Scene {
