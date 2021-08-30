@@ -32,12 +32,13 @@ class SecondBasementScene extends Phaser.Scene {
 
     this.socket.on('playerList', (data) => {
       for (const [id, player] of Object.entries(data)) {
+				if (player.floor !== 'B2') return;
         if (!this.players[id]) {
           this.players[id] = player;
           this.players[id].player = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
         } else {
           // if (player.floor === 'entrance' && this.socket.id !== id) {
-          if (this.socket.id !== id && player.floor === 'B2') {
+          if (this.socket.id !== id) {
             this.players[id].player.phaser.x = player.x;
             this.players[id].player.phaser.y = player.y;
             this.players[id].player.nameLabel.x = player.x;

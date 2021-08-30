@@ -32,6 +32,7 @@ class EntranceScene extends Phaser.Scene {
 
     this.socket.on('playerList', (data) => {
       for (const [id, player] of Object.entries(data)) {
+        if (player.floor !== 'entrance') return;
         if (!this.players[id]) {
           const directions = ['left', 'right', 'up', 'down'];
           for (const direction of directions) {
@@ -46,7 +47,7 @@ class EntranceScene extends Phaser.Scene {
           this.load.start();
         } else {
           // if (player.floor === 'entrance' && this.socket.id !== id) {
-          if (this.socket.id !== id && player.floor === 'entrance') {
+          if (this.socket.id !== id) {
             this.players[id].player.phaser.x = player.x;
             this.players[id].player.phaser.y = player.y;
             this.players[id].player.nameLabel.x = player.x;
