@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 
-import { log } from "../../log";
 import { animationFrames } from "./image";
 
 const directions = ["down", "up", "left", "right"];
@@ -14,8 +13,6 @@ export function playerCreateAnimations(scene) {
       repeat: -1,
     };
     scene.anims.create(animConfig);
-    log(animConfig);
-    log([...animationFrames(direction)]);
   }
 
   for (const direction of directions) {

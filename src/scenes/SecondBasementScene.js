@@ -116,7 +116,6 @@ class SecondBasementScene extends Phaser.Scene {
 
 		this.cursors = this.input.keyboard.createCursorKeys();
 		this.input.keyboard.on("keydown-SPACE", () => {
-			log("Space");
 			if (this.cheat === true) {
 				this.cheat = false;
 			} else {

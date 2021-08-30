@@ -1,4 +1,3 @@
-import { log } from "../log";
 import { popupCreate, popupDestroy } from "../entity/popup";
 import { showElevatorPanel, hideElevatorPanel } from '../entity/map/elevator';
 import EntranceScene from "../scenes/EntranceScene";
@@ -30,7 +29,6 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
   const curTileName = curTile?.properties?.name;
 
   if (playerOnMap.prevTileName !== curTileName) {
-    log(curTileName);
     if (playerOnMap.prevTileName === 'elevator') hideElevatorPanel();
     if (['work-1', 'work-2'].includes(playerOnMap.prevTileName)) popupDestroy();
 
@@ -56,6 +54,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             showElevatorPanel(scene, '1F');
             break;
           case 'out':
+            // 이거왜안됨..
             startScene(scene, 'EntranceScene', { x: 16 * 27, y: 16 * 29 });
             break;
           default:

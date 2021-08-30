@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
 import { isValidURLName, openURL } from "../../common/urlOpen";
-import { log } from "../../log";
 
 export function mapOnPointerDown(map, pointer) {
   const tile = map.interactionLayer.getTileAtWorldXY(
@@ -12,11 +11,8 @@ export function mapOnPointerDown(map, pointer) {
     return;
   }
 
-  log(tile.properties.name);
   if (isValidURLName(tile.properties.name)) {
     openURL(tile.properties.name);
-  } else {
-    log("tile have a invalid url name");
   }
 }
 
