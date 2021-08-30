@@ -25,15 +25,6 @@ class EntranceScene extends Phaser.Scene {
     this.socket = window.socket;
     this.players = {};
 
-    // 이 코드가 왜 두 번째로 띄운 창에서는 실행이 안 되는 거지.....
-    this.socket.on('addPlayer', (data) => {
-      const id = data.id;
-      if (this.socket.id !== id) {
-        this.players[id] = data;
-        this.players[id].player = playerCreate(this, data.x, data.y, data.name, data.chat, data.id);
-      }
-    });
-
     this.socket.on('removePlayer', (data) => {
       this.players[data.id].player.phaser.destroy(true);
       delete this.players[data.id];
@@ -41,27 +32,31 @@ class EntranceScene extends Phaser.Scene {
 
     this.socket.on('playerList', (data) => {
       for (const [id, player] of Object.entries(data)) {
-        // if (!Object.keys(data).includes(id)) {
+        if (!this.players[id]) {
           const directions = ['left', 'right', 'up', 'down'];
           for (const direction of directions) {
             for (let i = 1; i < 5; i += 1) {
               this.load.image(`${player.id}-${direction}-${i}`, `http://localhost:3000/static${player.imgUrl}${direction}-${i}.png`);
             }
           }
+          this.load.once('complete', () => {
+            this.players[id] = player;
+            this.players[id].player = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
+          }, this);
           this.load.start();
-        // }
-
-        // if (player.floor === 'entrance' && this.socket.id !== id) {
-        if (this.socket.id !== id) {
-          this.players[id].player.phaser.x = player.x;
-          this.players[id].player.phaser.y = player.y;
-          this.players[id].player.nameLabel.x = player.x;
-          this.players[id].player.nameLabel.y = player.y - 30;
-          this.players[id].player.chatBubble.x = player.x;
-          this.players[id].player.chatBubble.y = player.y - 45;
-          // this.players[id].player.phaser.anims.play(`player-${player.direction}`, true);
-          // this.players[id].player.phaser.anims.play(`player-${player.direction}-stop`, true);
-          this.players[id].player.phaser.setTexture(`${player.id}-${player.direction}-${2}`);
+        } else {
+          // if (player.floor === 'entrance' && this.socket.id !== id) {
+          if (this.socket.id !== id && player.floor === 'entrance') {
+            this.players[id].player.phaser.x = player.x;
+            this.players[id].player.phaser.y = player.y;
+            this.players[id].player.nameLabel.x = player.x;
+            this.players[id].player.nameLabel.y = player.y - 30;
+            this.players[id].player.chatBubble.x = player.x;
+            this.players[id].player.chatBubble.y = player.y - 45;
+            // this.players[id].player.phaser.anims.play(`player-${player.direction}`, true);
+            // this.players[id].player.phaser.anims.play(`player-${player.direction}-stop`, true);
+            this.players[id].player.phaser.setTexture(`${player.id}-${player.direction}-${2}`);
+          }
         }
       }
     });
@@ -165,6 +160,7 @@ class EntranceScene extends Phaser.Scene {
 
     this.socket.emit('movePlayer', {
       id: this.socket.id,
+      floor: 'entrance',
       direction: this.player.prevMove,
       x: this.player.phaser.x,
       y: this.player.phaser.y,
