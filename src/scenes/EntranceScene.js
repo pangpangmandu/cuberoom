@@ -28,6 +28,8 @@ class EntranceScene extends Phaser.Scene {
     this.socket.on('removePlayer', (data) => {
       if (this.players[data.id]) {
         this.players[data.id].phaser.destroy(true);
+        this.players[data.id].nameLabel.destroy(true);
+        this.players[data.id].chatBubble.destroy(true);
         delete this.players[data.id];
       }
       // this.players[data.id].player.phaser.destroy(true);
@@ -170,8 +172,6 @@ class EntranceScene extends Phaser.Scene {
       x: this.player.phaser.x,
       y: this.player.phaser.y,
     });
-
-    // this.map = mapCreateOverCharacterLayer(this.map, 'entrance-background');
   }
 }
 
