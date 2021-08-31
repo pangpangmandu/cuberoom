@@ -278,12 +278,15 @@
     }
 
     .block.label {
-      margin: 20px 0px 20px 0px;
+      width: 80%;
+      margin: 20px 0px;
+      padding: 12px;
       font-size: 20px;
     }
 
     .block.form {
       width: 80%;
+      padding: 12px;
       height: fit-content;
       grid-template-rows: 1fr 3fr 1fr 1fr 1fr 1fr 1fr;
       grid-template-columns: 1fr;
@@ -300,18 +303,20 @@
     .decide {
       position: absolute;
       text-align: center;
-      left: 24px;
+      right: 28px;
       bottom: -63px;
     }
 
     .decide img {
       border: 3px solid black;
+      height: 44px;
     }
 
     :global(a.to-main) {
       position: relative;
       bottom: -20px;
-      left: calc(90% - 160px + 4px);
+      /* right: calc(90% - 160px + 4px); */
+      left: calc(10% - 12px - 4px);
     }
   }
 </style>
