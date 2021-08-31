@@ -22,9 +22,25 @@ export function playerCreate(scene, x, y, name, chat, id) {
   chatBubble.setOrigin(0.5, 0.5);
   // nameLabel.setResolution(window.devicePixelRatio / 2)
   // chatBubble.setResolution(window.devicePixelRatio / 2)
+  // nameLabel.setSize(20 + nameLabel.width, 40 + nameLabel.height)
 
   scene.physics.world.enable([nameLabel, chatBubble]);
-  scene.physics.world.collide([nameLabel, chatBubble]);
+  // scene.physics.world.collide([nameLabel, chatBubble]);
+
+  // const group = scene.physics.add.group({ collideWorldBounds: true, setXY: { x, y }});
+  // group.add(phaser);
+  // group.add(nameLabel);
+  // group.add(chatBubble);
+
+  // phaser.body.setOnCollide(() => {
+  //   nameLabel.body.setVelocityY(0);
+  //   chatBubble.body.setVelocityY(0);
+  // })
+
+  // scene.physics.collide(phaser, undefined, () => {
+  //   nameLabel.body.setVelocityY(0);
+  //   chatBubble.body.setVelocityY(0);
+  // })
 
   return {
     phaser,
@@ -55,6 +71,8 @@ function mouseMove(player, pointer, scene) {
         player.phaser.body.setVelocityX(-velocity);
         player.nameLabel.body.setVelocityX(-velocity);
         player.chatBubble.body.setVelocityX(-velocity);
+        // player.nameLabel.x = player.phaser.x;
+        // player.chatBubble.x = player.phaser.x;
         newPrevMove = "left";
       }
       moved = true;
@@ -67,6 +85,8 @@ function mouseMove(player, pointer, scene) {
         player.phaser.body.setVelocityX(velocity);
         player.nameLabel.body.setVelocityX(velocity);
         player.chatBubble.body.setVelocityX(velocity);
+        // player.nameLabel.x = player.phaser.x;
+        // player.chatBubble.x = player.phaser.x;
         newPrevMove = "right";
       }
       moved = true;
@@ -86,6 +106,8 @@ function mouseMove(player, pointer, scene) {
         player.phaser.body.setVelocityY(-velocity);
         player.nameLabel.body.setVelocityY(-velocity);
         player.chatBubble.body.setVelocityY(-velocity);
+        // player.nameLabel.y = player.phaser.y - 30;
+        // player.chatBubble.y = player.phaser.y - 45;
         newPrevMove = "up";
       }
       moved = true;
@@ -98,6 +120,8 @@ function mouseMove(player, pointer, scene) {
         player.phaser.body.setVelocityY(velocity);
         player.nameLabel.body.setVelocityY(velocity);
         player.chatBubble.body.setVelocityY(velocity);
+        // player.nameLabel.y = player.phaser.y - 30;
+        // player.chatBubble.y = player.phaser.y - 45;
         newPrevMove = "down";
       }
       moved = true;
@@ -131,6 +155,8 @@ function move(player, cursors, scene) {
         player.phaser.body.setVelocityX(-velocity);
         player.nameLabel.body.setVelocityX(-velocity);
         player.chatBubble.body.setVelocityX(-velocity);
+        // player.nameLabel.x = player.phaser.x;
+        // player.chatBubble.x = player.phaser.x;
         newPrevMove = "left";
       }
       moved = true;
@@ -139,6 +165,8 @@ function move(player, cursors, scene) {
         player.phaser.body.setVelocityX(velocity);
         player.nameLabel.body.setVelocityX(velocity);
         player.chatBubble.body.setVelocityX(velocity);
+        // player.nameLabel.x = player.phaser.x;
+        // player.chatBubble.x = player.phaser.x;
         newPrevMove = "right";
       }
       moved = true;
@@ -153,6 +181,8 @@ function move(player, cursors, scene) {
         player.phaser.body.setVelocityY(-velocity);
         player.nameLabel.body.setVelocityY(-velocity);
         player.chatBubble.body.setVelocityY(-velocity);
+        // player.nameLabel.y = player.phaser.y - 30;
+        // player.chatBubble.y = player.phaser.y - 45;
         newPrevMove = "up";
       }
       moved = true;
@@ -161,6 +191,8 @@ function move(player, cursors, scene) {
         player.phaser.body.setVelocityY(velocity);
         player.nameLabel.body.setVelocityY(velocity);
         player.chatBubble.body.setVelocityY(velocity);
+        // player.nameLabel.y = player.phaser.y - 30;
+        // player.chatBubble.y = player.phaser.y - 45;
         newPrevMove = "down";
       }
       moved = true;
@@ -187,6 +219,8 @@ function move(player, cursors, scene) {
       player.phaser.body.setVelocityX(-velocity);
       player.nameLabel.body.setVelocityX(-velocity);
       player.chatBubble.body.setVelocityX(-velocity);
+      // player.nameLabel.x = player.phaser.x;
+      // player.chatBubble.x = player.phaser.x;
       newPrevMove = "left";
     }
     moved = true;
@@ -195,6 +229,8 @@ function move(player, cursors, scene) {
       player.phaser.body.setVelocityX(velocity);
       player.nameLabel.body.setVelocityX(velocity);
       player.chatBubble.body.setVelocityX(velocity);
+      // player.nameLabel.x = player.phaser.x;
+      // player.chatBubble.x = player.phaser.x;
       newPrevMove = "right";
     }
     moved = true;
@@ -209,6 +245,8 @@ function move(player, cursors, scene) {
       player.phaser.body.setVelocityY(-velocity);
       player.nameLabel.body.setVelocityY(-velocity);
       player.chatBubble.body.setVelocityY(-velocity);
+      // player.nameLabel.y = player.phaser.y - 30;
+      // player.chatBubble.y = player.phaser.y - 45;
       newPrevMove = "up";
     }
     moved = true;
@@ -217,6 +255,8 @@ function move(player, cursors, scene) {
       player.phaser.body.setVelocityY(velocity);
       player.nameLabel.body.setVelocityY(velocity);
       player.chatBubble.body.setVelocityY(velocity);
+      // player.nameLabel.y = player.phaser.y - 30;
+      // player.chatBubble.y = player.phaser.y - 45;
       newPrevMove = "down";
     }
     moved = true;
