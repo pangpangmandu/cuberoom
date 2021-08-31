@@ -61,6 +61,7 @@
   }
 
   function decide() {
+    // axios.post('http://127.0.0.1:3000/character-selection', {
     // axios.post('http://localhost:3000/character-selection', {
     axios.post('http://cuberoom.net/character-selection', {
       name,
