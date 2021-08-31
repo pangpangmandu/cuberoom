@@ -11,8 +11,8 @@
   import SecondBasementScene from '../scenes/SecondBasementScene';
   import { io } from 'socket.io-client';
 
-  const socket = io.connect('http://localhost:3000');
-  // const socket = io.connect('http://cuberoom.net');
+  const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });
+  // const socket = io.connect('http://cuberoom.net', { transports: ['websocket'] });
   window.socket = socket;
 
   let chat = '';
