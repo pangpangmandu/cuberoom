@@ -29,7 +29,7 @@ class SecondBasementScene extends Phaser.Scene {
       // this.players[data.id].player.phaser.destroy(true);
       // delete this.players[data.id];
 			if (this.players[data.id]) {
-        this.players[data.id].player.phaser.destroy(true);
+        this.players[data.id].phaser.destroy(true);
         delete this.players[data.id];
       }
     });
@@ -39,19 +39,19 @@ class SecondBasementScene extends Phaser.Scene {
 				if (player.floor !== 'B2') return;
         if (!this.players[id]) {
           this.players[id] = player;
-          this.players[id].player = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
+          this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
         } else {
           // if (player.floor === 'entrance' && this.socket.id !== id) {
           if (this.socket.id !== id) {
-            this.players[id].player.phaser.x = player.x;
-            this.players[id].player.phaser.y = player.y;
-            this.players[id].player.nameLabel.x = player.x;
-            this.players[id].player.nameLabel.y = player.y - 30;
-            this.players[id].player.chatBubble.x = player.x;
-            this.players[id].player.chatBubble.y = player.y - 45;
-            // this.players[id].player.phaser.anims.play(`player-${player.direction}`, true);
-            // this.players[id].player.phaser.anims.play(`player-${player.direction}-stop`, true);
-            this.players[id].player.phaser.setTexture(`${player.id}-${player.direction}-${2}`);
+            this.players[id].phaser.x = player.x;
+            this.players[id].phaser.y = player.y;
+            this.players[id].nameLabel.x = player.x;
+            this.players[id].nameLabel.y = player.y - 30;
+            this.players[id].chatBubble.x = player.x;
+            this.players[id].chatBubble.y = player.y - 45;
+            // this.players[id].phaser.anims.play(`player-${player.direction}`, true);
+            // this.players[id].phaser.anims.play(`player-${player.direction}-stop`, true);
+            this.players[id].phaser.setTexture(`${player.id}-${player.direction}-${2}`);
           }
         }
       }
