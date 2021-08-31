@@ -89,6 +89,11 @@ class FirstFloorScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'firstFloor-map');
+
+    for (const [id, player] of Object.entries(this.players)) {
+      this.players[id] = playerCreate(this, player.phaser.x, player.phaser.y, player.nameLabel._text, player.chatBubble._text, player.id);
+    }
+
     this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl); // 소켓 연결 되면 이 부분을 지워야 함
     this.players[this.socket.id] = this.player;
 

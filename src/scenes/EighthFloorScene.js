@@ -89,6 +89,11 @@ class EighthFloorScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'eighthFloor-map');
+
+    for (const [id, player] of Object.entries(this.players)) {
+      this.players[id] = playerCreate(this, player.phaser.x, player.phaser.y, player.nameLabel._text, player.chatBubble._text, player.id);
+    }
+
     this.player = playerCreate(this, this.x, this.y);
     this.players[this.socket.id] = this.player;
 
