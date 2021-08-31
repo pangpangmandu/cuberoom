@@ -37,6 +37,8 @@ export function showElevatorPanel(scene, floor) {
   panel.style.position = 'relative';
   panel.onmousedown = () => window.game.input.enabled = false;
   panel.onmouseup = () => window.game.input.enabled = true;
+  panel.ontouchstart = () => window.game.input.enabled = false;
+  panel.ontouchend = () => window.game.input.enabled = true;
 
   panelContainer.appendChild(panel);
 

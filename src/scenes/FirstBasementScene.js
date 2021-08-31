@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { playerCreate, playerUpdate, playerMouseUpdate } from "../entity/player";
+import { playerCreate, playerUpdate, playerMouseUpdate, playerFollowClickUpdate } from "../entity/player";
 import { allCharacterImageNames } from "../entity/player/image";
 import { playerCreateAnimations } from "../entity/player/animation";
 import { mapCreate, mapCreateOverCharacterLayer } from "../entity/map";
@@ -22,6 +22,7 @@ class FirstBasementScene extends Phaser.Scene {
 		this.playerOnMap = null;
 		this.x = 16 * 3;
 		this.y = 16 * 32;
+
 		this.socket = window.socket;
     this.players = {};
 
@@ -66,8 +67,8 @@ class FirstBasementScene extends Phaser.Scene {
 	}
 
 	init(data) {
-    if (data.x) this.x = data.x;
-    if (data.y) this.y = data.y;
+    if (data.x) this.x = data.x, this.destinationX = data.x;
+    if (data.y) this.y = data.y, this.destinationY = data.y;
   }
 
 	preload() {
@@ -137,28 +138,52 @@ class FirstBasementScene extends Phaser.Scene {
 	}
 
 	update(_time, _delta) {
+		// const pointer = this.input.activePointer;
+		// if(pointer.isDown){
+		// 	this.player = playerMouseUpdate(this.player,this.input.activePointer, this);
+		// 	mapUpdateMousePoint(this.map, this);
+		// 	this.playerOnMap = playerOnMapUpdate(
+		// 	  this.playerOnMap,
+		// 	  this.player,
+		// 	  this.map,
+		// 	  this
+		// 	);
+		// }else{
+		// 	this.player = playerUpdate(this.player,this.cursors, this);
+		// 	mapUpdateMousePoint(this.map, this);
+		// 	this.playerOnMap = playerOnMapUpdate(
+		// 	  this.playerOnMap,
+		// 	  this.player,
+		// 	  this.map,
+		// 	  this
+		// 	);
+		// }
 		const pointer = this.input.activePointer;
+		this.player = playerFollowClickUpdate(this.player, this.destinationX, this.destinationY, this);
+		mapUpdateMousePoint(this.map, this);
+		this.playerOnMap = playerOnMapUpdate(
+		  this.playerOnMap,
+		  this.player,
+		  this.map,
+		  this
+		);
+	
+
 		if(pointer.isDown){
-			this.player = playerMouseUpdate(this.player,this.input.activePointer, this);
-			mapUpdateMousePoint(this.map, this);
-			this.playerOnMap = playerOnMapUpdate(
-			  this.playerOnMap,
-			  this.player,
-			  this.map,
-			  this
-			);
-		}else{
-			this.player = playerUpdate(this.player,this.cursors, this);
-			mapUpdateMousePoint(this.map, this);
-			this.playerOnMap = playerOnMapUpdate(
-			  this.playerOnMap,
-			  this.player,
-			  this.map,
-			  this
-			);
+		  this.destinationX = this.input.activePointer.worldX;
+		  this.destinationY = this.input.activePointer.worldY;
+	
 		}
 
-		this.socket.emit('movePlayer', {
+		// console.log("x: "+this.destinationX+" y: "+this.destinationY);
+		
+
+		this.player.nameLabel.x = this.player.phaser.x;
+		this.player.chatBubble.x = this.player.phaser.x;
+		this.player.nameLabel.y = this.player.phaser.y - 30;
+		this.player.chatBubble.y = this.player.phaser.y - 45;
+
+	this.socket.emit('movePlayer', {
       id: this.socket.id,
 			floor: 'B1',
       direction: this.player.prevMove,

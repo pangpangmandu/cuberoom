@@ -22,7 +22,7 @@ class EntranceScene extends Phaser.Scene {
     this.playerOnMap = null;
     this.x = 16 * 6;
     this.y = 16 * 34;
-    
+
     this.socket = window.socket;
     this.players = {};
 
@@ -42,9 +42,9 @@ class EntranceScene extends Phaser.Scene {
           const directions = ['left', 'right', 'up', 'down'];
           for (const direction of directions) {
             for (let i = 1; i < 5; i += 1) {
-              // this.load.image(`${player.id}-${direction}-${i}`, `http://127.0.0.1:3000/static${player.imgUrl}${direction}-${i}.png`);
+              this.load.image(`${player.id}-${direction}-${i}`, `http://127.0.0.1:3000/static${player.imgUrl}${direction}-${i}.png`);
               // this.load.image(`${player.id}-${direction}-${i}`, `http://localhost:3000/static${player.imgUrl}${direction}-${i}.png`);
-              this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net/${player.imgUrl}${direction}-${i}.png`);
+              // this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net/${player.imgUrl}${direction}-${i}.png`);
             }
           }
           this.load.once('complete', () => {
@@ -80,8 +80,8 @@ class EntranceScene extends Phaser.Scene {
   }
 
   init(data) {
-    if (data.x) this.x = data.x;
-    if (data.y) this.y = data.y;
+    if (data.x) this.x = data.x, this.destinationX = data.x;
+    if (data.y) this.y = data.y, this.destinationY = data.y;
   }
 
   preload() {
@@ -185,6 +185,9 @@ class EntranceScene extends Phaser.Scene {
       this.destinationY = this.input.activePointer.worldY;
 
     }
+
+    // console.log("x: "+this.destinationX+" y: "+this.destinationY);
+
 
     this.player.nameLabel.x = this.player.phaser.x;
     this.player.chatBubble.x = this.player.phaser.x;
