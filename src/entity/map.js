@@ -64,7 +64,10 @@ export function mapCreate(scene, key) {
  */
 export function mapCreateOverCharacterLayer(map, tilesetImage) {
   const backgroundTileset = map.phaser.addTilesetImage('background', tilesetImage);
-  map.phaser.createLayer("overCharacter", backgroundTileset, 0, 0);
+  const b2Cylinder = map.phaser.addTilesetImage('cylinder', 'b2-cylinder');
+  const b2Cube = map.phaser.addTilesetImage('cube', 'b2-cube');
+  const b2Pink = map.phaser.addTilesetImage('pink', 'b2-pink');
+  map.phaser.createLayer("overCharacter", [backgroundTileset, b2Cylinder, b2Cube, b2Pink], 0, 0);
   return {
     ...map,
     backgroundTileset,

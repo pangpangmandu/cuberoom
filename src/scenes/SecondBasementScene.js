@@ -10,7 +10,7 @@ import {
 import { playerOnMapCreate, playerOnMapUpdate } from "../relation/playerOnMap";
 
 function backgroundStatic(scene) {
-	scene.add.sprite(800 / 2, 740 / 2, "secondBasement-background");
+	scene.add.sprite(800 / 2, 736 / 2, "secondBasement-background");
 }
 
 class SecondBasementScene extends Phaser.Scene {
@@ -75,6 +75,9 @@ class SecondBasementScene extends Phaser.Scene {
 		this.load.image("secondBasement-background", "/img/b2_background.png");
 		this.load.image("collision-tileset", "/tilemap/simple_tile.png");
 		this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
+		this.load.image("b2-cylinder", "/tilemap/b2_cylinder.png");
+		this.load.image("b2-cube", "/tilemap/b2_cube.png");
+		this.load.image("b2-pink", "/tilemap/b2_pink.png");
 		this.load.image("popup", "/img/ui-map/popup.png");
 		this.load.tilemapTiledJSON({
 			key: "secondBasement-map",
