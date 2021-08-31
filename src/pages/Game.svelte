@@ -12,7 +12,7 @@
   import { io } from 'socket.io-client';
 
   // const socket = io.connect('http://localhost:3000');
-  const socket = io.connect('https://cuberoom.net');
+  const socket = io.connect('http://cuberoom.net');
   window.socket = socket;
 
   let chat = '';

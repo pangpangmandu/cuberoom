@@ -14,7 +14,7 @@ export function* allCharacterImageNames(playerImgUrl) {
       yield [
         `player-${direction}-${i}`,
         // `http://localhost:3000/static${playerImgUrl}${direction}-${i}.png`,
-        `https://cuberoom.net/${playerImgUrl}${direction}-${i}.png`,
+        `http://cuberoom.net/${playerImgUrl}${direction}-${i}.png`,
       ];
     }
   }
