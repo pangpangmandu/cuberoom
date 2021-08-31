@@ -25,6 +25,7 @@ export default function startScene(scene, sceneName, spawnPos) {
   scene.cameras.main.fadeOut(500);
   // window.socket.emit('moveFloor', { id: window.socket.id, floor: getFloorName(sceneName) });
   scene.cameras.main.on('camerafadeoutcomplete', () => {
+    scene.scene.pause(scene.scene.key);
     scene.scene.start(sceneName, spawnPos);
   });
 }
