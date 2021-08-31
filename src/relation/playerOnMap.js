@@ -36,6 +36,8 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       case EntranceScene:
         switch (curTileName) {
           case 'up':
+            // 이거 다른 경우에도 추가하기?
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '1F' });
             startScene(scene, 'FirstFloorScene', { x: 16 * 5, y: 16 * 30 });
             break;
           default:
