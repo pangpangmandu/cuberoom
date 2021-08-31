@@ -32,8 +32,6 @@ class EntranceScene extends Phaser.Scene {
         this.players[data.id].chatBubble.destroy(true);
         delete this.players[data.id];
       }
-      // this.players[data.id].player.phaser.destroy(true);
-      // delete this.players[data.id];
     });
 
     this.socket.on('playerList', (data) => {

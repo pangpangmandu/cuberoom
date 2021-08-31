@@ -26,10 +26,10 @@ class FirstFloorScene extends Phaser.Scene {
     this.players = {};
 
     this.socket.on('removePlayer', (data) => {
-      // this.players[data.id].player.phaser.destroy(true);
-      // delete this.players[data.id];
       if (this.players[data.id]) {
         this.players[data.id].phaser.destroy(true);
+        this.players[data.id].nameLabel.destroy(true);
+        this.players[data.id].chatBubble.destroy(true);
         delete this.players[data.id];
       }
     });
