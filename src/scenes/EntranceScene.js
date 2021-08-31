@@ -60,6 +60,8 @@ class EntranceScene extends Phaser.Scene {
             this.players[id].chatBubble.y = player.y - 45;
             // this.players[id].phaser.anims.play(`player-${player.direction}`, true);
             // this.players[id].phaser.anims.play(`player-${player.direction}-stop`, true);
+            // 이 phaser에게는 scene이 없다...!
+            if (!this.players[id].phaser.scene) this.players[id].phaser.scene = this;
             this.players[id].phaser.setTexture(`${player.id}-${player.direction}-${2}`); // 이거 playerCreate할 때 참고!!!!
           }
         }
