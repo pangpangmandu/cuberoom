@@ -30,7 +30,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
 
   if (playerOnMap.prevTileName !== curTileName) {
     if (playerOnMap.prevTileName === 'elevator') hideElevatorPanel();
-    if (['work-1', 'work-2'].includes(playerOnMap.prevTileName)) popupDestroy();
+    if (['work-1', 'work-2', 'work-3','work-4','work-5','work-6','work-7','work-8'].includes(playerOnMap.prevTileName)) popupDestroy();
 
     switch (scene.constructor) {
       case EntranceScene:
@@ -184,17 +184,26 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             startScene(scene, 'SecondBasementScene', { x: 16 * 3, y: 16 * 35 });
             break;
           case 'work-1':
-            popupCreate(scene, popupPos[1], 1);
-            break;
+            if(document.getElementById("work-1")==null){
+              popupCreate(scene, popupPos[1], 1);
+              break;
+            }
+
           case 'work-2':
+            if(document.getElementById("work-2")==null){
             popupCreate(scene, popupPos[2], 2);
             break;
+            }
           case 'work-3':
+            if(document.getElementById("work-3")==null){
             popupCreate(scene, popupPos[3], 3);
             break;
+            }
           case 'work-4':
+            if(document.getElementById("work-4")==null){
             popupCreate(scene, popupPos[4], 4);
             break;
+            }
           default:
             break;
         }
@@ -209,17 +218,25 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             showElevatorPanel(scene, 'B2');
             break;
           case 'work-5':
+            if(document.getElementById("work-5")==null){
             popupCreate(scene, popupPos[5], 5);
             break;
+            }
           case 'work-6':
+            if(document.getElementById("work-6")==null){
             popupCreate(scene, popupPos[6], 6);
             break;
+            }
           case 'work-7':
+            if(document.getElementById("work-7")==null){
             popupCreate(scene, popupPos[7], 7);
             break;
+            }
           case 'work-8':
+            if(document.getElementById("work-8")==null){
             popupCreate(scene, popupPos[8], 8);
             break;
+            }
           default:
             break;
         }

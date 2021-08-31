@@ -1,4 +1,4 @@
-import { updateAnimation, updateMouseAnimation } from "./player/animation";
+import { updateAnimation, updateMouseAnimation, updateFollowClickAnimation } from "./player/animation";
 
 export function playerCreate(scene, x, y, name, chat, id) {
   const phaser = scene.physics.add.sprite(x, y, `${id}-down-2`, 1);
@@ -16,6 +16,8 @@ export function playerCreate(scene, x, y, name, chat, id) {
     fontFamily: '28px NeoDunggeunmo',
     fill: '#ffffff',
     align: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+
   });
 
   nameLabel.setOrigin(0.5, 0.5);
@@ -50,6 +52,80 @@ export function playerCreate(scene, x, y, name, chat, id) {
     chatBubble,
     id,
   };
+}
+
+
+function followClick(player, destinationX, destinationY, scene){
+
+  let tempX = player.phaser.x;
+  let tempY = player.phaser.y;
+
+  let moved = false;
+  let velocity = 50;
+
+  let newPrevMove = player.prevMove;
+
+
+  if (scene.cheat) {
+    velocity *= 10;
+  }
+  if(destinationX +10 < player.phaser.x){
+    // velocity *= parseInt(player.phaser.x - destinationX) * 0.007;
+    if(velocity < 100){
+      velocity = 100;
+    }
+    if (player.prevMove !== "left") {
+      player.phaser.body.setVelocityX(-velocity);
+      newPrevMove = "left";
+    }
+    moved = true;
+  }else if(destinationX > 10 + player.phaser.x){
+    // velocity *= parseInt( destinationX - player.phaser.x) * 0.007;
+    if(velocity < 100){
+      velocity = 100;
+    }
+    if (player.prevMove !== "right") {
+      player.phaser.body.setVelocityX(velocity);
+      newPrevMove = "right";
+    }
+    moved = true;
+  }else{
+    player.phaser.body.setVelocityX(0);
+  }
+
+  if (destinationY +20 < player.phaser.y) {
+    // velocity *= parseInt( player.phaser.y - destinationY) * 0.015;
+    if(velocity < 100){
+      velocity = 100;
+    }
+    if (player.prevMove !== "up") {
+      player.phaser.body.setVelocityY(-velocity);
+      newPrevMove = "up";
+    }
+    moved = true;
+  } else if (player.phaser.y +20 < destinationY) {
+    // velocity *= parseInt(  destinationY - player.phaser.y) * 0.015;
+    if(velocity < 100){
+      velocity = 100;
+    }
+    if (player.prevMove !== "down") {
+      player.phaser.body.setVelocityY(velocity);
+      newPrevMove = "down";
+    }
+    moved = true;
+  } else {
+    player.phaser.body.setVelocityY(0);
+  }
+  
+  if((Math.abs(tempX-destinationX) < 11) && (Math.abs(tempY-destinationY) < 11 )){
+    player.phaser.body.setVelocityY(0);
+  }
+
+
+return {
+  ...player,
+  prevMove: newPrevMove,
+};
 }
 
 function mouseMove(player, pointer, scene) {
@@ -287,5 +363,12 @@ export function playerUpdate(player, cursors, scene) {
 export function playerMouseUpdate(player, pointer, scene) {
   let newPlayer = updateMouseAnimation(player,  pointer);
   newPlayer = mouseMove(newPlayer, pointer, scene);
+  return newPlayer;
+}
+
+
+export function playerFollowClickUpdate(player, destinationX, destinationY, scene) {
+  let newPlayer = updateFollowClickAnimation(player, destinationX, destinationY);
+  newPlayer = followClick(newPlayer, destinationX, destinationY, scene);
   return newPlayer;
 }

@@ -3,6 +3,9 @@ import works from './works';
 let popupSprite;
 let descriptionContainer;
 
+
+
+
 export function popupCreate(scene, { x, y }, workNum) {
   const work = works[workNum];
   popupSprite = scene.add.sprite(x, y, "popup");
@@ -21,6 +24,8 @@ export function popupCreate(scene, { x, y }, workNum) {
   // FIXME: event 등록 해제해야 하는지 확인 필요
   popupSprite.on("pointerdown", () => {
     descriptionContainer = document.createElement('div');
+    // descriptionContainer.id = work.id;
+    console.log(descriptionContainer.id);
     descriptionContainer.style.position = 'absolute';
     descriptionContainer.style.top = '0px';
     descriptionContainer.style.left = '0px';
@@ -31,7 +36,10 @@ export function popupCreate(scene, { x, y }, workNum) {
     descriptionContainer.style.justifyContent = 'flex-end';
     descriptionContainer.style.alignItems = 'center';
 
+
     const description = document.createElement('div');
+    description.id = work.id;
+    description.classList.add("work");
     description.style.minWidth = '460px';
     description.style.maxWidth = '600px';
     description.style.backgroundColor = 'white';
@@ -43,6 +51,7 @@ export function popupCreate(scene, { x, y }, workNum) {
     description.style.justifyContent = 'space-between';
     description.style.position = 'relative';
     description.style.bottom = '150px';
+
 
     const left = document.createElement('img');
     left.src = work.imgUrl;
@@ -65,14 +74,25 @@ export function popupCreate(scene, { x, y }, workNum) {
 
     div = document.createElement('div');
     div.style.wordBreak = 'keep-all';
-    div.style.marginBottom = '16px';
-    div.appendChild(document.createTextNode(work.description));
-    right.appendChild(div);
-
-    div = document.createElement('div');
-    div.style.wordBreak = 'keep-all';
     div.style.marginBottom = '32px';
     div.appendChild(document.createTextNode(work.alt));
+    right.appendChild(div);
+
+    const showmore = document.createElement('div');
+    showmore.classList.add("showmore")
+    showmore.style.wordBreak = 'keep-all';
+    showmore.style.marginBottom = '32px';
+    showmore.style.textDecoration = "underline";
+    showmore.innerHTML = "더보기";
+    showmore.onclick = () => document.getElementsByClassName("description")[0].style.display="inline";
+    right.appendChild(showmore);
+
+    div = document.createElement('div');
+    div.classList.add("description");
+    div.style.wordBreak = 'keep-all';
+    div.style.marginBottom = '16px';
+    div.style.display = "none";
+    div.appendChild(document.createTextNode(work.description));
     right.appendChild(div);
 
     const closeButton = document.createElement('button');
@@ -87,6 +107,7 @@ export function popupCreate(scene, { x, y }, workNum) {
 
     const link = document.createElement('a');
     link.href = work.url;
+    link.target = "_blank";
     link.style.position = 'absolute';
     link.style.right = '0px';
     link.style.bottom = '0px';
@@ -100,6 +121,13 @@ export function popupCreate(scene, { x, y }, workNum) {
     descriptionContainer.appendChild(description);
     document.body.appendChild(descriptionContainer);
 
+
+    // let showmore = document.getElementsByClassName("showmore")[0].addEventListener("click",event=>{
+    //     showmore.innerHTML="";
+    //     showmore.style.textDecoration ="none";
+    //     showmore.appendChild(document.createTextNode(work.description));
+    // })
+
   });
 
   return {
@@ -109,5 +137,5 @@ export function popupCreate(scene, { x, y }, workNum) {
 
 export function popupDestroy() {
   popupSprite.destroy();
-  if (descriptionContainer) document.body.removeChild(descriptionContainer);
+  // if (descriptionContainer) document.body.removeChild(descriptionContainer);
 }
