@@ -57,11 +57,11 @@ class SecondFloorScene extends Phaser.Scene {
     });
 
     this.socket.on('addChat', (data) => {
-      if (this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
+      if (data.floor === '2F' && this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
     });
 
     this.socket.on('removeChat', (data) => {
-      if (this.players[data.id]) this.players[data.id].chatBubble.setText('');
+      if (data.floor === '2F' && this.players[data.id]) this.players[data.id].chatBubble.setText('');
     });
   }
 
