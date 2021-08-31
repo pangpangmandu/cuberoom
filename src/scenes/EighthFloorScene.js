@@ -22,8 +22,7 @@ class EighthFloorScene extends Phaser.Scene {
     this.playerOnMap = null;
     this.x = 16 * 5;
     this.y = 16 * 31;
-    this.destinationX = this.x;
-    this.destinationY = this.y;
+
     this.socket = window.socket;
     this.players = {};
 
@@ -68,8 +67,8 @@ class EighthFloorScene extends Phaser.Scene {
   }
 
   init(data) {
-    if (data.x) this.x = data.x;
-    if (data.y) this.y = data.y;
+    if (data.x) this.x = data.x, this.destinationX = data.x;
+    if (data.y) this.y = data.y, this.destinationY = data.y;
   }
 
   preload() {
@@ -173,8 +172,15 @@ class EighthFloorScene extends Phaser.Scene {
     if(pointer.isDown){
       this.destinationX = this.input.activePointer.worldX;
       this.destinationY = this.input.activePointer.worldY;
-
     }
+
+    // console.log("x: "+this.destinationX+" y: "+this.destinationY);
+
+
+    this.player.nameLabel.x = this.player.phaser.x;
+    this.player.chatBubble.x = this.player.phaser.x;
+    this.player.nameLabel.y = this.player.phaser.y - 30;
+    this.player.chatBubble.y = this.player.phaser.y - 45;
 
     this.socket.emit('movePlayer', {
       id: this.socket.id,

@@ -24,6 +24,10 @@ export function popupCreate(scene, { x, y }, workNum) {
   // FIXME: event 등록 해제해야 하는지 확인 필요
   popupSprite.on("pointerdown", () => {
     descriptionContainer = document.createElement('div');
+    descriptionContainer.onmousedown = () => window.game.input.enabled = false;
+    descriptionContainer.onmouseup = () => window.game.input.enabled = true;
+    descriptionContainer.ontouchstart = () => window.game.input.enabled = false;
+    descriptionContainer.ontouchend = () => window.game.input.enabled = true;
     // descriptionContainer.id = work.id;
     console.log(descriptionContainer.id);
     descriptionContainer.style.position = 'absolute';
