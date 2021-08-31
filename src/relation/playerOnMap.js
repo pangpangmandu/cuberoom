@@ -47,15 +47,18 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       case FirstFloorScene:
         switch (curTileName) {
           case 'up':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '2F' });
             startScene(scene, 'SecondFloorScene', { x: 16 * 6, y: 16 * 11 });
             break;
           case 'down':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'B1' });
             startScene(scene, 'FirstBasementScene', { x: 16 * 3, y: 16 * 32 });
             break;
           case 'elevator':
             showElevatorPanel(scene, '1F');
             break;
           case 'out':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'entrance' });
             // 이거왜안됨..
             startScene(scene, 'EntranceScene', { x: 16 * 27, y: 16 * 29 });
             break;
@@ -66,10 +69,11 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       case SecondFloorScene:
         switch (curTileName) {
           case 'up':
-            // 근데 2층에서 바로 5층으로 가는 게 맞나..??
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '5F' });
             startScene(scene, 'FifthFloorScene', { x: 16 * 6, y: 16 * 11 });
             break;
           case 'down':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '1F' });
             startScene(scene, 'FirstFloorScene', { x: 16 * 3, y: 16 * 11 });
             break;
           case 'elevator':
@@ -84,16 +88,18 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       case FifthFloorScene:
         switch (curTileName) {
           case 'up':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '6F' });
             startScene(scene, 'SixthFloorScene', { x: 16 * 6, y: 16 * 21 });
             break;
           case 'down':
-            // 근데 5층에서 바로 2층으로 가는 게 맞나..??
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '2F' });
             startScene(scene, 'SecondFloorScene', { x: 16 * 3, y: 16 * 11 });
             break;
           case 'elevator':
             showElevatorPanel(scene, '5F');
             break;
           case 'up2':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '6F' });
             startScene(scene, 'SixthFloorScene', { x: 16 * 46, y: 16 * 26 });
             break;
           default:
@@ -103,15 +109,18 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       case SixthFloorScene:
         switch (curTileName) {
           case 'up':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '7F' });
             startScene(scene, 'SeventhFloorScene', { x: 16 * 6, y: 16 * 11 });
             break;
           case 'down':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '5F' });
             startScene(scene, 'FifthFloorScene', { x: 16 * 3, y: 16 * 11 });
             break;
           case 'elevator':
             showElevatorPanel(scene, '6F');
             break;
           case 'down2':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '5F' });
             startScene(scene, 'FifthFloorScene', { x: 16 * 46, y: 16 * 17 });
             break;
           default:
@@ -121,9 +130,11 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       case SeventhFloorScene:
         switch (curTileName) {
           case 'up':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '8F' });
             startScene(scene, 'EighthFloorScene', { x: 16 * 6, y: 16 * 20 });
             break;
           case 'down':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '6F' });
             startScene(scene, 'SixthFloorScene', { x: 16 * 3, y: 16 * 21 });
             break;
           case 'elevator':
@@ -140,6 +151,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
           case 'up':
             break;
           case 'down':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '7F' });
             startScene(scene, 'SeventhFloorScene', { x: 16 * 6, y: 16 * 11 });
             break;
           case 'elevator':
@@ -153,18 +165,22 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       case FirstBasementScene:
         switch (curTileName) {
           case 'up':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '1F' });
             startScene(scene, 'FirstFloorScene', { x: 16 * 6, y: 16 * 11 });
             break;
           case 'down':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'B2' });
             startScene(scene, 'SecondBasementScene', { x: 16 * 6, y: 16 * 13 });
             break;
           case 'elevator':
             showElevatorPanel(scene, 'B1');
             break;
           case 'down2':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'B2' });
             startScene(scene, 'SecondBasementScene', { x: 16 * 37, y: 16 * 16 });
             break;
           case 'down3':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'B2' });
             startScene(scene, 'SecondBasementScene', { x: 16 * 3, y: 16 * 35 });
             break;
           case 'work-1':
@@ -186,6 +202,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
       case SecondBasementScene:
         switch (curTileName) {
           case 'up':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'B1' });
             startScene(scene, 'FirstBasementScene', { x: 16 * 6, y: 16 * 32 });
             break;
           case 'elevator':

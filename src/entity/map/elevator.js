@@ -43,6 +43,7 @@ export function showElevatorPanel(scene, floor) {
   const buttonTo1F = elButton(56, 276, '1F');
   buttonTo1F.onclick = () => {
     hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '1F' });
     startScene(scene, 'FirstFloorScene', { x: 16 * 9, y: 16 * 21 });
   }
   panel.appendChild(buttonTo1F);
@@ -50,6 +51,7 @@ export function showElevatorPanel(scene, floor) {
   const buttonTo2F = elButton(120, 276, '2F');
   buttonTo2F.onclick = () => {
     hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '2F' });
     startScene(scene, 'SecondFloorScene', { x: 16 * 9, y: 16 * 21 });
   }
   panel.appendChild(buttonTo2F);
@@ -57,6 +59,7 @@ export function showElevatorPanel(scene, floor) {
   const buttonTo5F = elButton(56, 212, '5F');
   buttonTo5F.onclick = () => {
     hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '5F' });
     startScene(scene, 'FifthFloorScene', { x: 16 * 9, y: 16 * 22 });
   }
   panel.appendChild(buttonTo5F);
@@ -64,6 +67,7 @@ export function showElevatorPanel(scene, floor) {
   const buttonTo6F = elButton(120, 212, '6F');
   buttonTo6F.onclick = () => {
     hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '6F' });
     startScene(scene, 'SixthFloorScene', { x: 16 * 9, y: 16 * 30 });
   }
   panel.appendChild(buttonTo6F);
@@ -71,6 +75,7 @@ export function showElevatorPanel(scene, floor) {
   const buttonTo7F = elButton(56, 148, '7F');
   buttonTo7F.onclick = () => {
     hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '7F' });
     startScene(scene, 'SeventhFloorScene', { x: 16 * 9, y: 16 * 22 });
   }
   panel.appendChild(buttonTo7F);
@@ -78,6 +83,7 @@ export function showElevatorPanel(scene, floor) {
   const buttonToB1 = elButton(120, 340, 'B1');
   buttonToB1.onclick = () => {
     hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'B1' });
     startScene(scene, 'FirstBasementScene', { x: 16 * 9, y: 16 * 42 });
   }
   panel.appendChild(buttonToB1);
@@ -85,6 +91,7 @@ export function showElevatorPanel(scene, floor) {
   const buttonToB2 = elButton(56, 340, 'B2');
   buttonToB2.onclick = () => {
     hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'B2' });
     startScene(scene, 'SecondBasementScene', { x: 16 * 9, y: 16 * 23 });
   }
   panel.appendChild(buttonToB2);
