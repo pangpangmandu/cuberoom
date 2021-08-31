@@ -33,8 +33,6 @@ class EntranceScene extends Phaser.Scene {
         this.players[data.id].chatBubble.destroy(true);
         delete this.players[data.id];
       }
-      // this.players[data.id].player.phaser.destroy(true);
-      // delete this.players[data.id];
     });
 
     this.socket.on('playerList', (data) => {
@@ -44,9 +42,9 @@ class EntranceScene extends Phaser.Scene {
           const directions = ['left', 'right', 'up', 'down'];
           for (const direction of directions) {
             for (let i = 1; i < 5; i += 1) {
-              this.load.image(`${player.id}-${direction}-${i}`, `http://127.0.0.1:3000/static${player.imgUrl}${direction}-${i}.png`);
+              // this.load.image(`${player.id}-${direction}-${i}`, `http://127.0.0.1:3000/static${player.imgUrl}${direction}-${i}.png`);
               // this.load.image(`${player.id}-${direction}-${i}`, `http://localhost:3000/static${player.imgUrl}${direction}-${i}.png`);
-              // this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net/${player.imgUrl}${direction}-${i}.png`);
+              this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net/${player.imgUrl}${direction}-${i}.png`);
             }
           }
           this.load.once('complete', () => {
@@ -64,6 +62,8 @@ class EntranceScene extends Phaser.Scene {
             this.players[id].chatBubble.y = player.y - 45;
             // this.players[id].phaser.anims.play(`player-${player.direction}`, true);
             // this.players[id].phaser.anims.play(`player-${player.direction}-stop`, true);
+            // 이 phaser에게는 scene이 없다...!
+            if (!this.players[id].phaser.scene) this.players[id].phaser.scene = this;
             this.players[id].phaser.setTexture(`${player.id}-${player.direction}-${2}`); // 이거 playerCreate할 때 참고!!!!
           }
         }
@@ -71,11 +71,11 @@ class EntranceScene extends Phaser.Scene {
     });
 
     this.socket.on('addChat', (data) => {
-      if (this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
+      if (data.floor === 'entrance' && this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
     });
 
     this.socket.on('removeChat', (data) => {
-      if (this.players[data.id]) this.players[data.id].chatBubble.setText('');
+      if (data.floor === 'entrance' && this.players[data.id]) this.players[data.id].chatBubble.setText('');
     });
   }
 

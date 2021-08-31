@@ -15,7 +15,6 @@
         서울 강남구에 있는 코라아나 미술관의 '스페이스 씨'에서 열리는 전시를 위해 만들었습니다.
         코리아나 미술관으로 가 볼까요? 강남구를 클릭해 주세요.
       "
-      width="50%"
     />
   </div>
   <img class="flag" src="/img/ui/map_click.png" alt="" />
@@ -49,6 +48,10 @@
     align-items: center;
     position: absolute;
     z-index: 2;
+  }
+
+  .guide img {
+    width: 450px;
   }
 
   .flag {

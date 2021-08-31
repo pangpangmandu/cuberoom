@@ -26,10 +26,10 @@ class SecondBasementScene extends Phaser.Scene {
     this.players = {};
 
     this.socket.on('removePlayer', (data) => {
-      // this.players[data.id].player.phaser.destroy(true);
-      // delete this.players[data.id];
 			if (this.players[data.id]) {
         this.players[data.id].phaser.destroy(true);
+				this.players[data.id].nameLabel.destroy(true);
+        this.players[data.id].chatBubble.destroy(true);
         delete this.players[data.id];
       }
     });
@@ -58,11 +58,11 @@ class SecondBasementScene extends Phaser.Scene {
     });
 
     this.socket.on('addChat', (data) => {
-      if (this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
+      if (data.floor === 'B2' && this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
     });
 
     this.socket.on('removeChat', (data) => {
-      if (this.players[data.id]) this.players[data.id].chatBubble.setText('');
+      if (data.floor === 'B2' && this.players[data.id]) this.players[data.id].chatBubble.setText('');
     });
 	}
 
@@ -93,6 +93,11 @@ class SecondBasementScene extends Phaser.Scene {
 		backgroundStatic(this);
 
 		this.map = mapCreate(this, 'secondBasement-map');
+
+		for (const [id, player] of Object.entries(this.players)) {
+      this.players[id] = playerCreate(this, player.phaser.x, player.phaser.y, player.nameLabel._text, player.chatBubble._text, player.id);
+    }
+
 		this.player = playerCreate(this, this.x, this.y);
 		this.players[this.socket.id] = this.player;
 

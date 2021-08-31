@@ -3,10 +3,10 @@
 </script>
 
 <main>
-  <img src="/img/ui/title.png" alt="큐브 룸" width="40%" />
+  <img class="title" src="/img/ui/title.png" alt="큐브 룸" />
   <div style="text-align: center;">
     <Link to="character-selection">
-      <img src="/img/ui/start.png" alt="시작하기" width="60%" />
+      <img  class="start" src="/img/ui/start.png" alt="시작하기" />
     </Link>
   </div>
 </main>
@@ -31,9 +31,25 @@
     flex: 1;
   }
 
+  .title {
+    width: 400px;
+  }
+
+  .start {
+    width: 312px;
+  }
+
   @media (orientation: portrait) {
     main {
       overflow: hidden;
+    }
+
+    .title {
+      width: 300px;
+    }
+
+    .start {
+      width: 250px;
     }
   }
 </style>

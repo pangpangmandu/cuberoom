@@ -26,10 +26,10 @@ class FirstFloorScene extends Phaser.Scene {
     this.players = {};
 
     this.socket.on('removePlayer', (data) => {
-      // this.players[data.id].player.phaser.destroy(true);
-      // delete this.players[data.id];
       if (this.players[data.id]) {
         this.players[data.id].phaser.destroy(true);
+        this.players[data.id].nameLabel.destroy(true);
+        this.players[data.id].chatBubble.destroy(true);
         delete this.players[data.id];
       }
     });
@@ -57,11 +57,11 @@ class FirstFloorScene extends Phaser.Scene {
     });
 
     this.socket.on('addChat', (data) => {
-      if (this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
+      if (data.floor === '1F' && this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
     });
 
     this.socket.on('removeChat', (data) => {
-      if (this.players[data.id]) this.players[data.id].chatBubble.setText('');
+      if (data.floor === '1F' && this.players[data.id]) this.players[data.id].chatBubble.setText('');
     });
   }
 
@@ -89,6 +89,11 @@ class FirstFloorScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'firstFloor-map');
+
+    for (const [id, player] of Object.entries(this.players)) {
+      this.players[id] = playerCreate(this, player.phaser.x, player.phaser.y, player.nameLabel._text, player.chatBubble._text, player.id);
+    }
+
     this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl); // 소켓 연결 되면 이 부분을 지워야 함
     this.players[this.socket.id] = this.player;
 
