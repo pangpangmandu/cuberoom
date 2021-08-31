@@ -42,9 +42,9 @@ class EntranceScene extends Phaser.Scene {
           const directions = ['left', 'right', 'up', 'down'];
           for (const direction of directions) {
             for (let i = 1; i < 5; i += 1) {
-              this.load.image(`${player.id}-${direction}-${i}`, `http://127.0.0.1:3000/static${player.imgUrl}${direction}-${i}.png`);
+              // this.load.image(`${player.id}-${direction}-${i}`, `http://127.0.0.1:3000/static${player.imgUrl}${direction}-${i}.png`);
               // this.load.image(`${player.id}-${direction}-${i}`, `http://localhost:3000/static${player.imgUrl}${direction}-${i}.png`);
-              // this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net/${player.imgUrl}${direction}-${i}.png`);
+              this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net/${player.imgUrl}${direction}-${i}.png`);
             }
           }
           this.load.once('complete', () => {
