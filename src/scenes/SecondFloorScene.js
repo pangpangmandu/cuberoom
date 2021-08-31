@@ -26,8 +26,12 @@ class SecondFloorScene extends Phaser.Scene {
     this.players = {};
 
     this.socket.on('removePlayer', (data) => {
-      this.players[data.id].player.phaser.destroy(true);
-      delete this.players[data.id];
+      // this.players[data.id].player.phaser.destroy(true);
+      // delete this.players[data.id];
+      if (this.players[data.id]) {
+        this.players[data.id].player.phaser.destroy(true);
+        delete this.players[data.id];
+      }
     });
 
     this.socket.on('playerList', (data) => {
@@ -54,11 +58,11 @@ class SecondFloorScene extends Phaser.Scene {
     });
 
     this.socket.on('addChat', (data) => {
-      this.players[data.id].chatBubble.setText(data.chat);
+      if (this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
     });
 
-    this.socket.on('removeChat', () => {
-      this.players[data.id].chatBubble.setText('');
+    this.socket.on('removeChat', (data) => {
+      if (this.players[data.id]) this.players[data.id].chatBubble.setText('');
     });
   }
 

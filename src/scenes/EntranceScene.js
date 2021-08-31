@@ -26,8 +26,13 @@ class EntranceScene extends Phaser.Scene {
     this.players = {};
 
     this.socket.on('removePlayer', (data) => {
-      this.players[data.id].player.phaser.destroy(true);
-      delete this.players[data.id];
+      console.log(12345)
+      if (this.players[data.id]) {
+        this.players[data.id].player.phaser.destroy(true);
+        delete this.players[data.id];
+      }
+      // this.players[data.id].player.phaser.destroy(true);
+      // delete this.players[data.id];
     });
 
     this.socket.on('playerList', (data) => {
@@ -43,6 +48,7 @@ class EntranceScene extends Phaser.Scene {
           this.load.once('complete', () => {
             this.players[id] = player;
             this.players[id].player = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
+            // console.log(11111, Boolean(this.players[id].player.nameLabel), Boolean(this.players[id].player.chatBubble))
           }, this);
           this.load.start();
         } else {
@@ -57,17 +63,18 @@ class EntranceScene extends Phaser.Scene {
             // this.players[id].player.phaser.anims.play(`player-${player.direction}`, true);
             // this.players[id].player.phaser.anims.play(`player-${player.direction}-stop`, true);
             this.players[id].player.phaser.setTexture(`${player.id}-${player.direction}-${2}`);
+            // console.log(22222, Boolean(this.players[id].player.nameLabel), Boolean(this.players[id].player.chatBubble))
           }
         }
       }
     });
 
     this.socket.on('addChat', (data) => {
-      this.players[data.id].chatBubble.setText(data.chat);
+      if (this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
     });
 
-    this.socket.on('removeChat', () => {
-      this.players[data.id].chatBubble.setText('');
+    this.socket.on('removeChat', (data) => {
+      if (this.players[data.id]) this.players[data.id].chatBubble.setText('');
     });
   }
 
