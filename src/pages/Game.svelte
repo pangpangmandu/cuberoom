@@ -61,9 +61,6 @@
   id="chat"
   on:mousedown={() => game.input.enabled = false}
   on:mouseup={() => game.input.enabled = true}
-
-  on:touchstart={() => game.input.enabled = false}
-  on:touchend={() => game.input.enabled = true}
 >
   <input maxlength="30" placeholder="엔터 키를 누르면 대화할 수 있습니다." bind:value={chat} />
   <button on:click={addChat}>↵</button>
