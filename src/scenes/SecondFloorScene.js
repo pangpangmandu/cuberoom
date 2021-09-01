@@ -38,7 +38,18 @@ class SecondFloorScene extends Phaser.Scene {
     this.socket.on('playerList', (data) => {
       for (const [id, player] of Object.entries(data)) {
         if (player.floor !== '2F') return;
-        if (!this.players[id]) {
+
+        const directions = ['left', 'right', 'up', 'down'];
+        for (const direction of directions) {
+          for (let i = 1; i < 5; i += 1) {
+            // if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://127.0.0.1:3000/static${player.imgUrl}${direction}-${i}.png`);
+            // if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://localhost:3000/static${player.imgUrl}${direction}-${i}.png`);
+            if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net/${player.imgUrl}${direction}-${i}.png`);
+          }
+        }
+        this.load.once('complete', () => {
+          // if (!this.players[id]) this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
+          if (!this.players[id]) {
           this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
         } else {
           // if (player.floor === 'entrance' && this.socket.id !== id) {
@@ -54,6 +65,25 @@ class SecondFloorScene extends Phaser.Scene {
             this.players[id].phaser.setTexture(`${player.id}-${player.direction}-${2}`);
           }
         }
+        }, this);
+        this.load.start();
+
+        // if (!this.players[id]) {
+        //   this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
+        // } else {
+        //   // if (player.floor === 'entrance' && this.socket.id !== id) {
+        //   if (this.socket.id !== id) {
+        //     this.players[id].phaser.x = player.x;
+        //     this.players[id].phaser.y = player.y;
+        //     this.players[id].nameLabel.x = player.x;
+        //     this.players[id].nameLabel.y = player.y - 30;
+        //     this.players[id].chatBubble.x = player.x;
+        //     this.players[id].chatBubble.y = player.y - 45;
+        //     // this.players[id].phaser.anims.play(`player-${player.direction}`, true);
+        //     // this.players[id].phaser.anims.play(`player-${player.direction}-stop`, true);
+        //     this.players[id].phaser.setTexture(`${player.id}-${player.direction}-${2}`);
+        //   }
+        // }
       }
     });
 
