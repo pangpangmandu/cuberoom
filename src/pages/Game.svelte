@@ -57,14 +57,15 @@
   window.game = game;
 </script>
 
-<div
+<form
   id="chat"
   on:mousedown={() => game.input.enabled = false}
   on:mouseup={() => game.input.enabled = true}
+  on:submit|preventDefault={addChat}
 >
   <input maxlength="30" placeholder="엔터 키를 누르면 대화할 수 있습니다." bind:value={chat} />
-  <button on:click={addChat}>↵</button>
-</div>
+  <button on:click|preventDefault={addChat}>↵</button>
+</form>
 
 <style>
   #chat {
