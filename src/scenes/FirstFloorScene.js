@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { playerCreate, playerUpdate ,playerMouseUpdate, playerFollowClickUpdate } from "../entity/player";
+import { playerCreate, playerUpdate ,playerMouseUpdate, playerFollowClickUpdate, playerinitmove } from "../entity/player";
 import { allCharacterImageNames } from "../entity/player/image";
 import { playerCreateAnimations } from "../entity/player/animation";
 import { mapCreate, mapCreateOverCharacterLayer } from "../entity/map";
@@ -98,6 +98,7 @@ class FirstFloorScene extends Phaser.Scene {
 
     this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl); // 소켓 연결 되면 이 부분을 지워야 함
     this.players[this.socket.id] = this.player;
+    this.player = playerinitmove(this.player);
 
     this.socket.emit('addPlayer', {
       id: this.socket.id,

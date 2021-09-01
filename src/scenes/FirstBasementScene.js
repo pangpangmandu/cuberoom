@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { playerCreate, playerUpdate, playerMouseUpdate, playerFollowClickUpdate } from "../entity/player";
+import { playerCreate, playerUpdate, playerMouseUpdate, playerFollowClickUpdate,playerinitmove } from "../entity/player";
 import { allCharacterImageNames } from "../entity/player/image";
 import { playerCreateAnimations } from "../entity/player/animation";
 import { mapCreate, mapCreateOverCharacterLayer } from "../entity/map";
@@ -97,6 +97,8 @@ class FirstBasementScene extends Phaser.Scene {
 
 		this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl);
 		this.players[this.socket.id] = this.player;
+		this.player = playerinitmove(this.player);
+
 
 		this.socket.emit('addPlayer', {
       id: this.socket.id,

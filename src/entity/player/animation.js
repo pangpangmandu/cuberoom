@@ -242,3 +242,13 @@ export function updateFollowClickAnimation(player, destinationX, destinationY) {
     prevAnim: newPrevAnim,
   };
 }
+
+
+export function updateInitAnimation(player){
+  let newPrevAnim = player.prevAnim;
+  player.phaser.anims.play("player-down-stop", true);
+  return {
+    ...player,
+    prevAnim: newPrevAnim,
+  };
+}

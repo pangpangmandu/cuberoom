@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { playerCreate, playerUpdate, playerFollowClickUpdate } from "../entity/player";
+import { playerCreate, playerUpdate, playerFollowClickUpdate, playerinitmove } from "../entity/player";
 import { allCharacterImageNames } from "../entity/player/image";
 import { playerCreateAnimations } from "../entity/player/animation";
 import { mapCreate, mapCreateOverCharacterLayer } from "../entity/map";
@@ -99,8 +99,12 @@ class SecondBasementScene extends Phaser.Scene {
       this.players[id] = playerCreate(this, player.phaser.x, player.phaser.y, player.nameLabel._text, player.chatBubble._text, player.id);
     }
 
-		this.player = playerCreate(this, this.x, this.y);
+		// this.player = playerCreate(this, this.x, this.y);
+		this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl);
+
 		this.players[this.socket.id] = this.player;
+		this.player = playerinitmove(this.player);
+
 
 		this.socket.emit('addPlayer', {
       id: this.socket.id,

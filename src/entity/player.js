@@ -1,4 +1,4 @@
-import { updateAnimation, updateMouseAnimation, updateFollowClickAnimation } from "./player/animation";
+import { updateAnimation, updateMouseAnimation, updateFollowClickAnimation, updateInitAnimation } from "./player/animation";
 
 export function playerCreate(scene, x, y, name, chat, id) {
   const phaser = scene.physics.add.sprite(x, y, `${id}-down-2`, 1);
@@ -54,6 +54,20 @@ export function playerCreate(scene, x, y, name, chat, id) {
   };
 }
 
+function initmove(player){
+
+  let velocity = 1;
+  let newPrevMove = player.prevMove;
+
+  player.phaser.body.setVelocityX(velocity);
+  newPrevMove = "right";
+
+  return {
+    ...player,
+    prevMove: newPrevMove,
+  };
+
+}
 
 function followClick(player, destinationX, destinationY, scene){
 
@@ -370,5 +384,12 @@ export function playerMouseUpdate(player, pointer, scene) {
 export function playerFollowClickUpdate(player, destinationX, destinationY, scene) {
   let newPlayer = updateFollowClickAnimation(player, destinationX, destinationY);
   newPlayer = followClick(newPlayer, destinationX, destinationY, scene);
+  return newPlayer;
+}
+
+
+export function playerinitmove(player){
+  let newPlayer = updateInitAnimation(player);
+  newPlayer = initmove(newPlayer);
   return newPlayer;
 }
