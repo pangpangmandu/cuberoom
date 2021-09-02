@@ -24,14 +24,6 @@
 </main>
 
 <style>
-
-  .start-game{
-
-    width : 120%;
-    height: 120%;
-    z-index : 2;
-  }
-
   main {
     height: 100%;
     background-image: url('/img/ui/map_background.jpg');
@@ -70,6 +62,9 @@
   }
 
   :global(a.start-game) {
+    width : 120%;
+    height: 120%;
+    z-index : 2;
     opacity: 0;
     position: absolute;
     top: calc(50% + 56px);
