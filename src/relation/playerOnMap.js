@@ -49,6 +49,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             showElevatorPanel(scene, '1F');
             break;
           case 'out':
+            console.log('out!!!!!')
             scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'entrance' });
             // 이거왜안됨..
             startScene(scene, 'EntranceScene', { x: 16 * 27, y: 16 * 29 });
