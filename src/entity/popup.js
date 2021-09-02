@@ -26,8 +26,8 @@ export function popupCreate(scene, { x, y }, workNum) {
     descriptionContainer = document.createElement('div');
     descriptionContainer.onmousedown = () => window.game.input.enabled = false;
     descriptionContainer.onmouseup = () => window.game.input.enabled = true;
-    descriptionContainer.ontouchstart = () => window.game.input.enabled = false;
-    descriptionContainer.ontouchend = () => window.game.input.enabled = true;
+    // descriptionContainer.ontouchstart = () => window.game.input.enabled = false;
+    // descriptionContainer.ontouchend = () => window.game.input.enabled = true;
     // descriptionContainer.id = work.id;
     console.log(descriptionContainer.id);
     descriptionContainer.style.position = 'absolute';

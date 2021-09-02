@@ -11,11 +11,11 @@
   import SecondBasementScene from '../scenes/SecondBasementScene';
   import { io } from 'socket.io-client';
 
-   const socket = io.connect('http://127.0.0.1:3000');
+  //  const socket = io.connect('http://127.0.0.1:3000');
   // const socket = io.connect('http://localhost:3000');
   // const socket = io.connect('http://cuberoom.net');
   // const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });
-  // const socket = io.connect('http://cuberoom.net', { transports: ['websocket'] });
+  const socket = io.connect('http://cuberoom.net', { transports: ['websocket'] });
   window.socket = socket;
 
   let chat = '';
@@ -57,17 +57,15 @@
   window.game = game;
 </script>
 
-<div
+<form
   id="chat"
   on:mousedown={() => game.input.enabled = false}
   on:mouseup={() => game.input.enabled = true}
-
-  on:touchstart={() => game.input.enabled = false}
-  on:touchend={() => game.input.enabled = true}
+  on:submit|preventDefault={addChat}
 >
   <input maxlength="30" placeholder="엔터 키를 누르면 대화할 수 있습니다." bind:value={chat} />
-  <button on:click={addChat}>↵</button>
-</div>
+  <button on:click|preventDefault={addChat}>↵</button>
+</form>
 
 <style>
   #chat {
