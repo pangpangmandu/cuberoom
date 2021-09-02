@@ -220,7 +220,7 @@ class FirstBasementScene extends Phaser.Scene {
     ) {
       this.socket.emit('movePlayer', {
         id: this.socket.id,
-        floor: 'entrance',
+        floor: 'B1',
         direction: this.player.prevMove,
         x: this.player.phaser.x,
         y: this.player.phaser.y,

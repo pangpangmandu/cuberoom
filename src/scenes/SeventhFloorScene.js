@@ -225,7 +225,7 @@ class SeventhFloorScene extends Phaser.Scene {
     ) {
       this.socket.emit('movePlayer', {
         id: this.socket.id,
-        floor: 'entrance',
+        floor: '7F',
         direction: this.player.prevMove,
         x: this.player.phaser.x,
         y: this.player.phaser.y,
