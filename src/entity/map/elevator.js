@@ -12,6 +12,7 @@ function elButton(x, y, floor) {
   button.style.border = 'none';
   button.style.backgroundImage = `url("/img/ui-map/el_${floor}.png")`;
   button.style.opacity = 0;
+  button.style.cursor = 'pointer';
 
   return button;
 }
