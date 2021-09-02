@@ -37,6 +37,7 @@ class SecondFloorScene extends Phaser.Scene {
     });
 
     this.socket.on('playerList', (data) => {
+      // console.log(data)
       for (const [id, player] of Object.entries(data)) {
         if (player.floor !== '2F') return;
 
@@ -53,6 +54,11 @@ class SecondFloorScene extends Phaser.Scene {
         } else {
           // if (player.floor === 'entrance' && this.socket.id !== id) {
           if (this.socket.id !== id) {
+            if (this.players[id].phaser.depth === 0) {
+              this.players[id].phaser.setDepth(1);
+              this.players[id].nameLabel.setDepth(1);
+              this.players[id].chatBubble.setDepth(1);
+            }
             this.players[id].phaser.x = player.x;
             this.players[id].phaser.y = player.y;
             this.players[id].nameLabel.x = player.x;
