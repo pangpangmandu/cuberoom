@@ -21,8 +21,8 @@ class EntranceScene extends Phaser.Scene {
     this.player = null;
     this.cursors = null;
     this.playerOnMap = null;
-    this.x = 16 * 6;
-    this.y = 16 * 34;
+    this.x = 16 * 5;
+    this.y = 16 * 30;
     this.socket = window.socket;
     this.players = {};
 
