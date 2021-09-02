@@ -121,9 +121,10 @@ class FirstBasementScene extends Phaser.Scene {
 
 		this.map = mapCreate(this, 'firstBasement-map');
 
-		for (const [id, player] of Object.entries(this.players)) {
-      this.players[id] = playerCreate(this, player.phaser.x, player.phaser.y, player.nameLabel._text, player.chatBubble._text, player.id);
-    }
+	// 잔상관련 주석 처리	
+	// 	for (const [id, player] of Object.entries(this.players)) {
+    //   this.players[id] = playerCreate(this, player.phaser.x, player.phaser.y, player.nameLabel._text, player.chatBubble._text, player.id);
+    // }
 
 		this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl);
 		this.players[this.socket.id] = this.player;

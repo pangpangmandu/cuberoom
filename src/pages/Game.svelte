@@ -11,7 +11,7 @@
   import SecondBasementScene from '../scenes/SecondBasementScene';
   import { io } from 'socket.io-client';
 
-  //  const socket = io.connect('http://127.0.0.1:3000');
+  // const socket = io.connect('http://127.0.0.1:3000');
   // const socket = io.connect('http://localhost:3000');
   // const socket = io.connect('http://cuberoom.net');
   // const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });

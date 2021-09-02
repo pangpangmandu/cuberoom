@@ -122,9 +122,10 @@ class SeventhFloorScene extends Phaser.Scene {
 
     this.map = mapCreate(this, 'seventhFloor-map');
 
-    for (const [id, player] of Object.entries(this.players)) {
-      this.players[id] = playerCreate(this, player.phaser.x, player.phaser.y, player.nameLabel._text, player.chatBubble._text, player.id);
-    }
+    // 잔상 관련 주석처리
+    // for (const [id, player] of Object.entries(this.players)) {
+    //   this.players[id] = playerCreate(this, player.phaser.x, player.phaser.y, player.nameLabel._text, player.chatBubble._text, player.id);
+    // }
 
     // this.player = playerCreate(this, this.x, this.y);
     this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl);

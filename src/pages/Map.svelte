@@ -24,6 +24,14 @@
 </main>
 
 <style>
+
+  .start-game{
+
+    width : 120%;
+    height: 120%;
+    z-index : 2;
+  }
+
   main {
     height: 100%;
     background-image: url('/img/ui/map_background.jpg');
@@ -42,12 +50,12 @@
 
   .guide {
     width: 100%;
-    height: 60%;
+    height: 30%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     position: absolute;
-    z-index: 2;
+    z-index: 1;
   }
 
   .guide img {
@@ -58,7 +66,7 @@
     position: absolute;
     top: 50%;
     left: calc(50% + 55px);
-    z-index: 2;
+    z-index: 3;
   }
 
   :global(a.start-game) {
