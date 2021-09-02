@@ -27,12 +27,20 @@ class FirstBasementScene extends Phaser.Scene {
     this.players = {};
 
     this.socket.on('removePlayer', (data) => {
-			if (this.players[data.id]) {
-        this.players[data.id].phaser.destroy(true);
-				this.players[data.id].nameLabel.destroy(true);
-        this.players[data.id].chatBubble.destroy(true);
-        delete this.players[data.id];
-      }
+			setTimeout(() => {
+        if (this.players[data.id]) {
+          this.players[data.id].phaser.destroy(true);
+          this.players[data.id].nameLabel.destroy(true);
+          this.players[data.id].chatBubble.destroy(true);
+          delete this.players[data.id];
+        }
+      }, 500);
+			// if (this.players[data.id]) {
+      //   this.players[data.id].phaser.destroy(true);
+			// 	this.players[data.id].nameLabel.destroy(true);
+      //   this.players[data.id].chatBubble.destroy(true);
+      //   delete this.players[data.id];
+      // }
     });
 
     this.socket.on('playerList', (data) => {
@@ -121,7 +129,7 @@ class FirstBasementScene extends Phaser.Scene {
 
 		this.map = mapCreate(this, 'firstBasement-map');
 
-	// 잔상관련 주석 처리	
+	// 잔상관련 주석 처리
 	// 	for (const [id, player] of Object.entries(this.players)) {
     //   this.players[id] = playerCreate(this, player.phaser.x, player.phaser.y, player.nameLabel._text, player.chatBubble._text, player.id);
     // }
