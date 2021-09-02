@@ -33,6 +33,7 @@
   function addChat() {
     clearTimeout(chatTimer);
     socket.emit('addChat', { id: socket.id, chat });
+    chat = '';
     chatTimer = setTimeout(() => socket.emit('removeChat', { id: socket.id }), 3000); // 3초 뒤에 말풍선 삭제
   }
 
