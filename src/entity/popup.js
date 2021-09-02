@@ -29,7 +29,6 @@ export function popupCreate(scene, { x, y }, workNum) {
     // descriptionContainer.ontouchstart = () => window.game.input.enabled = false;
     // descriptionContainer.ontouchend = () => window.game.input.enabled = true;
     // descriptionContainer.id = work.id;
-    console.log(descriptionContainer.id);
     descriptionContainer.style.position = 'absolute';
     descriptionContainer.style.top = '0px';
     descriptionContainer.style.left = '0px';

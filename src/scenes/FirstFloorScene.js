@@ -37,7 +37,6 @@ class FirstFloorScene extends Phaser.Scene {
     });
 
     this.socket.on('playerList', (data) => {
-      console.log('플레이어 수: ' , Object.keys(data).length)
       for (const [id, player] of Object.entries(data)) {
         if (player.floor !== '1F') return;
 
@@ -208,9 +207,6 @@ class FirstFloorScene extends Phaser.Scene {
       this.destinationY = this.input.activePointer.worldY;
 
     }
-
-    // console.log("x: "+this.destinationX+" y: "+this.destinationY);
-
 
     this.player.nameLabel.x = this.player.phaser.x;
     this.player.chatBubble.x = this.player.phaser.x;

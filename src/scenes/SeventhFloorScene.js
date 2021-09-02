@@ -213,9 +213,6 @@ class SeventhFloorScene extends Phaser.Scene {
 
     }
 
-    // console.log("x: "+this.destinationX+" y: "+this.destinationY);
-
-
     this.player.nameLabel.x = this.player.phaser.x;
     this.player.chatBubble.x = this.player.phaser.x;
     this.player.nameLabel.y = this.player.phaser.y - 30;

@@ -212,8 +212,6 @@ class FifthFloorScene extends Phaser.Scene {
       this.destinationY = this.input.activePointer.worldY;
 
     }
-    // console.log("x: "+this.destinationX+" y: "+this.destinationY);
-
 
     this.player.nameLabel.x = this.player.phaser.x;
     this.player.chatBubble.x = this.player.phaser.x;
