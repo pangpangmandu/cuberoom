@@ -227,13 +227,20 @@ class SecondBasementScene extends Phaser.Scene {
 		this.player.nameLabel.y = this.player.phaser.y - 30;
 		this.player.chatBubble.y = this.player.phaser.y - 45;
 
-		this.socket.emit('movePlayer', {
-      id: this.socket.id,
-			floor: 'B2',
-      direction: this.player.prevMove,
-      x: this.player.phaser.x,
-      y: this.player.phaser.y,
-    });
+		if (
+      this.destinationX && this.destinationY && (
+        Math.abs(this.destinationX - this.player.phaser.x) > 20
+        || Math.abs(this.destinationY - this.player.phaser.y) > 120
+      )
+    ) {
+      this.socket.emit('movePlayer', {
+        id: this.socket.id,
+        floor: 'entrance',
+        direction: this.player.prevMove,
+        x: this.player.phaser.x,
+        y: this.player.phaser.y,
+      });
+    }
 	}
 }
 
