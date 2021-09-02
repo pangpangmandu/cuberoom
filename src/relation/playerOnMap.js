@@ -29,7 +29,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
           case 'up':
             // 이거 다른 경우에도 추가하기?
             scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '1F' });
-            startScene(scene, 'FirstFloorScene', { x: 16 * 5, y: 16 * 30 });
+            startScene(scene, 'FirstFloorScene', { x: 16 * 5, y: 16 * 29 });
             break;
           default:
             break;
@@ -112,7 +112,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             break;
           case 'down2':
             scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '5F' });
-            startScene(scene, 'FifthFloorScene', { x: 16 * 46, y: 16 * 17 });
+            startScene(scene, 'FifthFloorScene', { x: 16 * 46, y: 16 * 22 });
             break;
           default:
             break;
@@ -207,6 +207,10 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             break;
           case 'elevator':
             showElevatorPanel(scene, 'B2');
+            break;
+          case 'up3':
+            scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'B1' });
+            startScene(scene, 'FirstBasementScene', { x: 16 * 3, y: 16 * 55 });
             break;
           case 'work-5':
             if(document.getElementById("work-5")==null){
