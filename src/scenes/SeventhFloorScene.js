@@ -220,7 +220,7 @@ class SeventhFloorScene extends Phaser.Scene {
     if (
       this.destinationX && this.destinationY && (
         Math.abs(this.destinationX - this.player.phaser.x) > 20
-        || Math.abs(this.destinationY - this.player.phaser.y) > 120
+        || Math.abs(this.destinationY - this.player.phaser.y) > 20
       )
     ) {
       this.socket.emit('movePlayer', {
