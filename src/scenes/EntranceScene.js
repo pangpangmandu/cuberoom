@@ -181,12 +181,10 @@ class EntranceScene extends Phaser.Scene {
       this
     );
 
-//     console.log("player x : "+this.player.phaser.x +" player y: "+ this.player.phaser.y)
 
     if(pointer.isDown){
       this.destinationX = this.input.activePointer.worldX;
       this.destinationY = this.input.activePointer.worldY;
-//       console.log("clicked x: "+this.destinationX+" clicked y: "+this.destinationY);
     }
 
 
