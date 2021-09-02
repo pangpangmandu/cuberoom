@@ -1,15 +1,5 @@
-import Phaser from "phaser";
 import { popupCreate, popupDestroy } from "../entity/popup";
 import { showElevatorPanel, hideElevatorPanel } from '../entity/map/elevator';
-import EntranceScene from "../scenes/EntranceScene";
-import FirstFloorScene from '../scenes/FirstFloorScene';
-import FirstBasementScene from '../scenes/FirstBasementScene';
-import SecondFloorScene from '../scenes/SecondFloorScene';
-import FifthFloorScene from '../scenes/FifthFloorScene';
-import SixthFloorScene from '../scenes/SixthFloorScene';
-import SeventhFloorScene from '../scenes/SeventhFloorScene';
-import EighthFloorScene from '../scenes/EighthFloorScene';
-import SecondBasementScene from '../scenes/SecondBasementScene';
 import { popupPos } from "../entity/works";
 import startScene from "../entity/map/startScene";
 
@@ -33,8 +23,8 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
     if (playerOnMap.prevTileName === 'elevator') hideElevatorPanel();
     if (['work-1', 'work-2', 'work-3','work-4','work-5','work-6','work-7','work-8'].includes(playerOnMap.prevTileName)) popupDestroy();
 
-    switch (scene.constructor) {
-      case EntranceScene:
+    switch (scene.scene.key) {
+      case 'EntranceScene':
         switch (curTileName) {
           case 'up':
             // 이거 다른 경우에도 추가하기?
@@ -45,7 +35,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             break;
         }
         break;
-      case FirstFloorScene:
+      case 'FirstFloorScene':
         switch (curTileName) {
           case 'up':
             scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '2F' });
@@ -67,7 +57,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             break;
         }
         break;
-      case SecondFloorScene:
+      case 'SecondFloorScene':
         switch (curTileName) {
           case 'up':
             scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '5F' });
@@ -86,7 +76,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             break;
         }
         break;
-      case FifthFloorScene:
+      case 'FifthFloorScene':
         switch (curTileName) {
           case 'up':
             scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '6F' });
@@ -107,7 +97,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             break;
         }
         break;
-      case SixthFloorScene:
+      case 'SixthFloorScene':
         switch (curTileName) {
           case 'up':
             scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '7F' });
@@ -128,7 +118,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             break;
         }
         break;
-      case SeventhFloorScene:
+      case 'SeventhFloorScene':
         switch (curTileName) {
           case 'up':
             scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '8F' });
@@ -147,7 +137,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             break;
         }
         break;
-      case EighthFloorScene:
+      case 'EighthFloorScene':
         switch (curTileName) {
           case 'up':
             break;
@@ -163,7 +153,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             break;
         }
         break;
-      case FirstBasementScene:
+      case 'FirstBasementScene':
         switch (curTileName) {
           case 'up':
             scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '1F' });
@@ -209,7 +199,7 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
             break;
         }
         break;
-      case SecondBasementScene:
+      case 'SecondBasementScene':
         switch (curTileName) {
           case 'up':
             scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'B1' });
