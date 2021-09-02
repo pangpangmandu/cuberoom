@@ -1,6 +1,7 @@
 <script>
   import { Link, navigate } from 'svelte-routing';
   import axios from 'axios';
+  import ENV from '../../ENV';
 
   let skinNum = 1;
   let eyeNum = 1;
@@ -63,7 +64,8 @@
   function decide() {
     // axios.post('http://127.0.0.1:3000/character-selection', {
     // axios.post('http://localhost:3000/character-selection', {
-    axios.post('http://cuberoom.net/character-selection', {
+    // axios.post('http://cuberoom.net/character-selection', {
+    axios.post(`${ENV.URL}/character-selection`, {
       name,
       faceS: eyeNum,
       hairS: hairStyleNum,

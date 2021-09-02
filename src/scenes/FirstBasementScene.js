@@ -8,6 +8,7 @@ import {
 	mapUpdateMousePoint,
 } from "../entity/map/interaction";
 import { playerOnMapCreate, playerOnMapUpdate } from "../relation/playerOnMap";
+import ENV from '../../ENV';
 
 function backgroundStatic(scene) {
 	scene.add.sprite(800 / 2, 1220 / 2, "firstBasement-background");
@@ -44,7 +45,8 @@ class FirstBasementScene extends Phaser.Scene {
           for (let i = 1; i < 5; i += 1) {
             // if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://127.0.0.1:3000/static${player.imgUrl}${direction}-${i}.png`);
             // if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://localhost:3000/static${player.imgUrl}${direction}-${i}.png`);
-            if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net${player.imgUrl}${direction}-${i}.png`);
+            // if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net${player.imgUrl}${direction}-${i}.png`);
+						if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `${ENV.URL_STATIC}${player.imgUrl}${direction}-${i}.png`);
           }
         }
         this.load.once('complete', () => {

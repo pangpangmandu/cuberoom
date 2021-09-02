@@ -10,12 +10,17 @@
   import EighthFloorScene from '../scenes/EighthFloorScene';
   import SecondBasementScene from '../scenes/SecondBasementScene';
   import { io } from 'socket.io-client';
+  import ENV from '../../ENV';
 
   // const socket = io.connect('http://127.0.0.1:3000');
   // const socket = io.connect('http://localhost:3000');
   // const socket = io.connect('http://cuberoom.net');
   // const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });
-  const socket = io.connect('http://cuberoom.net', { transports: ['websocket'] });
+  // const socket = io.connect('http://cuberoom.net', { transports: ['websocket'] });
+  const socket = ENV.ENVIRONMENT === 'production'
+    ? io.connect(ENV.URL, { transports: ['websocket'] })
+    : io.connect(ENV.URL);
+
   window.socket = socket;
 
   let chat = '';
