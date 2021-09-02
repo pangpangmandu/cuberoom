@@ -37,6 +37,7 @@ class FirstFloorScene extends Phaser.Scene {
     });
 
     this.socket.on('playerList', (data) => {
+      console.log('플레이어 수: ' , Object.keys(data).length)
       for (const [id, player] of Object.entries(data)) {
         if (player.floor !== '1F') return;
 
