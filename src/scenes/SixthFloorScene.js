@@ -42,9 +42,9 @@ class SixthFloorScene extends Phaser.Scene {
         const directions = ['left', 'right', 'up', 'down'];
         for (const direction of directions) {
           for (let i = 1; i < 5; i += 1) {
-            if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://127.0.0.1:3000/static${player.imgUrl}${direction}-${i}.png`);
+            // if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://127.0.0.1:3000/static${player.imgUrl}${direction}-${i}.png`);
             // if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://localhost:3000/static${player.imgUrl}${direction}-${i}.png`);
-            // if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net${player.imgUrl}${direction}-${i}.png`);
+            if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net${player.imgUrl}${direction}-${i}.png`);
           }
         }
         this.load.once('complete', () => {
@@ -121,7 +121,7 @@ class SixthFloorScene extends Phaser.Scene {
 
     this.map = mapCreate(this, 'sixthFloor-map');
 
-    // 잔상 관련 주석처리 
+    // 잔상 관련 주석처리
     // for (const [id, player] of Object.entries(this.players)) {
     //   this.players[id] = playerCreate(this, player.phaser.x, player.phaser.y, player.nameLabel._text, player.chatBubble._text, player.id);
     // }

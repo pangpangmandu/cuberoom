@@ -13,9 +13,9 @@ export function* allCharacterImageNames(playerImgUrl) {
     for (let i = 1; i < 5; i += 1) {
       yield [
         `player-${direction}-${i}`,
-        `http://127.0.0.1:3000/static${playerImgUrl}${direction}-${i}.png`,
-        `http://localhost:3000/static${playerImgUrl}${direction}-${i}.png`,
-        // `http://cuberoom.net${playerImgUrl}${direction}-${i}.png`,
+        // `http://127.0.0.1:3000/static${playerImgUrl}${direction}-${i}.png`,
+        // `http://localhost:3000/static${playerImgUrl}${direction}-${i}.png`,
+        `http://cuberoom.net${playerImgUrl}${direction}-${i}.png`,
       ];
     }
   }
