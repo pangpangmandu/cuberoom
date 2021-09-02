@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { popupCreate, popupDestroy } from "../entity/popup";
 import { showElevatorPanel, hideElevatorPanel } from '../entity/map/elevator';
 import EntranceScene from "../scenes/EntranceScene";

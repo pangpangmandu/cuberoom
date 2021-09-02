@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { playerCreate, playerUpdate, playerMouseUpdate, playerFollowClickUpdate } from "../entity/player";
+import { playerCreate, playerUpdate, playerMouseUpdate, playerFollowClickUpdate, playerinitmove } from "../entity/player";
 import { allCharacterImageNames } from "../entity/player/image";
 import { playerCreateAnimations } from "../entity/player/animation";
 import { mapCreate, mapCreateOverCharacterLayer } from "../entity/map";
@@ -105,6 +105,7 @@ class EntranceScene extends Phaser.Scene {
     this.map = mapCreate(this, 'entrance-map');
     this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl); // 소켓 연결 되면 이 부분을 지워야 함
     this.players[this.socket.id] = this.player;
+    this.player = playerinitmove(this.player);
 
     this.socket.emit('addPlayer', {
       id: this.socket.id,
@@ -180,13 +181,13 @@ class EntranceScene extends Phaser.Scene {
       this
     );
 
+    console.log("player x : "+this.player.phaser.x +" player y: "+ this.player.phaser.y)
+
     if(pointer.isDown){
       this.destinationX = this.input.activePointer.worldX;
       this.destinationY = this.input.activePointer.worldY;
-
+      console.log("clicked x: "+this.destinationX+" clicked y: "+this.destinationY);
     }
-
-    // console.log("x: "+this.destinationX+" y: "+this.destinationY);
 
 
     this.player.nameLabel.x = this.player.phaser.x;
