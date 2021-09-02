@@ -43,9 +43,6 @@ class SixthFloorScene extends Phaser.Scene {
         const directions = ['left', 'right', 'up', 'down'];
         for (const direction of directions) {
           for (let i = 1; i < 5; i += 1) {
-            // if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://127.0.0.1:3000/static${player.imgUrl}${direction}-${i}.png`);
-            // if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://localhost:3000/static${player.imgUrl}${direction}-${i}.png`);
-            // if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `http://cuberoom.net${player.imgUrl}${direction}-${i}.png`);
             if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `${ENV.URL_STATIC}${player.imgUrl}${direction}-${i}.png`);
           }
         }
