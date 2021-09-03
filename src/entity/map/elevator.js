@@ -39,8 +39,8 @@ export function showElevatorPanel(scene, floor) {
   panel.onmousedown = () => window.game.input.enabled = false;
   panel.onmouseup = () => window.game.input.enabled = true;
 
-  // panel.ontouchstart = () => window.game.input.enabled = false;
-  // panel.ontouchend = () => window.game.input.enabled = true;
+  panel.ontouchstart = () => window.game.input.mouse.enabled = false;
+  panel.ontouchend = () => window.game.input.mouse.enabled = true;
 
   panelContainer.appendChild(panel);
 
@@ -99,6 +99,83 @@ export function showElevatorPanel(scene, floor) {
     startScene(scene, 'SecondBasementScene', { x: 16 * 9, y: 16 * 23 });
   }
   panel.appendChild(buttonToB2);
+
+
+//////////////// 모바일 터치 ///
+
+  const buttonTo1F_M = elButton(56, 276, '1F');
+  buttonTo1F_M.ontouchstart = () => {
+    if(floor!='1F'){
+      hideElevatorPanel();
+      scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '1F' });
+      startScene(scene, 'FirstFloorScene', { x: 16 * 9, y: 16 * 21 });
+    }
+  }
+  panel.appendChild(buttonTo1F_M);
+
+ 
+  const buttonTo2F_M = elButton(120, 276, '2F');
+  buttonTo2F_M.ontouchstart = () => {
+    if(floor!='2F'){
+    hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '2F' });
+    startScene(scene, 'SecondFloorScene', { x: 16 * 9, y: 16 * 21 });
+    }
+  }
+  panel.appendChild(buttonTo2F_M);
+
+  const buttonTo5F_M = elButton(56, 212, '5F');
+  buttonTo5F_M.ontouchstart = () => {
+    if(floor!='5F'){
+    hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '5F' });
+    startScene(scene, 'FifthFloorScene', { x: 16 * 9, y: 16 * 22 });
+    }
+  }
+  panel.appendChild(buttonTo5F_M);
+
+  const buttonTo6F_M = elButton(120, 212, '6F');
+  buttonTo6F_M.ontouchstart = () => {
+    if(floor!='6F'){
+    hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '6F' });
+    startScene(scene, 'SixthFloorScene', { x: 16 * 9, y: 16 * 30 });
+    }
+  } 
+  panel.appendChild(buttonTo6F_M);
+
+  const buttonTo7F_M = elButton(56, 148, '7F');
+  buttonTo7F_M.ontouchstart = () => {
+    if(floor!='7F'){
+    hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: '7F' });
+    startScene(scene, 'SeventhFloorScene', { x: 16 * 9, y: 16 * 22 });
+    }
+  } 
+  panel.appendChild(buttonTo7F_M);
+
+  const buttonToB1_M = elButton(120, 340, 'B1');
+  buttonToB1_M.ontouchstart = () => {
+    if(floor!='B1'){
+    hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'B1' });
+    startScene(scene, 'FirstBasementScene', { x: 16 * 9, y: 16 * 42 });
+    }
+  }
+  panel.appendChild(buttonToB1_M);
+
+  const buttonToB2_M = elButton(56, 340, 'B2');
+  buttonToB2_M.ontouchstart = () => {
+    if(floor!='B2'){
+    hideElevatorPanel();
+    scene.socket.emit('moveFloor', { id: scene.socket.id, floor: 'B2' });
+    startScene(scene, 'SecondBasementScene', { x: 16 * 9, y: 16 * 23 });
+   }
+  }
+  panel.appendChild(buttonToB2_M);
+
+
+
 
   // 아래 두 개는 왜 눌러도 버튼 색이 안 변하지..? ㅜㅜ
 
