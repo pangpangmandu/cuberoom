@@ -80,9 +80,9 @@ function followClick(player, destinationX, destinationY, scene){
   let newPrevMove = player.prevMove;
 
 
-  if (scene.cheat) {
-    velocity *= 10;
-  }
+  // if (scene.cheat) {
+  //   velocity *= 10;
+  // }
   if(destinationX +10 < player.phaser.x){
     // velocity *= parseInt(player.phaser.x - destinationX) * 0.007;
     if(velocity < 100){
