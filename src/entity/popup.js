@@ -26,8 +26,8 @@ export function popupCreate(scene, { x, y }, workNum) {
     descriptionContainer = document.createElement('div');
     descriptionContainer.onmousedown = () => window.game.input.enabled = false;
     descriptionContainer.onmouseup = () => window.game.input.enabled = true;
-    // descriptionContainer.ontouchstart = () => window.game.input.enabled = false;
-    // descriptionContainer.ontouchend = () => window.game.input.enabled = true;
+    descriptionContainer.ontouchstart = () => window.game.input.mouse.enabled = false;
+    descriptionContainer.ontouchend = () => window.game.input.mouse.enabled = true;
     // descriptionContainer.id = work.id;
     descriptionContainer.style.position = 'absolute';
     descriptionContainer.style.top = '0px';
@@ -49,11 +49,11 @@ export function popupCreate(scene, { x, y }, workNum) {
     description.style.borderColor = 'black';
     description.style.borderWidth = '4px';
     description.style.borderStyle = 'solid';
-    description.style.padding = '24px';
+    description.style.padding = '34px';
     description.style.display = 'flex';
     description.style.justifyContent = 'space-between';
     description.style.position = 'relative';
-    description.style.bottom = '150px';
+    description.style.bottom = '100px';
 
 
     const left = document.createElement('img');
@@ -82,12 +82,34 @@ export function popupCreate(scene, { x, y }, workNum) {
     right.appendChild(div);
 
     const showmore = document.createElement('div');
-    showmore.classList.add("showmore")
     showmore.style.wordBreak = 'keep-all';
     showmore.style.marginBottom = '32px';
     showmore.style.textDecoration = "underline";
     showmore.innerHTML = "더보기";
-    showmore.onclick = () => document.getElementsByClassName("description")[0].style.display="inline";
+    showmore.onclick = () => {
+      if(showmore.classList.contains("showmore")){
+        document.getElementsByClassName("description")[0].style.display="none";
+        showmore.classList.remove("showmore");
+        showmore.innerHTML = "더보기";
+      }else{
+        document.getElementsByClassName("description")[0].style.display="inline-block";
+        showmore.classList.add("showmore");
+        showmore.innerHTML = "접기";
+      }
+
+    }
+    showmore.ontouchstart = () => {
+      if(showmore.classList.contains("showmore")){
+        document.getElementsByClassName("description")[0].style.display="none";
+        showmore.classList.remove("showmore");
+        showmore.innerHTML = "더보기";
+      }else{
+        document.getElementsByClassName("description")[0].style.display="inline-block";
+        showmore.classList.add("showmore");
+        showmore.innerHTML = "접기";
+      }
+
+    }
     right.appendChild(showmore);
 
     div = document.createElement('div');
@@ -104,16 +126,17 @@ export function popupCreate(scene, { x, y }, workNum) {
     closeButton.style.width = '30px';
     closeButton.style.height = '30px';
     closeButton.style.top = '0px';
-    closeButton.style.right = '0px';
+    closeButton.style.right = '-30px';
     closeButton.style.position = 'absolute';
     closeButton.onclick = () => document.body.removeChild(descriptionContainer);
+    closeButton.ontouchstart = () => document.body.removeChild(descriptionContainer);
 
     const link = document.createElement('a');
     link.href = work.url;
     link.target = "_blank";
     link.style.position = 'absolute';
     link.style.right = '0px';
-    link.style.bottom = '0px';
+    link.style.bottom = '-30px';
     link.appendChild(document.createTextNode('새 창으로 링크 열기'));
 
     right.appendChild(closeButton);

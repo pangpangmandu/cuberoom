@@ -170,24 +170,30 @@ export function updateMouseAnimation(player, pointer) {
 export function updateFollowClickAnimation(player, destinationX, destinationY) {
   let newPrevAnim = player.prevAnim;
 
-  if((Math.abs(player.phaser.x -destinationX) < 11 ) && (Math.abs(player.phaser.y-destinationY) < 21 )){
-    if (player.prevAnim === "player-up") {
+  if((Math.abs(player.phaser.x -destinationX) <5) && (Math.abs(player.phaser.y-destinationY) <5 )){
+    if (player.prevAnim === "player-down") {
       player.phaser.anims.play("player-down-stop", true);
-    } else if (player.prevAnim === "player-down") {
-      player.phaser.anims.play("player-down-stop", true);
+      // newPrevAnim = "player-down";
     } else if (player.prevAnim === "player-left") {
       player.phaser.anims.play("player-left-stop", true);
+      // newPrevAnim = "player-left";
     } else if (player.prevAnim === "player-right") {
       player.phaser.anims.play("player-right-stop", true);
-    } else {
+      // newPrevAnim = "player-right";
+    }else if (player.prevAnim === "player-up") {
+      player.phaser.anims.play("player-up-stop", true);
+      // newPrevAnim = "player-down";
+    }else {
       player.phaser.anims.stop();
     }
+
+    newPrevAnim = "player-idle";
   }else{
     if (destinationX < player.phaser.x ) {
-      if(destinationY < player.phaser.y && ( player.phaser.x -destinationX <= 15) ){
+      if(destinationY +5 < player.phaser.y ){
         player.phaser.anims.play("player-up", true);
         newPrevAnim = "player-up";
-      }else if(destinationY > player.phaser.y && (player.phaser.x -destinationX <= 15)){
+      }else if(destinationY > 5+ player.phaser.y ){
         player.phaser.anims.play("player-down", true);
         newPrevAnim = "player-down";
       }else if(player.prevAnim !== "player-left") {
@@ -196,10 +202,10 @@ export function updateFollowClickAnimation(player, destinationX, destinationY) {
       }
   
     } else if (destinationX> player.phaser.x) {
-      if(destinationY < player.phaser.y && ( destinationX -player.phaser.x <= 15) ){
+      if(destinationY +5  < player.phaser.y ){
         player.phaser.anims.play("player-up", true);
         newPrevAnim = "player-up";
-      }else if(destinationY > player.phaser.y && ( destinationX -player.phaser.x <=15)){
+      }else if(destinationY > 5+player.phaser.y ){
         player.phaser.anims.play("player-down", true);
         newPrevAnim = "player-down";
       }else if(player.prevAnim !== "player-right") {

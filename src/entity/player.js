@@ -83,7 +83,7 @@ function followClick(player, destinationX, destinationY, scene){
   // if (scene.cheat) {
   //   velocity *= 10;
   // }
-  if(destinationX +10 < player.phaser.x){
+  if(destinationX  +5 < player.phaser.x){
     // velocity *= parseInt(player.phaser.x - destinationX) * 0.007;
     if(velocity < 100){
       velocity = 100;
@@ -93,7 +93,7 @@ function followClick(player, destinationX, destinationY, scene){
       newPrevMove = "left";
     }
     moved = true;
-  }else if(destinationX > 10 + player.phaser.x){
+  }else if(destinationX > 5+ player.phaser.x){
     // velocity *= parseInt( destinationX - player.phaser.x) * 0.007;
     if(velocity < 100){
       velocity = 100;
@@ -107,7 +107,7 @@ function followClick(player, destinationX, destinationY, scene){
     player.phaser.body.setVelocityX(0);
   }
 
-  if (destinationY +20 < player.phaser.y) {
+  if (destinationY +5 <player.phaser.y) {
     // velocity *= parseInt( player.phaser.y - destinationY) * 0.015;
     if(velocity < 100){
       velocity = 100;
@@ -117,7 +117,7 @@ function followClick(player, destinationX, destinationY, scene){
       newPrevMove = "up";
     }
     moved = true;
-  } else if (player.phaser.y +20 < destinationY) {
+  } else if (player.phaser.y +5< destinationY) {
     // velocity *= parseInt(  destinationY - player.phaser.y) * 0.015;
     if(velocity < 100){
       velocity = 100;

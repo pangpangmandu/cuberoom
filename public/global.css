@@ -23,7 +23,7 @@ body {
 @media ( max-width : 800px){
 
 	.work {
-		transform: scale(80%);
+		transform: scale(70%);
 		font-size: 15px !important;
 	}
 
