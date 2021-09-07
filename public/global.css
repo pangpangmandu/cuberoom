@@ -23,8 +23,15 @@ body {
 @media ( max-width : 800px){
 
 	.work {
-		transform: scale(70%);
-		font-size: 15px !important;
+		transform: scale(90%);
+		font-size: 11px !important;
+		margin-bottom: -15%;
 	}
+
+	.left{
+		width: 80px !important;
+		height: 80px !important;
+	}
+
 
 }

@@ -28,11 +28,11 @@ export function popupCreate(scene, { x, y }, workNum) {
     descriptionContainer.onmouseup = () => window.game.input.enabled = true;
     descriptionContainer.ontouchstart = () => window.game.input.mouse.enabled = false;
     descriptionContainer.ontouchend = () => window.game.input.mouse.enabled = true;
-    // descriptionContainer.id = work.id;
+    descriptionContainer.classList.add('description-container');
     descriptionContainer.style.position = 'absolute';
     descriptionContainer.style.top = '0px';
     descriptionContainer.style.left = '0px';
-    descriptionContainer.style.width = '100%';
+    descriptionContainer.style.width = '100vw';
     descriptionContainer.style.height = '100%';
     descriptionContainer.style.display = 'flex';
     descriptionContainer.style.flexDirection = 'column';
@@ -43,13 +43,14 @@ export function popupCreate(scene, { x, y }, workNum) {
     const description = document.createElement('div');
     description.id = work.id;
     description.classList.add("work");
-    description.style.minWidth = '460px';
+    description.style.minWidth = '300px';
     description.style.maxWidth = '600px';
     description.style.backgroundColor = 'white';
     description.style.borderColor = 'black';
     description.style.borderWidth = '4px';
     description.style.borderStyle = 'solid';
     description.style.padding = '34px';
+    description.style.paddingBottom = '50px';
     description.style.display = 'flex';
     description.style.justifyContent = 'space-between';
     description.style.position = 'relative';
@@ -57,6 +58,7 @@ export function popupCreate(scene, { x, y }, workNum) {
 
 
     const left = document.createElement('img');
+    left.classList.add("left");
     left.src = work.imgUrl;
     left.style.width = '160px';
     left.style.height = '160px';
@@ -74,6 +76,18 @@ export function popupCreate(scene, { x, y }, workNum) {
     div.style.marginBottom = '16px';
     div.appendChild(document.createTextNode(work.medium));
     right.appendChild(div);
+
+    if(work.title2 != null){
+      let div = document.createElement('div');
+      div.appendChild(document.createTextNode(work.title2));
+      right.appendChild(div);
+  
+      div = document.createElement('div');
+      div.style.marginBottom = '16px';
+      div.appendChild(document.createTextNode(work.medium2));
+      right.appendChild(div);
+    }
+
 
     div = document.createElement('div');
     div.style.wordBreak = 'keep-all';
@@ -139,8 +153,28 @@ export function popupCreate(scene, { x, y }, workNum) {
     link.style.bottom = '-30px';
     link.appendChild(document.createTextNode('새 창으로 링크 열기'));
 
+    let isLink2 =false;
+    let link2 ;
+    if(work.url2 != null){
+
+      link.removeChild(link.firstChild);
+      link.appendChild(document.createTextNode('작품1 새 창으로 링크 열기'))
+
+      link2 = document.createElement('a');
+      link2.href = work.url2;
+      link2.target = "_blank";
+      link2.style.position = 'absolute';
+      link2.style.right = '0px';
+      link2.style.bottom = '-50px';
+      link2.appendChild(document.createTextNode('작품2 새 창으로 링크 열기'));
+      isLink2 = true;
+    }
+
     right.appendChild(closeButton);
     right.appendChild(link);
+    if(isLink2){
+    right.appendChild(link2);
+    }
 
     description.appendChild(left);
     description.appendChild(right);

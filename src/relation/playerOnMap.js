@@ -1,4 +1,6 @@
+import Phaser from "phaser";
 import { popupCreate, popupDestroy } from "../entity/popup";
+import { welcomeCreate, welcomeDestroy} from "../entity/welcome";
 import { showElevatorPanel, hideElevatorPanel } from '../entity/map/elevator';
 import { popupPos } from "../entity/works";
 import startScene from "../entity/map/startScene";
@@ -19,9 +21,23 @@ export function playerOnMapUpdate(playerOnMap, player, map, scene) {
   const curTile = map.interactionLayer.getTileAtWorldXY(playerX, playerY);
   const curTileName = curTile?.properties?.name;
 
+
+  let wflag = false;
+
+
   if (playerOnMap.prevTileName !== curTileName) {
     if (playerOnMap.prevTileName === 'elevator') hideElevatorPanel();
     if (['work-1', 'work-2', 'work-3','work-4','work-5','work-6','work-7','work-8'].includes(playerOnMap.prevTileName)) popupDestroy();
+
+
+
+    if( playerX >= 140 && playerX <= 180 && playerY >= 430 && playerY <= 460 ){
+      welcomeCreate(scene, {x:203, y:400},flag);
+
+    }
+
+
+
 
     switch (scene.scene.key) {
       case 'EntranceScene':

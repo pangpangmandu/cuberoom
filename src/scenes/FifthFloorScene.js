@@ -111,6 +111,7 @@ class FifthFloorScene extends Phaser.Scene {
     this.load.image("collision-tileset", "/tilemap/simple_tile.png");
     this.load.image("interactive-tile", "/tilemap/interactive-tile.png");
     this.load.image("popup", "/img/ui-map/popup.png");
+
     this.load.tilemapTiledJSON({
       key: "fifthFloor-map",
       url: "/tilemap/fifth-floor.json",
