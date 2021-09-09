@@ -11,6 +11,10 @@
   let clothesNum = 1;
   let name = '';
 
+  function handleInput() {
+    if (name.length > 12) name = name.slice(0, 12);
+  }
+
   // 이 함수들 나중에 하나로 추상화하기
   function increaseSkinNum() {
     skinNum++;
@@ -91,7 +95,7 @@
     <div class="block form">
       <div class="row whole">
         <div style="width: 50px; margin-right: 12px;">이름</div>
-        <input bind:value={name} />
+        <input bind:value={name} maxlength="12" on:input={handleInput} />
         <div style="width: 50px; margin-left: 12px; visibility: hidden;">(공백)</div>
       </div>
       <div class="row whole">
