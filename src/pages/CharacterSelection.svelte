@@ -2,6 +2,7 @@
   import { Link, navigate } from 'svelte-routing';
   import axios from 'axios';
   import ENV from '../../ENV';
+  import names from '../entity/names';
 
   let skinNum = 1;
   let eyeNum = 1;
@@ -62,6 +63,7 @@
   }
 
   function decide() {
+    name = name || names[Math.floor(Math.random() * names.length)];
     axios.post(`${ENV.URL}/character-selection`, {
       name,
       faceS: eyeNum,
