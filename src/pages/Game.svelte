@@ -58,7 +58,7 @@
   window.game = game;
 
   let key;
-  let keyCode; 
+  let keyCode;
 
   function handleKeydown (event){
     key = event.key;

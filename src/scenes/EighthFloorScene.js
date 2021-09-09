@@ -51,8 +51,8 @@ class EighthFloorScene extends Phaser.Scene {
           if (!this.players[id]) {
           this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
         } else {
-          // if (player.floor === 'entrance' && this.socket.id !== id) {
-          if (this.socket.id !== id) {
+          // if (player.floor === 'entrance' && window.socket.id !== id) {
+          if (window.socket.id !== id) {
             if (this.players[id].phaser.depth === 0) {
               this.players[id].phaser.setDepth(1);
               this.players[id].nameLabel.setDepth(1);
@@ -75,8 +75,8 @@ class EighthFloorScene extends Phaser.Scene {
         // if (!this.players[id]) {
         //   this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
         // } else {
-        //   // if (player.floor === 'entrance' && this.socket.id !== id) {
-        //   if (this.socket.id !== id) {
+        //   // if (player.floor === 'entrance' && window.socket.id !== id) {
+        //   if (window.socket.id !== id) {
         //     this.players[id].phaser.x = player.x;
         //     this.players[id].phaser.y = player.y;
         //     this.players[id].nameLabel.x = player.x;
@@ -131,13 +131,13 @@ class EighthFloorScene extends Phaser.Scene {
     // }
 
     // this.player = playerCreate(this, this.x, this.y);
-    this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl);
+    this.player = playerCreate(this, this.x, this.y, window.playerName, '', window.socket.id, window.playerImgUrl);
 
-    this.players[this.socket.id] = this.player;
+    this.players[window.socket.id] = this.player;
     this.player = playerinitmove(this.player);
 
     this.socket.emit('addPlayer', {
-      id: this.socket.id,
+      id: window.socketId,
       name: window.playerName,
       imgUrl: window.playerImgUrl,
       floor: '8F',
@@ -224,7 +224,7 @@ class EighthFloorScene extends Phaser.Scene {
       )
     ) {
       this.socket.emit('movePlayer', {
-        id: this.socket.id,
+        id: window.socketId,
         floor: '8F',
         direction: this.player.prevMove,
         x: this.player.phaser.x,

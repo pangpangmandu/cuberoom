@@ -50,8 +50,8 @@ class EntranceScene extends Phaser.Scene {
           }, this);
           this.load.start();
         } else {
-          // if (player.floor === 'entrance' && this.socket.id !== id) {
-          if (this.socket.id !== id) {
+          // if (player.floor === 'entrance' && window.socket.id !== id) {
+          if (window.socket.id !== id) {
             if (this.players[id].phaser.depth === 0) {
               this.players[id].phaser.setDepth(1);
               this.players[id].nameLabel.setDepth(1);
@@ -108,12 +108,12 @@ class EntranceScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'entrance-map');
-    this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl); // 소켓 연결 되면 이 부분을 지워야 함
-    this.players[this.socket.id] = this.player;
+    this.player = playerCreate(this, this.x, this.y, window.playerName, '', window.socket.id, window.playerImgUrl); // 소켓 연결 되면 이 부분을 지워야 함
+    this.players[window.socket.id] = this.player;
     this.player = playerinitmove(this.player);
 
     this.socket.emit('addPlayer', {
-      id: this.socket.id,
+      id: window.socketId,
       name: window.playerName,
       imgUrl: window.playerImgUrl,
       floor: 'entrance',
@@ -205,7 +205,7 @@ class EntranceScene extends Phaser.Scene {
       )
     ) {
       this.socket.emit('movePlayer', {
-        id: this.socket.id,
+        id: window.socketId,
         floor: 'entrance',
         direction: this.player.prevMove,
         x: this.player.phaser.x,
