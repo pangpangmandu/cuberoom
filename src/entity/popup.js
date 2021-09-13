@@ -58,7 +58,7 @@ export function popupCreate(scene, { x, y }, workNum) {
 
 
     const left = document.createElement('img');
-    left.classList.add("left");
+    left.classList.add("popup-left");
     left.src = work.imgUrl;
     left.style.width = '160px';
     left.style.height = '160px';
@@ -153,6 +153,9 @@ export function popupCreate(scene, { x, y }, workNum) {
     link.style.position = 'absolute';
     link.style.right = '0px';
     link.style.bottom = '-20px';
+    link.ontouchstart = () => {
+      window.open(work.url); 
+    } 
     link.appendChild(document.createTextNode('새 창으로 링크 열기'));
 
     let isLink2 =false;
@@ -170,6 +173,10 @@ export function popupCreate(scene, { x, y }, workNum) {
       link2.style.right = '0px';
       link2.style.bottom = '-50px';
       link2.appendChild(document.createTextNode('작품2 새 창으로 링크 열기'));
+      link2.ontouchstart = () => {
+        var el = this;
+        window.open(work.url2); 
+      } 
       isLink2 = true;
     }
 
