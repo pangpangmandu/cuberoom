@@ -50,8 +50,8 @@ class EntranceScene extends Phaser.Scene {
           }, this);
           this.load.start();
         } else {
-          // if (player.floor === 'entrance' && window.socket.id !== id) {
-          if (window.socket.id !== id) {
+          // if (player.floor === 'entrance' && this.socket.id !== id) {
+          if (this.socket.id !== id) {
             if (this.players[id].phaser.depth === 0) {
               this.players[id].phaser.setDepth(1);
               this.players[id].nameLabel.setDepth(1);
@@ -62,7 +62,7 @@ class EntranceScene extends Phaser.Scene {
             this.players[id].nameLabel.x = player.x;
             this.players[id].nameLabel.y = player.y - 30;
             this.players[id].chatBubble.x = player.x;
-            this.players[id].chatBubble.y = player.y - 45;
+            this.players[id].chatBubble.y = player.y - 50;
             // this.players[id].phaser.anims.play(`player-${player.direction}`, true);
             // this.players[id].phaser.anims.play(`player-${player.direction}-stop`, true);
             // 이 phaser에게는 scene이 없다...!
@@ -74,11 +74,15 @@ class EntranceScene extends Phaser.Scene {
     });
 
     this.socket.on('addChat', (data) => {
-      if (data.floor === 'entrance' && this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
+      const formattedChat = data.chat.match(/.{1,12}/g).join('\n');
+      if (data.floor === 'entrance' && this.players[data.id]) this.players[data.id].chatBubble.setText(formattedChat);
+      this.players[data.id].chatBubble.setPadding(4);
+      // match 개수만큼 챗버블 위치를 위로 올려야 함!
     });
 
     this.socket.on('removeChat', (data) => {
       if (data.floor === 'entrance' && this.players[data.id]) this.players[data.id].chatBubble.setText('');
+      this.players[data.id].chatBubble.setPadding(0);
     });
   }
 
@@ -108,12 +112,12 @@ class EntranceScene extends Phaser.Scene {
     backgroundStatic(this);
 
     this.map = mapCreate(this, 'entrance-map');
-    this.player = playerCreate(this, this.x, this.y, window.playerName, '', window.socket.id, window.playerImgUrl); // 소켓 연결 되면 이 부분을 지워야 함
-    this.players[window.socket.id] = this.player;
+    this.player = playerCreate(this, this.x, this.y, window.playerName, '', this.socket.id, window.playerImgUrl); // 소켓 연결 되면 이 부분을 지워야 함
+    this.players[this.socket.id] = this.player;
     this.player = playerinitmove(this.player);
 
     this.socket.emit('addPlayer', {
-      id: window.socketId,
+      id: this.socket.id,
       name: window.playerName,
       imgUrl: window.playerImgUrl,
       floor: 'entrance',
@@ -196,7 +200,7 @@ class EntranceScene extends Phaser.Scene {
     this.player.nameLabel.x = this.player.phaser.x;
     this.player.chatBubble.x = this.player.phaser.x;
     this.player.nameLabel.y = this.player.phaser.y - 30;
-    this.player.chatBubble.y = this.player.phaser.y - 45;
+    this.player.chatBubble.y = this.player.phaser.y - 50;
 
     if (
       this.destinationX && this.destinationY && (
@@ -205,7 +209,7 @@ class EntranceScene extends Phaser.Scene {
       )
     ) {
       this.socket.emit('movePlayer', {
-        id: window.socketId,
+        id: this.socket.id,
         floor: 'entrance',
         direction: this.player.prevMove,
         x: this.player.phaser.x,
