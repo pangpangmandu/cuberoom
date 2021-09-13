@@ -382,7 +382,7 @@ export function playerMouseUpdate(player, pointer, scene) {
 
 
 export function playerFollowClickUpdate(player, destinationX, destinationY, scene) {
-  let newPlayer = updateFollowClickAnimation(player, destinationX, destinationY);
+  let newPlayer = updateFollowClickAnimation(scene, player, destinationX, destinationY);
   newPlayer = followClick(newPlayer, destinationX, destinationY, scene);
   return newPlayer;
 }
