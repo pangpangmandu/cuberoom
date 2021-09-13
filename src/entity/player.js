@@ -12,12 +12,11 @@ export function playerCreate(scene, x, y, name, chat, id) {
     align: 'center',
   });
 
-  const chatBubble = scene.add.text(x, y-45, chat, {
+  const chatBubble = scene.add.text(x, y-50, chat, {
     fontFamily: '28px NeoDunggeunmo',
     fill: '#ffffff',
     align: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)',
-
   });
 
   nameLabel.setOrigin(0.5, 0.5);
@@ -130,7 +129,7 @@ function followClick(player, destinationX, destinationY, scene){
   } else {
     player.phaser.body.setVelocityY(0);
   }
-  
+
   if((Math.abs(tempX-destinationX) < 11) && (Math.abs(tempY-destinationY) < 11 )){
     player.phaser.body.setVelocityY(0);
   }

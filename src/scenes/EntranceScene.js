@@ -62,7 +62,7 @@ class EntranceScene extends Phaser.Scene {
             this.players[id].nameLabel.x = player.x;
             this.players[id].nameLabel.y = player.y - 30;
             this.players[id].chatBubble.x = player.x;
-            this.players[id].chatBubble.y = player.y - 45;
+            this.players[id].chatBubble.y = player.y - 50;
             // this.players[id].phaser.anims.play(`player-${player.direction}`, true);
             // this.players[id].phaser.anims.play(`player-${player.direction}-stop`, true);
             // 이 phaser에게는 scene이 없다...!
@@ -74,11 +74,15 @@ class EntranceScene extends Phaser.Scene {
     });
 
     this.socket.on('addChat', (data) => {
-      if (data.floor === 'entrance' && this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
+      const formattedChat = data.chat.match(/.{1,12}/g).join('\n');
+      if (data.floor === 'entrance' && this.players[data.id]) this.players[data.id].chatBubble.setText(formattedChat);
+      this.players[data.id].chatBubble.setPadding(4);
+      // match 개수만큼 챗버블 위치를 위로 올려야 함!
     });
 
     this.socket.on('removeChat', (data) => {
       if (data.floor === 'entrance' && this.players[data.id]) this.players[data.id].chatBubble.setText('');
+      this.players[data.id].chatBubble.setPadding(0);
     });
   }
 
@@ -196,7 +200,7 @@ class EntranceScene extends Phaser.Scene {
     this.player.nameLabel.x = this.player.phaser.x;
     this.player.chatBubble.x = this.player.phaser.x;
     this.player.nameLabel.y = this.player.phaser.y - 30;
-    this.player.chatBubble.y = this.player.phaser.y - 45;
+    this.player.chatBubble.y = this.player.phaser.y - 50;
 
     if (
       this.destinationX && this.destinationY && (
