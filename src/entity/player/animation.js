@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { animationFrames } from "./image";
+import Phaser from "phaser";
 
 const directions = ["down", "up", "left", "right"];
 
@@ -167,8 +168,21 @@ export function updateMouseAnimation(player, pointer) {
   };
 }
 
-export function updateFollowClickAnimation(player, destinationX, destinationY) {
+function isCollTile(scene, x,y) {
+  return scene.map.collisionLayer.getTileAtWorldXY(x,y) !=null;
+}
+
+export function updateFollowClickAnimation(scene, player, destinationX, destinationY) {
   let newPrevAnim = player.prevAnim;
+
+  let isStuck = false;
+  
+  let playerRight = player.phaser.x + 10;
+  let playerLeft = player.phaser.x - 10;
+  let playerUp = player.phaser.y - 10;
+  let playerDown = player.phaser.y + 10;
+
+
 
   if((Math.abs(player.phaser.x -destinationX) <5) && (Math.abs(player.phaser.y-destinationY) <5 )){
     if (player.prevAnim === "player-down") {
@@ -189,7 +203,21 @@ export function updateFollowClickAnimation(player, destinationX, destinationY) {
 
     newPrevAnim = "player-idle";
   }else{
-    if (destinationX < player.phaser.x ) {
+
+
+    if (player.prevAnim === "player-down" && isCollTile(scene, player.phaser.x, playerDown)){
+      player.phaser.anims.stop();
+      newPrevAnim = "player-idle";
+    } else if (player.prevAnim === "player-left" && isCollTile(scene,playerLeft,player.phaser.y)) {
+      player.phaser.anims.stop();
+      newPrevAnim = "player-idle";
+    } else if (player.prevAnim === "player-right" && isCollTile(scene,playerRight,player.phaser.y)) {
+      player.phaser.anims.stop();
+      newPrevAnim = "player-idle";
+    }else if (player.prevAnim === "player-up" && isCollTile(scene,player.phaser.x, playerUp)) {
+      player.phaser.anims.stop();
+      newPrevAnim = "player-idle";
+    }else if (destinationX < player.phaser.x ) {
       if(destinationY +5 < player.phaser.y ){
         player.phaser.anims.play("player-up", true);
         newPrevAnim = "player-up";

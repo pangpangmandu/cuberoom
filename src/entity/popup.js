@@ -58,7 +58,7 @@ export function popupCreate(scene, { x, y }, workNum) {
 
 
     const left = document.createElement('img');
-    left.classList.add("left");
+    left.classList.add("popup-left");
     left.src = work.imgUrl;
     left.style.width = '160px';
     left.style.height = '160px';
@@ -135,6 +135,7 @@ export function popupCreate(scene, { x, y }, workNum) {
     right.appendChild(div);
 
     const closeButton = document.createElement('button');
+    closeButton.classList.add("closebutton");
     closeButton.style.border = 'none';
     closeButton.style.backgroundImage = 'url("/img/ui/close.png")';
     closeButton.style.width = '30px';
@@ -146,11 +147,15 @@ export function popupCreate(scene, { x, y }, workNum) {
     closeButton.ontouchstart = () => document.body.removeChild(descriptionContainer);
 
     const link = document.createElement('a');
+    link.classList.add("link1");
     link.href = work.url;
     link.target = "_blank";
     link.style.position = 'absolute';
     link.style.right = '0px';
-    link.style.bottom = '-30px';
+    link.style.bottom = '-20px';
+    link.ontouchstart = () => {
+      window.open(work.url); 
+    } 
     link.appendChild(document.createTextNode('새 창으로 링크 열기'));
 
     let isLink2 =false;
@@ -162,11 +167,16 @@ export function popupCreate(scene, { x, y }, workNum) {
 
       link2 = document.createElement('a');
       link2.href = work.url2;
+      link2.classList.add("link2");
       link2.target = "_blank";
       link2.style.position = 'absolute';
       link2.style.right = '0px';
       link2.style.bottom = '-50px';
       link2.appendChild(document.createTextNode('작품2 새 창으로 링크 열기'));
+      link2.ontouchstart = () => {
+        var el = this;
+        window.open(work.url2); 
+      } 
       isLink2 = true;
     }
 
