@@ -35,20 +35,58 @@ class EntranceScene extends Phaser.Scene {
       }
     });
 
+    // this.socket.on('playerList', (data) => {
+    //   for (const [id, player] of Object.entries(data)) {
+    //     if (player.floor !== 'entrance') return;
+    //     if (!this.players[id]) {
+    //       const directions = ['left', 'right', 'up', 'down'];
+    //       for (const direction of directions) {
+    //         for (let i = 1; i < 5; i += 1) {
+    //           this.load.image(`${player.id}-${direction}-${i}`, `${ENV.URL_STATIC}${player.imgUrl}${direction}-${i}.png`);
+    //         }
+    //       }
+    //       this.load.once('complete', () => {
+    //         if (!this.players[id]) this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
+    //       }, this);
+    //       this.load.start();
+    //     } else {
+    //       // if (player.floor === 'entrance' && this.socket.id !== id) {
+    //       if (this.socket.id !== id) {
+    //         if (this.players[id].phaser.depth === 0) {
+    //           this.players[id].phaser.setDepth(1);
+    //           this.players[id].nameLabel.setDepth(1);
+    //           this.players[id].chatBubble.setDepth(1);
+    //         }
+    //         this.players[id].phaser.x = player.x;
+    //         this.players[id].phaser.y = player.y;
+    //         this.players[id].nameLabel.x = player.x;
+    //         this.players[id].nameLabel.y = player.y - 30;
+    //         this.players[id].chatBubble.x = player.x;
+    //         this.players[id].chatBubble.y = player.y - 50;
+    //         // this.players[id].phaser.anims.play(`player-${player.direction}`, true);
+    //         // this.players[id].phaser.anims.play(`player-${player.direction}-stop`, true);
+    //         // 이 phaser에게는 scene이 없다...!
+    //         if (!this.players[id].phaser.scene) this.players[id].phaser.scene = this;
+    //         this.players[id].phaser.setTexture(`${player.id}-${player.direction}-${2}`); // 이거 playerCreate할 때 참고!!!!
+    //       }
+    //     }
+    //   }
+    // });
+
     this.socket.on('playerList', (data) => {
       for (const [id, player] of Object.entries(data)) {
         if (player.floor !== 'entrance') return;
-        if (!this.players[id]) {
-          const directions = ['left', 'right', 'up', 'down'];
-          for (const direction of directions) {
-            for (let i = 1; i < 5; i += 1) {
-              this.load.image(`${player.id}-${direction}-${i}`, `${ENV.URL_STATIC}${player.imgUrl}${direction}-${i}.png`);
-            }
+
+        const directions = ['left', 'right', 'up', 'down'];
+        for (const direction of directions) {
+          for (let i = 1; i < 5; i += 1) {
+            if (!this.textures.exists(`${player.id}-${direction}-${i}`)) this.load.image(`${player.id}-${direction}-${i}`, `${ENV.URL_STATIC}${player.imgUrl}${direction}-${i}.png`);
           }
-          this.load.once('complete', () => {
-            if (!this.players[id]) this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
-          }, this);
-          this.load.start();
+        }
+        this.load.once('complete', () => {
+          // if (!this.players[id]) this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
+          if (!this.players[id]) {
+          this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
         } else {
           // if (player.floor === 'entrance' && this.socket.id !== id) {
           if (this.socket.id !== id) {
@@ -65,11 +103,11 @@ class EntranceScene extends Phaser.Scene {
             this.players[id].chatBubble.y = player.y - 50;
             // this.players[id].phaser.anims.play(`player-${player.direction}`, true);
             // this.players[id].phaser.anims.play(`player-${player.direction}-stop`, true);
-            // 이 phaser에게는 scene이 없다...!
-            if (!this.players[id].phaser.scene) this.players[id].phaser.scene = this;
-            this.players[id].phaser.setTexture(`${player.id}-${player.direction}-${2}`); // 이거 playerCreate할 때 참고!!!!
+            this.players[id].phaser.setTexture(`${player.id}-${player.direction}-${2}`);
           }
         }
+        }, this);
+        this.load.start();
       }
     });
 
