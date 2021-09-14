@@ -74,15 +74,18 @@ class EntranceScene extends Phaser.Scene {
     });
 
     this.socket.on('addChat', (data) => {
-      const formattedChat = data.chat.match(/.{1,12}/g).join('\n');
-      if (data.floor === 'entrance' && this.players[data.id]) this.players[data.id].chatBubble.setText(formattedChat);
-      this.players[data.id].chatBubble.setPadding(4);
-      // match 개수만큼 챗버블 위치를 위로 올려야 함!
+      if (data.floor === 'entrance' && this.players[data.id]) {
+        const formattedChat = data.chat.match(/.{1,12}/g).join('\n');
+        this.players[data.id].chatBubble.setText(formattedChat);
+        this.players[data.id].chatBubble.setPadding(4);
+      }
     });
 
     this.socket.on('removeChat', (data) => {
-      if (data.floor === 'entrance' && this.players[data.id]) this.players[data.id].chatBubble.setText('');
-      this.players[data.id].chatBubble.setPadding(0);
+      if (data.floor === 'entrance' && this.players[data.id]) {
+        this.players[data.id].chatBubble.setText('');
+        this.players[data.id].chatBubble.setPadding(0);
+      }
     });
   }
 

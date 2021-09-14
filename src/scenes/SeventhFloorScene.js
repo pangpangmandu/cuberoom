@@ -51,7 +51,7 @@ class SeventhFloorScene extends Phaser.Scene {
           if (!this.players[id]) {
           this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
         } else {
-          // if (player.floor === 'entrance' && this.socket.id !== id) {
+          // if (player.floor === '7F' && this.socket.id !== id) {
           if (this.socket.id !== id) {
             if (this.players[id].phaser.depth === 0) {
               this.players[id].phaser.setDepth(1);
@@ -63,7 +63,7 @@ class SeventhFloorScene extends Phaser.Scene {
             this.players[id].nameLabel.x = player.x;
             this.players[id].nameLabel.y = player.y - 30;
             this.players[id].chatBubble.x = player.x;
-            this.players[id].chatBubble.y = player.y - 45;
+            this.players[id].chatBubble.y = player.y - 50;
             // this.players[id].phaser.anims.play(`player-${player.direction}`, true);
             // this.players[id].phaser.anims.play(`player-${player.direction}-stop`, true);
             this.players[id].phaser.setTexture(`${player.id}-${player.direction}-${2}`);
@@ -75,14 +75,14 @@ class SeventhFloorScene extends Phaser.Scene {
         // if (!this.players[id]) {
         //   this.players[id] = playerCreate(this, player.x, player.y, player.name, player.chat, player.id);
         // } else {
-        //   // if (player.floor === 'entrance' && this.socket.id !== id) {
+        //   // if (player.floor === '7F' && this.socket.id !== id) {
         //   if (this.socket.id !== id) {
         //     this.players[id].phaser.x = player.x;
         //     this.players[id].phaser.y = player.y;
         //     this.players[id].nameLabel.x = player.x;
         //     this.players[id].nameLabel.y = player.y - 30;
         //     this.players[id].chatBubble.x = player.x;
-        //     this.players[id].chatBubble.y = player.y - 45;
+        //     this.players[id].chatBubble.y = player.y - 50;
         //     // this.players[id].phaser.anims.play(`player-${player.direction}`, true);
         //     // this.players[id].phaser.anims.play(`player-${player.direction}-stop`, true);
         //     this.players[id].phaser.setTexture(`${player.id}-${player.direction}-${2}`);
@@ -92,11 +92,18 @@ class SeventhFloorScene extends Phaser.Scene {
     });
 
     this.socket.on('addChat', (data) => {
-      if (data.floor === '7F' && this.players[data.id]) this.players[data.id].chatBubble.setText(data.chat);
+      if (data.floor === '7F' && this.players[data.id]) {
+        const formattedChat = data.chat.match(/.{1,12}/g).join('\n');
+        this.players[data.id].chatBubble.setText(formattedChat);
+        this.players[data.id].chatBubble.setPadding(4);
+      }
     });
 
     this.socket.on('removeChat', (data) => {
-      if (data.floor === '7F' && this.players[data.id]) this.players[data.id].chatBubble.setText('');
+      if (data.floor === '7F' && this.players[data.id]) {
+        this.players[data.id].chatBubble.setText('');
+        this.players[data.id].chatBubble.setPadding(0);
+      }
     });
   }
 
@@ -220,7 +227,7 @@ class SeventhFloorScene extends Phaser.Scene {
     this.player.nameLabel.x = this.player.phaser.x;
     this.player.chatBubble.x = this.player.phaser.x;
     this.player.nameLabel.y = this.player.phaser.y - 30;
-    this.player.chatBubble.y = this.player.phaser.y - 45;
+    this.player.chatBubble.y = this.player.phaser.y - 50;
 
     if (
       this.destinationX && this.destinationY && (
